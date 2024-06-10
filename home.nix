@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  myAliases = {
+    ll = "ls -l";
+    ".." = "cd ..";
+    nv = "nvim";
+  };
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -68,15 +75,41 @@
   #  /etc/profiles/per-user/forest/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    GTK_IM_MODULE="fcitx";
+    QT_IM_MODULE="fcitx";
+    SDL_IM_MODULE="fcitx";
+    XMODIFIERS="@im=fcitx";
+    QT_QPA_PLATFORMTHEME="qt5ct";
+
+    EDITOR = "nvim";
+    TERMINAL="kitty";
+
   };
 
   programs.bash = {
     enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      ".." = "cd ..";
+    shellAliases = myAliases;
+  };
+
+  programs.zsh = {
+    enable = true;
+    shellAliases = myAliases;
+    autocd = true;
+    defaultKeymap = "emacs";
+    enableCompletion = true;
+    history = {
+        save = 10000;
+        size = 10000;
+        path = "~/.histfile";
     };
+
+    initExtra = ''
+      eval "$(starship init zsh)"
+      eval "$(atuin init zsh)"
+      clear
+      fastfetch
+    '';
+
   };
 
   # Let Home Manager install and manage itself.

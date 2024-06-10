@@ -121,6 +121,8 @@
      curl
   ];
 
+  environment.pathsToLink = [ "/share/zsh" ];
+
   programs.zsh.enable = true;
   programs.steam.enable = true;
   programs.firefox.enable = true;
