@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, systemSettings, userSettings, ... }:
 
 let
   myAliases = {
@@ -10,8 +10,8 @@ in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "forest";
-  home.homeDirectory = "/home/forest";
+  home.username = userSettings.username;
+  home.homeDirectory = "/home/${userSettings.username}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -104,13 +104,6 @@ in
     };
 
     initExtra = ''
-      # if test -n "$KITTY_INSTALLATION_DIR"; then
-      # export KITTY_SHELL_INTEGRATION="enabled"
-      # autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
-      # kitty-integration
-      # unfunction kitty-integration
-      # fi
-
       eval "$(starship init zsh)"
       eval "$(atuin init zsh)"
       clear
@@ -127,10 +120,10 @@ in
     };
 
     theme = "Catppuccin-Mocha";
-    font.name = "JetBrainsMono Nerd";
+    font.name = userSettings.font;
     font.size = 12;
+    font.package = userSettings.fontPkg;
     extraConfig = ''
-
     '';
   };
 

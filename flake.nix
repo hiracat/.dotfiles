@@ -1,5 +1,5 @@
 {
-    description = "first flake";
+    description = "hiracat's dotfiles flake";
 
     inputs = {
         nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -8,27 +8,48 @@
     };
 
     outputs = { self, nixpkgs, home-manager, ...}:
-        let
-            systemSettings = {
-                system = "x86_64-linux";
-            };
 
-            lib = nixpkgs.lib;
-            pkgs = nixpkgs.legacyPackages.${systemSettings.system};
-        in {
+    let
+        lib = nixpkgs.lib;
+        pkgs = nixpkgs.legacyPackages.${systemSettings.system};
 
-        nixosConfigurations = {
-            nixos = lib.nixosSystem {
-                system = systemSettings.system;
-                modules = [ ./configuration.nix ];
-            };
+        systemSettings = {
+            system = "x86_64-linux";
+            hostname = "nixos";
+            timezone = "America/New_York";
+            locale = "en_US.UTF-8";
         };
 
-        homeConfigurations = {
-            forest = home-manager.lib.homeManagerConfiguration {
-                inherit pkgs;
-                modules = [ ./home.nix ];
-            };
+        userSettings = {
+            username = "forest";
+            email = "hiracat@proton.me";
+            editor = "nvim";
+            term = "kitty";
+            font = "JetBrainsMono Nerd";
+            fontPkg = pkgs.nerdfonts;
         };
+
+    in {
+       nixosConfigurations = {
+           nixos = lib.nixosSystem {
+               system = systemSettings.system;
+               modules = [ ./configuration.nix ];
+               specialArgs = {
+                   inherit userSettings;
+                   inherit systemSettings;
+               };
+           };
+       };
+
+       homeConfigurations = {
+           forest = home-manager.lib.homeManagerConfiguration {
+               inherit pkgs;
+               modules = [ ./home.nix ];
+               extraSpecialArgs = {
+                   inherit userSettings;
+                   inherit systemSettings;
+               };
+           };
+       };
     };
 }
