@@ -1,5 +1,4 @@
 {
-
     description = "first flake";
 
     inputs = {
@@ -10,14 +9,17 @@
 
     outputs = { self, nixpkgs, home-manager, ...}:
         let
-            system = "x86_64-linux";
+            systemSettings = {
+                system = "x86_64-linux";
+            };
+
             lib = nixpkgs.lib;
-            pkgs = nixpkgs.legacyPackages.${system};
+            pkgs = nixpkgs.legacyPackages.${systemSettings.system};
         in {
 
         nixosConfigurations = {
             nixos = lib.nixosSystem {
-                inherit system;
+                system = systemSettings.system;
                 modules = [ ./configuration.nix ];
             };
         };

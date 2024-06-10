@@ -100,17 +100,32 @@ in
     history = {
         save = 10000;
         size = 10000;
-        path = ".histfile";
+        path = "${config.home.homeDirectory}/.histfile";
     };
 
     initExtra = ''
+      # if test -n "$KITTY_INSTALLATION_DIR"; then
+      # export KITTY_SHELL_INTEGRATION="enabled"
+      # autoload -Uz -- "$KITTY_INSTALLATION_DIR"/shell-integration/zsh/kitty-integration
+      # kitty-integration
+      # unfunction kitty-integration
+      # fi
+
       eval "$(starship init zsh)"
       eval "$(atuin init zsh)"
       clear
       fastfetch
     '';
-
   };
+
+  programs.kitty = {
+    shellIntegration = {
+      mode = "no-rc"; # disable features if desired here
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
+  };
+
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
