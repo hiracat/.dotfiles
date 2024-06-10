@@ -27,7 +27,7 @@ in
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
-    pkgs.hello
+    # pkgs.hello
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -119,11 +119,19 @@ in
   };
 
   programs.kitty = {
+    enable = true;
     shellIntegration = {
       mode = "no-rc"; # disable features if desired here
       enableZshIntegration = true;
       enableBashIntegration = true;
     };
+
+    theme = "Catppuccin-Mocha";
+    font.name = "JetBrainsMono Nerd";
+    font.size = 12;
+    extraConfig = ''
+
+    '';
   };
 
 

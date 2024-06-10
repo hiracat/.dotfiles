@@ -118,6 +118,7 @@
      fd
      cargo
      curl
+     nerdfonts
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];
