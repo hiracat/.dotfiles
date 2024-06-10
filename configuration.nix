@@ -95,7 +95,6 @@
     ];
   };
 
-  users.defaultUserShell = pkgs.zsh;
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -122,8 +121,11 @@
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];
-
+  environment.shells = with pkgs; [ zsh ];
+  users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+
+
   programs.steam.enable = true;
   programs.firefox.enable = true;
 
