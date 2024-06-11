@@ -8,6 +8,8 @@ let
     };
 in
 {
+    nixpkgs.config.allowUnfree = true;
+
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
     home.username = userSettings.username;
@@ -24,7 +26,7 @@ in
 
     # The home.packages option allows you to install Nix packages into your
     # environment.
-    home.packages = [
+    home.packages = with pkgs; [
         # # Adds the 'hello' command to your environment. It prints a friendly
         # # "Hello, world!" when run.
         # pkgs.hello
@@ -41,6 +43,13 @@ in
         # (pkgs.writeShellScriptBin "my-hello" ''
         #   echo "Hello, ${config.home.username}!"
         # '')
+        kdePackages.kate
+        kdePackages.plasma-browser-integration
+        spotify
+        prismlauncher
+        blender
+        krita
+        obsidian
     ];
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage

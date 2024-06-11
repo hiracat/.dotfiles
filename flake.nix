@@ -11,6 +11,8 @@
     outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ...}:
 
     let
+
+
         lib = nixpkgs.lib;
         pkgs = nixpkgs.legacyPackages.${systemSettings.system};
         pkgs-stable = nixpkgs-stable.legacyPackages.${systemSettings.system};

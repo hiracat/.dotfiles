@@ -84,15 +84,6 @@
     description = userSettings.username;
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      kdePackages.kate
-      kdePackages.plasma-browser-integration
-      flatpak
-      spotify
-      prismlauncher
-      blender
-      krita
-      stow
-      obsidian
     ];
   };
 
@@ -119,6 +110,7 @@
      fd
      cargo
      curl
+     flatpak
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];
