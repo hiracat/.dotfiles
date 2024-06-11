@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, systemSettings, userSettings, ... }:
+{ config, pkgs, home-manager, pkgs-stable, systemSettings,  ... }:
 
 let
     myAliases = {
@@ -8,12 +8,10 @@ let
     };
 in
 {
-    nixpkgs.config.allowUnfree = true;
-
     # Home Manager needs a bit of information about you and the paths it should
     # manage.
-    home.username = userSettings.username;
-    home.homeDirectory = "/home/${userSettings.username}";
+    home.username = "forest";
+    home.homeDirectory = "/home/forest";
 
     # This value determines the Home Manager release that your configuration is
     # compatible with. This helps avoid breakage when a new Home Manager release
@@ -128,17 +126,17 @@ in
         };
 
         theme = "Catppuccin-Mocha";
-        font.name = userSettings.font;
+        font.name = "JetBrains Mono Nerd";
         font.size = 12;
-        font.package = userSettings.fontPkg;
+        font.package = pkgs.nerdfonts;
         extraConfig = ''
         '';
     };
 
     programs.git = {
         enable = true;
-        userName = userSettings.username;
-        userEmail = userSettings.email;
+        userName = "forest";
+        userEmail = "hiracat@proton.me";
         extraConfig = {
             init.defaultBranch = "main";
         };

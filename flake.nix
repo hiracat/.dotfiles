@@ -11,8 +11,6 @@
     outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ...}:
 
     let
-
-
         lib = nixpkgs.lib;
         pkgs = nixpkgs.legacyPackages.${systemSettings.system};
         pkgs-stable = nixpkgs-stable.legacyPackages.${systemSettings.system};
@@ -37,24 +35,16 @@
        nixosConfigurations = {
            nixos = lib.nixosSystem {
                system = systemSettings.system;
-               modules = [ ./configuration.nix ];
-               specialArgs = {
-                   inherit userSettings;
-                   inherit systemSettings;
-                   inherit pkgs-stable;
-               };
-           };
-       };
-
-       homeConfigurations = {
-           forest = home-manager.lib.homeManagerConfiguration {
-               inherit pkgs;
-               modules = [ ./home.nix ];
-               extraSpecialArgs = {
-                   inherit userSettings;
-                   inherit systemSettings;
-                   inherit pkgs-stable;
-               };
+               modules = [
+                    ./configuration.nix
+                    home-manager.nixosModules.home-manager {
+                        home-manager.useGlobalPkgs = true;
+                        home-manager.useUserPackages = true;
+                        home-manager.users.forest = {
+                            imports = [ ./home.nix ];
+                        };
+                    }
+               ];
            };
        };
     };

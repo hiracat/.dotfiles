@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, systemSettings, userSettings, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
 # Define your hostname.
-  networking.hostName = systemSettings.hostname;
+  networking.hostName = "nixos";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -26,21 +26,21 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = systemSettings.timezone;
+  time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = systemSettings.locale;
+  i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = systemSettings.locale;
-    LC_IDENTIFICATION = systemSettings.locale;
-    LC_MEASUREMENT = systemSettings.locale;
-    LC_MONETARY = systemSettings.locale;
-    LC_NAME = systemSettings.locale;
-    LC_NUMERIC = systemSettings.locale;
-    LC_PAPER = systemSettings.locale;
-    LC_TELEPHONE = systemSettings.locale;
-    LC_TIME = systemSettings.locale;
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
   # Enable the X11 windowing system.
@@ -79,10 +79,11 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${userSettings.username} = {
+  users.users.forest = {
     isNormalUser = true;
-    description = userSettings.username;
+    description = "forest";
     extraGroups = [ "networkmanager" "wheel" ];
+    initialPassword = "password"; # for vms
     packages = with pkgs; [
     ];
   };
@@ -164,4 +165,11 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
 
+  virtualisation.vmVariant = {
+  # following configuration is added only when building VM with build-vm
+  virtualisation = {
+    memorySize =  2048; # Use 2048MiB memory.
+    cores = 3;
+  };
+  };
 }
