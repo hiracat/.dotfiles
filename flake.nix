@@ -31,7 +31,7 @@
             email = "hiracat@proton.me";
             editor = "nvim";
             terminal = "kitty";
-            font = "JetBrainsMono Nerd";
+            font = "JetBrainsMono Nerd Font";
             fontPkg = pkgs.nerdfonts;
         };
 
