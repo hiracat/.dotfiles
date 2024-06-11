@@ -13,7 +13,11 @@
     let
         lib = nixpkgs.lib;
         pkgs = nixpkgs.legacyPackages.${systemSettings.system};
-        pkgs-stable = nixpkgs-stable.legacyPackages.${systemSettings.system};
+        pkgs-stable = import nixpkgs-stable {
+            config.allowUnfree = true;
+            stable = nixpkgs-stable.legacyPackages.${systemSettings.system};
+            system = systemSettings.system;
+        };
 
         systemSettings = {
             system = "x86_64-linux";
@@ -26,7 +30,7 @@
             username = "forest";
             email = "hiracat@proton.me";
             editor = "nvim";
-            term = "kitty";
+            terminal = "kitty";
             font = "JetBrainsMono Nerd";
             fontPkg = pkgs.nerdfonts;
         };
@@ -35,12 +39,14 @@
        nixosConfigurations = {
            nixos = lib.nixosSystem {
                system = systemSettings.system;
+               specialArgs = { inherit systemSettings userSettings pkgs-stable; };
                modules = [
                     ./configuration.nix
                     home-manager.nixosModules.home-manager {
+                        home-manager.extraSpecialArgs = {inherit systemSettings userSettings pkgs-stable; };
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
-                        home-manager.users.forest = {
+                        home-manager.users.${userSettings.username} = {
                             imports = [ ./home.nix ];
                         };
                     }
