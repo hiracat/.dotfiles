@@ -55,6 +55,7 @@ in
     prismlauncher
     blender
     krita
+    termdown
 
     stylua
     shfmt
