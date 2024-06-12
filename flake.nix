@@ -46,6 +46,7 @@
                         home-manager.extraSpecialArgs = {inherit systemSettings userSettings pkgs-stable; };
                         home-manager.useGlobalPkgs = true;
                         home-manager.useUserPackages = true;
+                        home-manager.backupFileExtension = "backup";
                         home-manager.users.${userSettings.username} = {
                             imports = [ ./home.nix ];
                         };

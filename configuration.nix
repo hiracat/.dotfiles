@@ -6,15 +6,15 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-# Define your hostname.
+  # Define your hostname.
   networking.hostName = systemSettings.hostname;
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -94,24 +94,24 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-     git
-     neovim
-     wl-clipboard
-     ripgrep
-     kitty
-     zsh
-     atuin
-     fastfetch
-     clang
-     starship
-     wget
-     unzip
-     python3
-     nodePackages.npm
-     fd
-     cargo
-     curl
-     flatpak
+    git
+    neovim
+    wl-clipboard
+    ripgrep
+    kitty
+    zsh
+    atuin
+    fastfetch
+    clang
+    starship
+    wget
+    unzip
+    python3
+    nodePackages.npm
+    fd
+    cargo
+    curl
+    flatpak
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];
@@ -133,14 +133,14 @@
   };
 
   services.interception-tools = {
-      enable = true;
-      plugins = [ pkgs.interception-tools-plugins.caps2esc ];
-      udevmonConfig = ''
+    enable = true;
+    plugins = [ pkgs.interception-tools-plugins.caps2esc ];
+    udevmonConfig = ''
       - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
         DEVICE:
           EVENTS:
             EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-      '';
+    '';
   };
 
 
@@ -178,10 +178,10 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
   virtualisation.vmVariant = {
-  # following configuration is added only when building VM with build-vm
-  virtualisation = {
-    memorySize =  2048; # Use 2048MiB memory.
-    cores = 3;
-  };
+    # following configuration is added only when building VM with build-vm
+    virtualisation = {
+      memorySize = 2048; # Use 2048MiB memory.
+      cores = 3;
+    };
   };
 }
