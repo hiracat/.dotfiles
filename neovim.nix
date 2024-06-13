@@ -2,6 +2,7 @@
 {
   programs.neovim = {
     enable = true;
+    package = pkgs-stable.neovim-unwrapped;
     # plugins = with pkgs.vimPlugins; [ nvim lspzero-nvim];
   };
   home.file = {
