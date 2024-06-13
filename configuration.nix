@@ -99,7 +99,7 @@
     kitty
     atuin
     fastfetch
-    clang
+    gcc
     starship
     wget
     unzip
