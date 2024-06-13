@@ -3,7 +3,6 @@
 let
   myAliases = {
     ll = "ls -l";
-    ".." = "cd ..";
     nv = "nvim";
   };
 in
@@ -68,7 +67,6 @@ in
     gdb
     cmake
     cmake-language-server
-    clang
     clang-tools
 
   ];
@@ -122,7 +120,6 @@ in
   programs.zsh = {
     enable = true;
     shellAliases = myAliases;
-    autocd = true;
     defaultKeymap = "emacs";
     enableCompletion = true;
     history = {
