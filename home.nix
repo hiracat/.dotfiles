@@ -56,6 +56,7 @@ in
     blender
     krita
     termdown
+    fzf
 
     stylua
     shfmt
@@ -107,7 +108,6 @@ in
     QT_IM_MODULE = "fcitx";
     SDL_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
-    QT_QPA_PLATFORMTHEME = "qt5ct";
 
     TERMINAL = userSettings.terminal;
     EDITOR = userSettings.editor;
