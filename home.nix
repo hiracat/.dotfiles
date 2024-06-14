@@ -67,6 +67,7 @@ in
     gdb
     cmake
     cmake-language-server
+    clang
     clang-tools
 
   ];
