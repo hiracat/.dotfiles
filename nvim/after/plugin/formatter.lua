@@ -16,6 +16,11 @@ require("formatter").setup({
 			-- filetype
 			require("formatter.filetypes.sh").shfmt,
 		},
+		zsh = {
+			-- "formatter.filetypes.any" defines default configurations for any
+			-- filetype
+			require("formatter.filetypes.sh").shfmt,
+		},
 		lua = {
 			-- "formatter.filetypes.lua" defines default configurations for the
 			-- "lua" filetype
