@@ -29,7 +29,7 @@ require("formatter").setup({
 			-- You can also define your own configuration
 		},
 		cpp = {
-			require("formatter.filetypes.cpp").clang_format,
+			require("formatter.filetypes.cpp").clangformat,
 		},
 
 		nix = {

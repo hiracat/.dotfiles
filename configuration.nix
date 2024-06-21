@@ -59,10 +59,12 @@
   };
 
 
-  hardware.opengl.driSupport = true; # installs mesa
-  hardware.opengl.extraPackages = with pkgs; [
-    amdvlk
-  ];
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      amdvlk
+    ];
+  };
 
   services.fstrim.enable = true;
 
