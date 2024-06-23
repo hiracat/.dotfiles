@@ -1,4 +1,4 @@
-{ home-manager }:
+{ pkgs, pkgs-stable, home-manager, userSettings, systemSettings, lib, ... }:
 {
   home.file = {
     ".config/hypr" = {
