@@ -67,9 +67,8 @@ in
     gdb
     cmake
     cmake-language-server
-    clang
     clang-tools
-
+    vulkan-tools
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
