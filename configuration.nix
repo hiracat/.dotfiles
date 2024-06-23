@@ -69,9 +69,6 @@
 
   services.fstrim.enable = true;
 
-  # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
-
   security.rtkit.enable = true;
 
   services.pipewire = {
@@ -89,10 +86,6 @@
 
   sound = {
     enable = true;
-    mediaKeys = {
-      enable = true;
-      volumeStep = "2";
-    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
