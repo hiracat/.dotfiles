@@ -52,6 +52,7 @@
   services.desktopManager.plasma6.enable = true;
 
 
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -116,6 +117,7 @@
     cargo
     curl
     flatpak
+    rofi-wayland
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];
