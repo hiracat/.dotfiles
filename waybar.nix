@@ -1,13 +1,9 @@
 { pkgs, pkgs-stable, home-manager, userSettings, systemSettings, lib, ... }:
 {
-  wayland.windowManager.hyprland = {
-    enable = true;
-    extraConfig = " ";
-  };
   home.file = {
-    ".config/hypr" = {
+    ".config/waybar" = {
       enable = true;
-      source = ./hypr;
+      source = ./waybar;
       recursive = true;
     };
   };

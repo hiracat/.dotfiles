@@ -14,6 +14,7 @@ in
       # Include the results of the hardware scan.
       ./neovim.nix
       ./hyprland.nix
+      ./waybar.nix
     ];
 
   # Home Manager needs a bit of information about you and the paths it should
