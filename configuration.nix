@@ -120,6 +120,7 @@
     curl
     flatpak
     rofi-wayland
+    playerctl
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];
