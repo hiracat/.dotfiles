@@ -166,6 +166,7 @@ in
     userEmail = userSettings.email;
     extraConfig = {
       init.defaultBranch = "main";
+      credential.helper = "store";
     };
   };
 
