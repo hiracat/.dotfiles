@@ -48,6 +48,7 @@
   # services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
+
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
   #services.desktopManager.plasma6.enable = true;
@@ -56,8 +57,17 @@
 
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
   };
+
+  services.dbus.enable = true;
+  xdg.portal = {
+    enable = true;
+    wlr.enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+    ];
+  };
+
   programs.thunar.enable = true;
   programs.waybar.enable = true;
 
@@ -122,10 +132,25 @@
     cargo
     curl
     flatpak
+
     rofi-wayland
     playerctl
+    dunst
+    libnotify
+
+    wayland-protocols
+    wayland-utils
+    wlroots
+    networkmanagerapplet
   ];
 
+  fonts.fonts = with pkgs; [
+    nerdfonts
+  ];
+
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
   environment.pathsToLink = [ "/share/zsh" ];
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
