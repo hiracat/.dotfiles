@@ -31,6 +31,25 @@ in
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  gtk = {
+    enable = true;
+
+    cursorTheme.package = pkgs.bibata-cursors;
+    cursorTheme.name = "Bibata-Modern";
+
+    theme.package = pkgs.catppuccin-gtk;
+    theme.name = "catppuccin-mocha";
+
+    iconTheme.package = pkgs.candy-icons;
+    iconTheme.name = "candy-icons";
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
+  };
+
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
