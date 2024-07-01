@@ -68,8 +68,11 @@
     ];
   };
 
-  programs.thunar.enable = true;
   programs.waybar.enable = true;
+
+  programs.thunar.enable = true;
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -132,6 +135,9 @@
     cargo
     curl
     flatpak
+    rar
+    libsForQt5.ark
+    vlc
 
     rofi-wayland
     playerctl
@@ -155,8 +161,6 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
-
-
 
   programs.steam = {
     enable = true;
