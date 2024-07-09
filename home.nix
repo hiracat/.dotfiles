@@ -73,7 +73,7 @@ in
     kdePackages.plasma-browser-integration
     spotify
     prismlauncher
-    blender
+    # blender
     krita
     obsidian
     termdown

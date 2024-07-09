@@ -96,10 +96,13 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-
   sound = {
     enable = true;
   };
+
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -129,7 +132,6 @@
     starship
     wget
     unzip
-    python3
     nodePackages.npm
     fd
     cargo
