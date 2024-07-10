@@ -28,7 +28,6 @@ local plugins = {
 
 	-- tools
 	{ "nvim-telescope/telescope-dap.nvim" },
-	{ "tpope/vim-commentary" },
 	{ "mbbill/undotree" },
 	{ "tpope/vim-fugitive" },
 	{ "mhartington/formatter.nvim" },
