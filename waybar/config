@@ -11,14 +11,14 @@
     "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "temperature", "backlight", "sway/language", "battery", "clock", "tray"],
 
      // Modules configuration
-     "hyprland/workspaces": {
-         "all-outputs": true,
-         "format":"{icon}",
-         "format-icons": {
-             "1": "",
-             "urgent": "",
-             "focused": "",
-             "default": ""
+    "hyprland/workspaces": {
+       "all-outputs": true,
+       "format":"{icon}",
+       "format-icons": {
+            "1": "",
+            "urgent": "",
+            "focused": "",
+            "default": ""
          }
      },
 
