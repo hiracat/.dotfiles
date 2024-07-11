@@ -140,6 +140,7 @@
     rar
     libsForQt5.ark
     vlc
+    htop
 
     rofi-wayland
     playerctl
