@@ -187,6 +187,7 @@ in
     extraConfig = {
       init.defaultBranch = "main";
       credential.helper = "store";
+      push.autoSetupRemote = true;
     };
   };
 
