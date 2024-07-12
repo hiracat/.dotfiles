@@ -16,13 +16,11 @@
 * {
     font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     border: none;
-    border-radius: 0px;
+    border-radius: 15px;
+    color: @text;
 }
 
 window#waybar {
-    background-color: rgba(0,0,0,0.8);
-    border-bottom: 0px solid #ffffff;
-    /* color: #FFFFFF; */
     background: transparent;
     transition-property: background-color;
     transition-duration: .5s;
@@ -34,14 +32,10 @@ window#waybar {
 
 #workspaces {
     color: @text;
-    background: alpha(@base, .5);
-    margin: 2px 1px 3px 1px;
-    padding: 0px 1px;
+    background: @base;
+    margin: 3px 1px 3px 1px;
     border-radius: 15px;
     border: 0px;
-    font-weight: bold;
-    font-style: normal;
-    opacity: 0.8;
     font-size: 16px;
 }
 
@@ -50,14 +44,12 @@ window#waybar {
     margin: 4px 3px;
     border-radius: 15px;
     border: 0px;
-    color: @text;
     background-color: alpha(@base, .9);
     transition: all 0.3s ease-in-out;
     opacity: 0.4;
 }
 
 #workspaces button.active {
-    color: @text;
     background: alpha(@base, .5);
     border-radius: 15px;
     min-width: 40px;
@@ -66,9 +58,7 @@ window#waybar {
 }
 
 #workspaces button:hover {
-    color: @text;
     background: @base;
-    border-radius: 15px;
     opacity:0.7;
 }
 
