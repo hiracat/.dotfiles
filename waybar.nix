@@ -2,7 +2,7 @@
 {
   home.file = {
     ".config/waybar" = {
-      enable = true;
+      enable = false;
       source = ./waybar;
       recursive = true;
     };
