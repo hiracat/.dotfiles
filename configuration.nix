@@ -53,11 +53,10 @@
   services.displayManager.sddm.wayland.enable = true;
   #services.desktopManager.plasma6.enable = true;
 
-
-
   programs.hyprland = {
     enable = true;
   };
+
 
   services.dbus.enable = true;
   xdg.portal = {

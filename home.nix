@@ -78,6 +78,7 @@ in
     obsidian
     termdown
     fzf
+    osu
 
     stylua
     shfmt
