@@ -135,7 +135,6 @@
     fd
     cargo
     curl
-    flatpak
     rar
     libsForQt5.ark
     vlc
@@ -164,6 +163,8 @@
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+
+  services.flatpak.enable = true;
 
   programs.steam = {
     enable = true;
