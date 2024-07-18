@@ -91,6 +91,7 @@ in
     clang-tools
     vulkan-tools
     libsForQt5.gwenview
+    anki
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
