@@ -95,9 +95,6 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
-  sound = {
-    enable = true;
-  };
 
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true;
