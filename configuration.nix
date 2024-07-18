@@ -146,6 +146,8 @@
     wayland-utils
     wlroots
     networkmanagerapplet
+
+    gparted
   ];
 
   fonts.packages = with pkgs; [
