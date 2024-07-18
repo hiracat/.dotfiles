@@ -141,6 +141,7 @@
     playerctl
     dunst
     libnotify
+    alsa-utils
 
     wayland-protocols
     wayland-utils
