@@ -1,9 +1,10 @@
 { config, pkgs, pkgs-stable, home-manager, userSettings, systemSettings, lib, ... }:
 
 let
-  myAliases = {
+  aliases = {
     ll = "ls -l";
     nv = "nvim";
+    gc = ''f() { git add . && git commit -m "$1"}; f'';
   };
 in
 {
@@ -137,12 +138,12 @@ in
 
   programs.bash = {
     enable = true;
-    shellAliases = myAliases;
+    shellAliases = aliases;
   };
 
   programs.zsh = {
     enable = true;
-    shellAliases = myAliases;
+    shellAliases = aliases;
     defaultKeymap = "emacs";
     enableCompletion = true;
     history = {
