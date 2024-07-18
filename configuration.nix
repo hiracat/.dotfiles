@@ -136,7 +136,6 @@
     libsForQt5.ark
     vlc
     htop
-    gimp
 
     rofi-wayland
     playerctl
