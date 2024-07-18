@@ -4,7 +4,7 @@ let
   aliases = {
     ll = "ls -l";
     nv = "nvim";
-    gc = ''f() { git add . && git commit -m "$1"}; f'';
+    gc = ''f() { git add . && git commit -m "$1" && git push}; f'';
   };
 in
 {
