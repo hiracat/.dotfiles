@@ -53,7 +53,6 @@
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
     theme = "catppuccin-mocha";
   };
 
@@ -131,6 +130,7 @@
     kitty
     atuin
     fastfetch
+    catppuccin-sddm
     gcc
     starship
     wget
@@ -157,7 +157,6 @@
     networkmanagerapplet
 
     gparted
-    catppuccin-sddm
   ];
 
   fonts.packages = with pkgs; [
