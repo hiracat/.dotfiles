@@ -127,7 +127,6 @@ in
   #  /etc/profiles/per-user/forest/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     SDL_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";

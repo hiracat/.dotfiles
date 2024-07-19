@@ -160,7 +160,7 @@
     nerdfonts
     fira
     kochi-substitute
-
+    paratype-pt-serif
   ];
 
   fonts.fontconfig = {
@@ -172,11 +172,11 @@
       "JetBrains Mono"
     ];
     sansSerif = [
-      "Fira"
+      "Fira Sans"
       "Kochi Substitute"
     ];
     serif = [
-      "Fira"
+      "PT Serif"
       "Kochi Substitute"
     ];
   };
