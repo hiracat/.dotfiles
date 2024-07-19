@@ -51,8 +51,11 @@
 
 
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-mocha";
+  };
 
 
   #services.desktopManager.plasma6.enable = true;
@@ -154,6 +157,7 @@
     networkmanagerapplet
 
     gparted
+    catppuccin-sddm
   ];
 
   fonts.packages = with pkgs; [
