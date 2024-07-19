@@ -49,8 +49,12 @@
 
   # Enable the KDE Plasma Desktop Environment.
 
+
+  services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+
+
   #services.desktopManager.plasma6.enable = true;
 
   programs.hyprland = {
@@ -155,7 +159,41 @@
   fonts.packages = with pkgs; [
     nerdfonts
     fira
+    kochi-substitute
+
   ];
+
+  fonts.fontconfig = {
+    enable = true;
+  };
+
+  fonts.fontconfig.defaultFonts = {
+    monospace = [
+      "JetBrains Mono"
+    ];
+    sansSerif = [
+      "Fira"
+      "Kochi Substitute"
+    ];
+    serif = [
+      "Fira"
+      "Kochi Substitute"
+    ];
+  };
+
+
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.waylandFrontend = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-gtk
+      fcitx5-catppuccin
+      fcitx5-mozc
+    ];
+  };
+  # This enables "mozc" as an input method in "fcitx".  This has a relatively
+  # complete dictionary.  I recommend it for Japanese input.
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
