@@ -104,6 +104,8 @@ k("n", "<F6>", ":lua require'dap'.continue()<CR>", opts) --dap continue
 k("n", "<F7>", ":lua require'dap'.step_into()<CR>", opts) --dap setp into
 k("n", "<F8>", ":lua require'dap'.step_over()<CR>", opts) --dap set over
 
+k("n", "<A>k", ':lua require("dap.ui.widgets").hover()<CR>', { noremap = true })
+
 -- Harpoon.nvim
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
