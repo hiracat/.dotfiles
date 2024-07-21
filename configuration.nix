@@ -130,7 +130,6 @@
     kitty
     atuin
     fastfetch
-    catppuccin-sddm
     gcc
     starship
     wget
@@ -157,6 +156,14 @@
     networkmanagerapplet
 
     gparted
+    (
+      pkgs.catppuccin-sddm.override {
+        flavor = "mocha";
+        font = "Fira Sans";
+        fontSize = "12";
+        # background = "${./wallpaper.png}";
+        loginBackground = true;
+      })
   ];
 
   fonts.packages = with pkgs; [
