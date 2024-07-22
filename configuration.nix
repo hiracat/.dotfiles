@@ -50,6 +50,7 @@
   # Enable the KDE Plasma Desktop Environment.
 
 
+
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
@@ -207,7 +208,13 @@
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    QT_IM_MODULE = "fcitx";
+    SDL_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    TERMINAL = userSettings.terminal;
+    EDITOR = userSettings.editor;
   };
+
   environment.pathsToLink = [ "/share/zsh" ];
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;

@@ -126,14 +126,7 @@ in
   #
   #  /etc/profiles/per-user/forest/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    QT_IM_MODULE = "fcitx";
-    SDL_IM_MODULE = "fcitx";
-    XMODIFIERS = "@im=fcitx";
-
-    TERMINAL = userSettings.terminal;
-    EDITOR = userSettings.editor;
-  };
+  home.sessionVariables = { };
 
   programs.bash = {
     enable = true;
