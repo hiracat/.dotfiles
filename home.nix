@@ -70,8 +70,6 @@ in
     # (pkgs.writeShellScriptBin "my-hello" ''
     #   echo "Hello, ${config.home.username}!"
     # '')
-    kdePackages.kate
-    kdePackages.plasma-browser-integration
     spotify
     prismlauncher
     # blender
