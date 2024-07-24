@@ -34,15 +34,39 @@ in
 
   gtk = {
     enable = true;
-
     cursorTheme.package = pkgs.bibata-cursors;
     cursorTheme.name = "Bibata-Modern";
+    cursorTheme.size = 16;
 
     theme.package = pkgs.catppuccin-gtk;
     theme.name = "catppuccin-mocha";
 
     iconTheme.package = pkgs.candy-icons;
     iconTheme.name = "candy-icons";
+
+    font = {
+      name = "Fira Sans";
+      size = 12;
+    };
+
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+
+  };
+
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "catppuccin-gtk";
+    };
   };
 
   qt = {
@@ -91,6 +115,8 @@ in
     vulkan-tools
     anki
     feh
+    grim
+    slurp
   ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
