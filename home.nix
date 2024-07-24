@@ -32,14 +32,15 @@ in
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
+  catppuccin.accent = "red";
+  catppuccin.flavor = "mocha";
   gtk = {
     enable = true;
     cursorTheme.package = pkgs.bibata-cursors;
     cursorTheme.name = "Bibata-Modern";
     cursorTheme.size = 16;
 
-    theme.package = pkgs.catppuccin-gtk;
-    theme.name = "catppuccin-mocha";
+    catppuccin.enable = true;
 
     iconTheme.package = pkgs.candy-icons;
     iconTheme.name = "candy-icons";
@@ -63,17 +64,16 @@ in
 
   };
 
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "catppuccin-gtk";
-    };
-  };
 
   qt = {
     enable = true;
-    platformTheme.name = "gtk";
-    style.name = "adwaita-dark";
+    platformTheme.name = "kvantum";
+    style.name = "kvantum";
+    style.catppuccin.enable = true;
+    style.catppuccin.apply = true;
   };
+  services.dunst.enable = true;
+  services.dunst.catppuccin.enable = true;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.

@@ -53,7 +53,8 @@
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    theme = "catppuccin-mocha";
+    catppuccin.enable = true;
+    package = pkgs.kdePackages.sddm;
   };
 
 
@@ -151,7 +152,6 @@
 
     rofi-wayland
     playerctl
-    dunst
     libnotify
     alsa-utils
 

@@ -2,13 +2,14 @@
   description = "hiracat's dotfiles flake";
 
   inputs = {
+    catppuccin.url = "github:catppuccin/nix";
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... }:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, catppuccin, ... }:
 
     let
       lib = nixpkgs.lib;
@@ -43,6 +44,7 @@
           specialArgs = { inherit systemSettings userSettings pkgs-stable; };
           modules = [
             ./configuration.nix
+            catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = { inherit systemSettings userSettings pkgs-stable; };
@@ -50,7 +52,10 @@
               home-manager.useUserPackages = true;
               home-manager.backupFileExtension = "backup";
               home-manager.users.${userSettings.username} = {
-                imports = [ ./home.nix ];
+                imports = [
+                  ./home.nix
+                  catppuccin.homeManagerModules.catppuccin
+                ];
               };
             }
           ];
