@@ -10,6 +10,10 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModulePackages = with config.boot.kernelPackages; [ ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
