@@ -96,7 +96,7 @@ in
     # '')
     spotify
     prismlauncher
-    # blender
+    blender
     krita
     obsidian
     termdown
