@@ -96,8 +96,8 @@ in
     # '')
     spotify
     prismlauncher
-    blender
     krita
+    blender-hip
     obsidian
     termdown
     fzf
