@@ -61,15 +61,10 @@
 
   #services.desktopManager.plasma6.enable = true;
 
-  programs.hyprland = {
+  hardware.graphics = {
     enable = true;
+    enable32Bit = true;
   };
-
-  hardware.graphics =
-    {
-      enable = true;
-      enable32Bit = true;
-    };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -82,24 +77,9 @@
     ];
   };
 
-  programs.waybar.enable = true;
-  programs.partition-manager.enable = true;
-
-  programs.thunar.enable = true;
-  programs.xfconf.enable = true; # make thunar work better
-  services.gvfs.enable = true; # Mount, trash, and other functionalities
-  services.tumbler.enable = true; # Thumbnail support for images
-
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
   services.fstrim.enable = true;
-
   security.rtkit.enable = true;
-
   security.polkit.enable = true;
 
   services.pipewire = {
@@ -109,7 +89,6 @@
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
-
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
     #media-session.enable = true;
@@ -134,19 +113,20 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  services.atd.enable = true;
-  services.cron.enable = true;
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    git
+    dunst
     wl-clipboard
     ripgrep
     lutris
     bottles
     kitty
     atuin
+
+    neovim
     fastfetch
     gcc
     starship
@@ -174,15 +154,46 @@
     wlroots
     networkmanagerapplet
 
-    (
-      pkgs.catppuccin-sddm.override {
-        flavor = "mocha";
-        font = "Fira Sans";
-        fontSize = "12";
-        # background = "${./wallpaper.png}";
-        loginBackground = true;
-      })
+    spotify
+    prismlauncher
+    krita
+    blender-hip
+    obsidian
+    termdown
+    fzf
+    polkit_gnome
+
+    stylua
+    shfmt
+    nixpkgs-fmt
+    nil
+    lua-language-server
+    lua
+    gdb
+    cmake
+    cmake-language-server
+    clang-tools
+    vulkan-tools
+    anki
+    feh
+    grim
+    slurp
   ];
+
+  programs.hyprland.enable = true;
+  programs.partition-manager.enable = true;
+  programs.thunar.enable = true;
+  programs.xfconf.enable = true; # make thunar work better
+  services.gvfs.enable = true; # Mount, trash, and other functionalities
+  services.tumbler.enable = true; # Thumbnail support for images
+  services.atd.enable = true;
+  services.cron.enable = true;
+  services.xserver.xkb = {
+
+    layout = "us";
+    variant = "";
+  };
+
 
   fonts.packages = with pkgs; [
     nerdfonts

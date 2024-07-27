@@ -1,9 +1,9 @@
 { pkgs, pkgs-stable, home-manager, userSettings, systemSettings, lib, ... }:
 {
   home.file = {
-    ".config/waybar" = {
-      enable = false;
-      source = ./waybar;
+    ".config/nvim" = {
+      enable = true;
+      source = ./nvim;
       recursive = true;
     };
   };

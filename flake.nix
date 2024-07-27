@@ -46,7 +46,7 @@
           system = systemSettings.system;
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
-            ./configuration.nix
+            ./nixos/configuration.nix
             inputs.catppuccin.nixosModules.catppuccin
           ];
         };
@@ -54,14 +54,14 @@
 
       homeConfigurations = {
         # FIXME replace with your username@hostname
+        backupFileExtension = "backup";
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
         "${userSettings.username}@${systemSettings.hostname}" = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = { inherit inputs systemSettings userSettings; };
-          # useGlobalPkgs = true;
-          # useUserPackages = true;
-          # backupFileExtension = "backup";
           # > Our main home-manager configuration file <
-          modules = [ ./home.nix ];
+          modules = [ ./home-manager/home.nix ];
         };
       };
     };
