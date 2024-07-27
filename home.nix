@@ -101,6 +101,7 @@ in
     obsidian
     termdown
     fzf
+    polkit_gnome
 
     stylua
     shfmt

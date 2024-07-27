@@ -10,5 +10,9 @@
       source = ./hypr;
       recursive = true;
     };
+    ".config/hypr/nixthings.conf" = {
+      enable = true;
+      text = "exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &";
+    };
   };
 }

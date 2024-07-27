@@ -81,6 +81,7 @@
   };
 
   programs.waybar.enable = true;
+  programs.partition-manager.enable = true;
 
   programs.thunar.enable = true;
   programs.xfconf.enable = true; # make thunar work better
@@ -96,6 +97,8 @@
   services.fstrim.enable = true;
 
   security.rtkit.enable = true;
+
+  security.polkit.enable = true;
 
   services.pipewire = {
     enable = true;
@@ -132,6 +135,7 @@
   services.atd.enable = true;
   services.cron.enable = true;
 
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -165,7 +169,6 @@
     wlroots
     networkmanagerapplet
 
-    gparted
     (
       pkgs.catppuccin-sddm.override {
         flavor = "mocha";
