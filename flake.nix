@@ -3,20 +3,23 @@
 
   inputs = {
     catppuccin.url = "github:catppuccin/nix";
+
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, catppuccin, ... }:
-
+  outputs = { self, nixpkgs, home-manager, ... } @inputs:
     let
+      inherit (self) outputs;
+
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${systemSettings.system};
-      pkgs-stable = import nixpkgs-stable {
+      pkgs-stable = import inputs.nixpkgs-stable {
         config.allowUnfree = true;
-        stable = nixpkgs-stable.legacyPackages.${systemSettings.system};
+        stable = inputs.nixpkgs-stable.legacyPackages.${systemSettings.system};
         system = systemSettings.system;
       };
 
@@ -39,26 +42,26 @@
     in
     {
       nixosConfigurations = {
-        nixos = lib.nixosSystem {
+        ${systemSettings.hostname} = lib.nixosSystem {
           system = systemSettings.system;
-          specialArgs = { inherit systemSettings userSettings pkgs-stable; };
+          specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             ./configuration.nix
-            catppuccin.nixosModules.catppuccin
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = { inherit systemSettings userSettings pkgs-stable; };
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.users.${userSettings.username} = {
-                imports = [
-                  ./home.nix
-                  catppuccin.homeManagerModules.catppuccin
-                ];
-              };
-            }
+            inputs.catppuccin.nixosModules.catppuccin
           ];
+        };
+      };
+
+      homeConfigurations = {
+        # FIXME replace with your username@hostname
+        "${userSettings.username}@${systemSettings.hostname}" = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = { inherit inputs systemSettings userSettings; };
+          # useGlobalPkgs = true;
+          # useUserPackages = true;
+          # backupFileExtension = "backup";
+          # > Our main home-manager configuration file <
+          modules = [ ./home.nix ];
         };
       };
     };

@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-stable, home-manager, userSettings, systemSettings, lib, ... }:
+{ config, pkgs, home-manager, userSettings, systemSettings, lib, ... }:
 
 let
   aliases = {
@@ -9,6 +9,12 @@ let
 in
 {
 
+
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
 
   imports =
     [
@@ -32,15 +38,15 @@ in
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  catppuccin.accent = "red";
-  catppuccin.flavor = "mocha";
+  # catppuccin.accent = "red";
+  # catppuccin.flavor = "mocha";
   gtk = {
     enable = true;
     cursorTheme.package = pkgs.bibata-cursors;
     cursorTheme.name = "Bibata-Modern";
     cursorTheme.size = 16;
 
-    catppuccin.enable = true;
+    # catppuccin.enable = true;
 
     iconTheme.package = pkgs.candy-icons;
     iconTheme.name = "candy-icons";
@@ -69,11 +75,11 @@ in
     enable = true;
     platformTheme.name = "kvantum";
     style.name = "kvantum";
-    style.catppuccin.enable = true;
-    style.catppuccin.apply = true;
+    # style.catppuccin.enable = true;
+    # style.catppuccin.apply = true;
   };
   services.dunst.enable = true;
-  services.dunst.catppuccin.enable = true;
+  # services.dunst.catppuccin.enable = true;
 
   # The home.packages option allows you to install Nix packages into your
   # environment.

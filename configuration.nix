@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, pkgs-stable, userSettings, systemSettings, ... }:
+{ inputs, pkgs, userSettings, systemSettings, ... }:
 
 {
   imports =
@@ -12,7 +12,7 @@
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = with config.boot.kernelPackages; [ ];
+  boot.extraModulePackages = with inputs.config.boot.kernelPackages; [ ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -52,9 +52,6 @@
   # You can disable this if you're only using the Wayland session.
   # services.xserver.enable = true;
 
-
-
-
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
@@ -62,14 +59,19 @@
     package = pkgs.kdePackages.sddm;
   };
 
-
   #services.desktopManager.plasma6.enable = true;
-
 
   programs.hyprland = {
     enable = true;
   };
 
+  hardware.graphics =
+    {
+      enable = true;
+      enable32Bit = true;
+    };
+
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   services.dbus.enable = true;
   xdg.portal = {
@@ -141,6 +143,8 @@
   environment.systemPackages = with pkgs; [
     wl-clipboard
     ripgrep
+    lutris
+    bottles
     kitty
     atuin
     fastfetch
@@ -163,6 +167,7 @@
     playerctl
     libnotify
     alsa-utils
+    mangohud
 
     wayland-protocols
     wayland-utils
@@ -236,9 +241,14 @@
 
   programs.steam = {
     enable = true;
+    gamescopeSession.enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+
   };
+  programs.gamemode.enable = true;
+
+
   programs.firefox.enable = true;
 
   # Enable CUPS to print documents.
