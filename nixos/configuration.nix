@@ -20,7 +20,6 @@
     loader.efi.canTouchEfiVariables = true;
     loader.grub.device = "nodev";
     loader.grub.efiSupport = true;
-    loader.grub.useOSProber = true;
     loader.systemd-boot.enable = false;
   };
 
@@ -70,6 +69,7 @@
   };
 
   programs = {
+    hyprland.enable = true;
     partition-manager.enable = true;
     thunar.enable = true;
     xfconf.enable = true; # make thunar work better
@@ -81,7 +81,6 @@
       gamescopeSession.enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-
     };
   };
 
