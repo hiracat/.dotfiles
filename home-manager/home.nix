@@ -31,7 +31,6 @@
 
   # catppuccin.accent = "red";
   # catppuccin.flavor = "mocha";
-  # services.dunst.catppuccin.enable = true;
 
   programs.git = {
     enable = true;
@@ -43,7 +42,6 @@
       push.autoSetupRemote = true;
     };
   };
-
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
