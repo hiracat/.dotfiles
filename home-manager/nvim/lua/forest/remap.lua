@@ -81,7 +81,7 @@ k("n", "<leader>k", ":lprev<CR>zz", opts)
 -- Telescope
 local builtin = require("telescope.builtin")
 
-k("n", "<leader>ff", function()
+k("n", "<leader>fd", function()
 	builtin.find_files({ hidden = true })
 end, {}, opts) --file find
 

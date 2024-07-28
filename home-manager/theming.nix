@@ -3,9 +3,7 @@
     enable = true;
     cursorTheme.package = pkgs.bibata-cursors;
     cursorTheme.name = "Bibata-Modern-Classic";
-    cursorTheme.size = 16;
-
-    # catppuccin.enable = true;
+    cursorTheme.size = 18;
 
     iconTheme.package = pkgs.candy-icons;
     iconTheme.name = "candy-icons";
