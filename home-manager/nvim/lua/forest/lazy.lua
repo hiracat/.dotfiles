@@ -25,7 +25,7 @@ local plugins = {
 	{ "xiyaowong/transparent.nvim", lazy = false },
 	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{ "eandrju/cellular-automaton.nvim" },
-	{ "norcalli/nvim-colorizer.lua" },
+	{ "NvChad/nvim-colorizer.lua" },
 
 	-- tools
 	{ "nvim-telescope/telescope-dap.nvim" },
