@@ -23,9 +23,8 @@
 
   networking = {
     networkmanager.enable = true;
-    hostName = systemSettings.hostname;
-    wireless.enable = true;
     firewall.enable = false;
+    hostName = systemSettings.hostname;
   };
 
   hardware = {
@@ -138,6 +137,7 @@
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
     ];
+    config.common.default = "*";
   };
 
   fonts = {
