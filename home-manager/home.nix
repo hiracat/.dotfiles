@@ -1,10 +1,8 @@
-{ pkgs, userSettings, ... }@inputs:
+{ pkgs, userSettings, ... }:
 {
-  nixpkgs = {
-    config = {
-      allowUnfree = true;
-      allowUnfreePredicate = _: true;
-    };
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = _: true;
   };
 
   imports = [

@@ -16,9 +16,12 @@
     extraModulePackages = with inputs.config.boot.kernelPackages; [ ];
 
     # Bootloader.
-    loader.systemd-boot.enable = true;
+    loader.grub.enable = true;
     loader.efi.canTouchEfiVariables = true;
-
+    loader.grub.device = "nodev";
+    loader.grub.efiSupport = true;
+    loader.grub.useOSProber = true;
+    loader.systemd-boot.enable = false;
   };
 
   networking = {
@@ -241,7 +244,7 @@
       lua
       gdb
       cmake
-      cmake-language-server
+      #cmake-language-server
       clang-tools
       vulkan-tools
       anki
@@ -265,10 +268,11 @@
   virtualisation.vmVariant = {
     # following configuration is added only when building VM with build-vm
     virtualisation = {
-      memorySize = 4096; # Use 2048MiB memory.
+      memorySize = 8192; # Use 2048MiB memory.
       cores = 6;
     };
   };
+
   nixpkgs.config.allowUnfree = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
