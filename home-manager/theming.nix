@@ -2,7 +2,7 @@
   gtk = {
     enable = true;
     cursorTheme.package = pkgs.bibata-cursors;
-    cursorTheme.name = "Bibata-Modern";
+    cursorTheme.name = "Bibata-Modern-Classic";
     cursorTheme.size = 16;
 
     # catppuccin.enable = true;
@@ -16,15 +16,11 @@
     };
 
     gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
+      gtk-application-prefer-dark-theme = true;
     };
 
     gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
+      gtk-application-prefer-dark-theme = true;
     };
   };
 

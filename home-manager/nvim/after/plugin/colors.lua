@@ -28,7 +28,8 @@ require("transparent").setup({
 })
 
 -- setup must be called before loading
-require("nightfox").setup({})
+require("nightfox").setup()
 require("catppuccin").setup({
 	flavour = "mocha", -- latte, frappe, macchiato, mocha
 })
+require("colorizer").setup()

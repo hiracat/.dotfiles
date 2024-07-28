@@ -70,6 +70,7 @@
 
   programs = {
     hyprland.enable = true;
+    neovim.enable = true;
     partition-manager.enable = true;
     thunar.enable = true;
     xfconf.enable = true; # make thunar work better
@@ -78,7 +79,6 @@
     firefox.enable = true;
     steam = {
       enable = true;
-      gamescopeSession.enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
@@ -197,8 +197,9 @@
       bottles
       kitty
       atuin
+      calibre
+      nwg-look
 
-      neovim
       fastfetch
       gcc
       starship
