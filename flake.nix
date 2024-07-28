@@ -3,7 +3,6 @@
 
   inputs = {
     catppuccin.url = "github:catppuccin/nix";
-
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
 
@@ -14,7 +13,6 @@
   outputs = { self, nixpkgs, home-manager, ... } @inputs:
     let
       inherit (self) outputs;
-
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${systemSettings.system};
       pkgs-stable = import inputs.nixpkgs-stable {
@@ -48,21 +46,23 @@
           modules = [
             ./nixos/configuration.nix
             inputs.catppuccin.nixosModules.catppuccin
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = { inherit inputs systemSettings userSettings; };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.${userSettings.username} = {
+                imports = [
+                  ./home-manager/home.nix
+                  inputs.catppuccin.homeManagerModules.catppuccin
+                ];
+              };
+            }
+
           ];
         };
       };
 
-      homeConfigurations = {
-        # FIXME replace with your username@hostname
-        backupFileExtension = "backup";
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        "${userSettings.username}@${systemSettings.hostname}" = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          extraSpecialArgs = { inherit inputs systemSettings userSettings; };
-          # > Our main home-manager configuration file <
-          modules = [ ./home-manager/home.nix ];
-        };
-      };
     };
 }
