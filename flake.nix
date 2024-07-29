@@ -2,8 +2,6 @@
   description = "hiracat's dotfiles flake";
 
   inputs = {
-    catppuccin.url = "github:catppuccin/nix";
-
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
 
@@ -46,7 +44,6 @@
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             ./nixos/configuration.nix
-            inputs.catppuccin.nixosModules.catppuccin
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = { inherit inputs systemSettings userSettings; };
@@ -56,7 +53,6 @@
               home-manager.users.${userSettings.username} = {
                 imports = [
                   ./home-manager/home.nix
-                  inputs.catppuccin.homeManagerModules.catppuccin
                 ];
               };
             }

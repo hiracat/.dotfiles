@@ -30,8 +30,6 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  # catppuccin.accent = "red";
-  # catppuccin.flavor = "mocha";
 
   programs.git = {
     enable = true;

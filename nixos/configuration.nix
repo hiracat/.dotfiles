@@ -113,7 +113,6 @@
     };
     displayManager.sddm = {
       enable = true;
-      catppuccin.enable = true;
       package = pkgs.kdePackages.sddm;
     };
     avahi = {
