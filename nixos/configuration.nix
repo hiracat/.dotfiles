@@ -190,6 +190,7 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+      base16-schemes
       git
       dunst
       wl-clipboard

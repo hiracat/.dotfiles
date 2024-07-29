@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   gtk = {
+
     enable = true;
     cursorTheme.package = pkgs.bibata-cursors;
     cursorTheme.name = "Bibata-Modern-Classic";
@@ -7,6 +8,9 @@
 
     iconTheme.package = pkgs.candy-icons;
     iconTheme.name = "candy-icons";
+
+    theme.name = "adw-gtk3";
+    theme.package = pkgs.adw-gtk3;
 
     font = {
       name = "Fira Sans";
@@ -24,7 +28,8 @@
 
   qt = {
     enable = true;
-    platformTheme.name = "kvantum";
-    style.name = "kvantum";
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
+    style.package = pkgs.adwaita-qt;
   };
 }
