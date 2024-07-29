@@ -14,7 +14,7 @@
  * ----------------------------------------------------- */
 
 * {
-    font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Fira Sans Semibold", "Font Awesome 6 Free Solid", "Font Awesome 6 Brands", Roboto, Helvetica, Arial, sans-serif;
     border: none;
     border-radius: 15px;
     color: @text;

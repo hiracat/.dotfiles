@@ -148,6 +148,7 @@
       fira
       kochi-substitute
       paratype-pt-serif
+      font-awesome
     ];
     fontconfig = {
       enable = true;
