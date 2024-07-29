@@ -77,24 +77,24 @@ k("n", "<leader>k", ":lprev<CR>zz", opts)
 
 -- Plugin Remaps
 -- #############
-
+--
 -- Telescope
-local builtin = require("telescope.builtin")
+local telescope = require("telescope.builtin")
 
 k("n", "<leader>fd", function()
-	builtin.find_files({ hidden = true })
+	telescope.find_files()
 end, {}, opts) --file find
 
 k("n", "<leader>fs", function()
-	builtin.live_grep({ hidden = true })
+	telescope.live_grep()
 end, {}, opts) --file search
 
 k("n", "<leader>fo", function()
-	builtin.buffers({ hidden = true })
+	telescope.buffers()
 end, {}, opts) --file open
 
 k("n", "<leader>fh", function()
-	builtin.help_tags({ hidden = true })
+	telescope.help_tags()
 end, {}, opts) --file help
 
 -- Dap
