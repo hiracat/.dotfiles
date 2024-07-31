@@ -18,6 +18,7 @@ local plugins = {
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 	{ "shaunsingh/nord.nvim", name = "nord", priority = 1000 },
 	{ "rose-pine/neovim", name = "rose-pine" },
+	{ "GnRlLeclerc/dynamic-base16.nvim" },
 
 	-- apearance
 	{ "mfussenegger/nvim-dap" },

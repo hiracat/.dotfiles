@@ -189,6 +189,11 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+      libadwaita
+      glib
+      kdePackages.breeze
+
+
       base16-schemes
       git
       dunst

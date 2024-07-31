@@ -6,13 +6,22 @@
   };
 
   imports = [
-    ./neovim.nix
+    ./cava.nix
+    ./gtk.nix
     ./hyprland.nix
+    ./kitty.nix
+    ./neovim.nix
+    ./qt.nix
+    ./shell.nix
     ./waybar.nix
-    ./theming.nix
-    ./terminal.nix
+    ./dunst.nix
+    inputs.nix-colors.homeManagerModules.default
   ];
 
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
+  # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
+  # colorScheme = inputs.nix-colors.colorSchemes.colors;
+  # colorScheme = inputs.nix-colors.colorSchemes.everforest;
 
 
   # Home Manager needs a bit of information about you and the paths it should

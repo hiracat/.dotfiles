@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
+    nix-colors.url = "github:misterio77/nix-colors";
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -34,6 +35,12 @@
         terminal = "kitty";
         font = "JetBrainsMono Nerd Font";
         fontPkg = pkgs.nerdfonts;
+        aliases = {
+          ll = "ls -l";
+          nv = "nvim";
+          gc = ''f() { git  add . && git commit -m "$1" && git push}; f'';
+          killn = "killn() { pid=$(pidof waybar) && kill $pid }";
+        };
       };
 
     in
@@ -44,6 +51,7 @@
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             ./nixos/configuration.nix
+            ./scripts/default.nix
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = { inherit inputs systemSettings userSettings; };

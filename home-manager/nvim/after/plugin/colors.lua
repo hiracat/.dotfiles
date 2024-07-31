@@ -29,9 +29,6 @@ require("transparent").setup({
 
 -- setup must be called before loading
 require("nightfox").setup()
-require("catppuccin").setup({
-	flavour = "mocha", -- latte, frappe, macchiato, mocha
-})
 vim.opt.termguicolors = true
 
 require("colorizer").setup({
