@@ -72,11 +72,10 @@
     hyprland.enable = true;
     neovim.enable = true;
     partition-manager.enable = true;
-    thunar.enable = true;
-    xfconf.enable = true; # make thunar work better
     zsh.enable = true;
     gamemode.enable = true;
     firefox.enable = true;
+    dconf.enable = true;
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -85,6 +84,7 @@
   };
 
   services = {
+    gnome.gnome-keyring.enable = true;
     flatpak.enable = true;
     gvfs.enable = true; # Mount, trash, and other functionalities
     tumbler.enable = true; # Thumbnail support for images
@@ -185,15 +185,20 @@
       XMODIFIERS = "@im=fcitx";
       TERMINAL = userSettings.terminal;
       EDITOR = userSettings.editor;
+      GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/gsettings-desktop-schemas-46.0/glib-2.0/schemas";
     };
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
-      libadwaita
+      adwaita-icon-theme
       glib
+      gsettings-desktop-schemas
       kdePackages.breeze
 
 
+      nemo-with-extensions
+      nemo-fileroller
+      cava
       base16-schemes
       git
       dunst

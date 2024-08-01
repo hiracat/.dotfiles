@@ -51,7 +51,6 @@
       @define-color view_fg_color #${config.colorScheme.palette.base05};
       @define-color headerbar_bg_color #${config.colorScheme.palette.base01};
       @define-color headerbar_fg_color #${config.colorScheme.palette.base05};
-      # @define-color headerbar_border_color rgba({{config.colorScheme.palette.base01-dec-r}}, {{base01-dec-g}}, {{base01-dec-b}}, 0.7);
       @define-color headerbar_border_color #${config.colorScheme.palette.base01};
       @define-color headerbar_backdrop_color @window_bg_color;
       @define-color headerbar_shade_color rgba(0, 0, 0, 0.07);

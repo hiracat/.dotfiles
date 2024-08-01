@@ -16,6 +16,9 @@
         pkill waybar && waybar > /dev/null 2>&1 &
         cat ~/.cache/colorschemes/nvimcolors.lua > ~/.config/nvim/lua/forest/coloroverrides.lua
         pkill dunst && dunst > /dev/null 2>&1 &
+        gsettings set org.gnome.desktop.interface gtk-theme "adwaita-dark"
+        sleep .1
+        gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
       '';
     }
     )
