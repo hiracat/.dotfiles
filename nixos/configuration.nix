@@ -190,6 +190,7 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+      nix-tree
       adwaita-icon-theme
       glib
       gsettings-desktop-schemas
