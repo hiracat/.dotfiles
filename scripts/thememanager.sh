@@ -1,0 +1,72 @@
+#!/bin/sh
+set -e
+if ! command -v swww >/dev/null 2>&1; then
+    echo "Error: swww is not installed." >&2
+    exit 1
+fi
+
+select_random_image() {
+    # get the current image path from swwww
+    current_image=$(echo "$(swww query)" | awk -F'image: ' '{print $2}')
+    folder_path=/home/forest/.dotfiles/assets/wallpapers
+
+    # if folder path is a folder
+    if [ ! -d "$folder_path" ]; then
+        echo "Folder not found: $folder_path, please make a folder in this location" >&2
+        exit 1
+    fi
+
+    # get all the files ine the folder
+    files=$(find "$folder_path" -type f)
+
+    # check if there are any files in the folder
+    if [ -z "$files" ]; then
+        echo "no wallpapers found in $folder_path please add some" >&2
+        exit 1
+    fi
+
+    # select a random image
+
+    new_random_image=$(echo "$files" | shuf -n 1)
+
+    if [ $(echo "$files" | wc -l) -eq 1 ]; then
+        echo "only one image" >&2
+        new_random_image=$files
+    else
+        # select a NEW random image
+        while [ "$current_image" = "$new_random_image" ]; do
+            new_random_image=$(echo "$files" | shuf -n 1)
+        done
+    fi
+    # output the selected image
+    echo "current image: $current_image" >&2
+    echo "new image: $new_random_image" >&2
+    echo $new_random_image
+}
+
+failed() {
+    echo "bad args"
+    echo "usage"
+    echo "theme wallpaper <path or random> <nomatch>"
+    echo "theme theme <themename> <nomatch>"
+    echo "nomatch, dont switch the wallpaper to match the theme, or generate colors to match the wallpaper"
+    exit 1
+}
+
+if [ -z $1 ]; then
+    failed
+fi
+
+if [ $1 = "wallpaper" ]; then
+    if [ -z $2 ]; then
+        failed
+    else
+        if [ "$2" = "random" ]; then
+            swww img "$(select_random_image)"
+        elif [ -f "$2" ]; then
+            swww img "$2"
+        else
+            failed
+        fi
+    fi
+fi

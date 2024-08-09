@@ -17,7 +17,7 @@ local function callback(err, filename, events)
 		vim.cmd("source " .. watchedPath)
 		vim.cmd("Catppuccin mocha")
 		require("lualine").setup({ options = { theme = "catppuccin-mocha" } })
-	end)()
+	end)
 
 	vim.uv.fs_event_stop(event)
 	vim.uv.fs_event_start(event, watchedPath, config, callback)

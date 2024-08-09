@@ -18,10 +18,10 @@
     inputs.nix-colors.homeManagerModules.default
   ];
 
-  # colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
   # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
   # colorScheme = inputs.nix-colors.colorSchemes.colors;
-  colorScheme = inputs.nix-colors.colorSchemes.everforest;
+  # colorScheme = inputs.nix-colors.colorSchemes.everforest;
 
 
   # Home Manager needs a bit of information about you and the paths it should
