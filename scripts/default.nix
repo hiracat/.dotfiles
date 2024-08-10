@@ -10,7 +10,7 @@
 
         args=""
         if [ -z "$1" ]; then
-            echo "usage: rebuild <test/switch> <full>"
+            echo "usage: rebuild <test/switch> <fast>"
             exit 1
         else
             if [ "$1" = "test" ]; then
@@ -23,10 +23,10 @@
             fi
 
             if [ -z "$2" ]; then
-                args+=" --fast "
+                args+=""
             else
-                if [ "$2" = "full" ]; then
-                    args+=""
+                if [ "$2" = "fast" ]; then
+                    args+=" --fast "
                 fi
             fi
         fi

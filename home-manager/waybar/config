@@ -15,7 +15,7 @@
      // Modules configuration
     "hyprland/workspaces": {
        "all-outputs": true,
-       "format":"{icon}",
+       "format":"{id}: {icon}",
        "format-icons": {
             "1": "", //firefox icon
             "urgent": "",

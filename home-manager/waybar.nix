@@ -1,4 +1,4 @@
-{ pkgs, config, pkgs-stable, nix-colors, home-manager, userSettings, systemSettings, lib, ... }:
+{ config, ... }:
 {
   programs.waybar.enable = true;
   home.file = {
