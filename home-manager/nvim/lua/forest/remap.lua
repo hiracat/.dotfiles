@@ -22,8 +22,6 @@ k("n", "<leader>t", ":w<CR>:term<CR>i", opts)
 k("t", ":q<cr>", "<C-\\><C-n>:bd!<CR>", opts)
 
 -- text editing stuff
-k("v", "J", ":m '>+1<CR>gv=gv", opts) --allows you to move highlighted lines around
-k("v", "K", ":m '<-2<CR>gv=gv", opts)
 
 k("n", "<C-d>", "<C-d>zz", opts) --keeps mouse in hte same position while doing half page jumping
 k("n", "<C-u>", "<C-u>zz", opts)
@@ -64,8 +62,6 @@ k("n", "<leader>mx", ":!chmod +x %<CR>", opts) --make executable
 
 -- stuff i dont understand
 -- #######################
-
--- k("n", "Q", "<nop>", opts) --disables Q which does somethign wierd
 
 k("n", "<C-j>", ":cnext<CR>zz", opts) --quick fix list navigation
 k("n", "<C-k>", ":cprev<CR>zz", opts)

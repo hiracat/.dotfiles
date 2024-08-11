@@ -39,7 +39,7 @@
           ll = "ls -l";
           nv = "nvim";
           gc = ''f() { git  add . && git commit -m "$1" && git push}; f'';
-          killn = "killn() { pid=$(pidof waybar) && kill $pid }";
+          nvim = "nvim $(fzf)";
         };
       };
 
