@@ -53,12 +53,12 @@ window#waybar {
 }
 
 #workspaces button.active {
-    background: @base02;
+    background: @base03;
     min-width: 45px;
 }
 
 #workspaces button:hover {
-    background: @base03;
+    background: @base04;
 }
 
 /* -----------------------------------------------------
@@ -94,7 +94,7 @@ tooltip label {
     border-radius: 15px;
 }
 #taskbar button:hover {
-    background: @base03
+    background: @base04
 }
 
 /* -----------------------------------------------------

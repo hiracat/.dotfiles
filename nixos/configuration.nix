@@ -190,6 +190,8 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+      bear
+      go
       swww
       nix-tree
       adwaita-icon-theme
