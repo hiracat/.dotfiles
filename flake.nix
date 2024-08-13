@@ -52,7 +52,7 @@
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             ./nixos/configuration.nix
-            ./nisos/desktop-configuration.nix
+            ./nixos/desktop-configuration.nix
             ./nixos/desktop-hardware-configuration.nix # here to easily manage many machines
             ./scripts/default.nix
             home-manager.nixosModules.home-manager
