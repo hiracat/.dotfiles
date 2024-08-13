@@ -11,17 +11,6 @@
       ./hardware-configuration.nix
     ];
 
-  boot = {
-    kernelPackages = pkgs.linuxPackages_latest;
-    extraModulePackages = with inputs.config.boot.kernelPackages; [ ];
-
-    # Bootloader.
-    loader.grub.enable = true;
-    loader.efi.canTouchEfiVariables = true;
-    loader.grub.device = "nodev";
-    loader.grub.efiSupport = true;
-    loader.systemd-boot.enable = false;
-  };
 
   networking = {
     networkmanager.enable = true;
