@@ -23,7 +23,8 @@
 
       systemSettings = {
         system = "x86_64-linux";
-        hostname = "nixos";
+        hostname = "nixos-desktop";
+        laptopHostname = "nixos-laptop";
         timezone = "America/New_York";
         locale = "en_US.UTF-8";
       };
@@ -51,7 +52,32 @@
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             ./nixos/configuration.nix
+            ./nixos/desktop-hardware-configuration.nix # here to easily manage many machines
             ./scripts/default.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = { inherit inputs systemSettings userSettings; };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.backupFileExtension = "backup";
+              home-manager.users.${userSettings.username} = {
+                imports = [
+                  ./home-manager/home.nix
+                ];
+              };
+            }
+          ];
+        };
+      };
+
+      nixosConfigurations = {
+        ${systemSettings.laptopHostname} = lib.nixosSystem {
+          system = systemSettings.system;
+          specialArgs = { inherit inputs systemSettings userSettings; };
+          modules = [
+            ./nixos/configuration.nix
+            ./scripts/default.nix
+            # import laptop hardware config when created
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = { inherit inputs systemSettings userSettings; };

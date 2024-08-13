@@ -31,7 +31,7 @@
             fi
         fi
 
-        rebuildcmd="sudo nixos-rebuild $args --flake ~/.dotfiles -j 6"
+        rebuildcmd="sudo nixos-rebuild $args --flake ~/.dotfiles#$(hostname) -j 6"
         echo "running command: $rebuildcmd"
         eval "$rebuildcmd"
         echo "rebuild system"

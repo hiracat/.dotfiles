@@ -8,7 +8,7 @@
   imports =
     [
       # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      # moved to flake to more easily manage multiple machines
     ];
 
 
