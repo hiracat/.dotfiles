@@ -5,7 +5,7 @@
       name = "rebuild";
       runtimeInputs = [ ];
       text = ''
-              set -e
+        set -e
         set +o nounset
 
         args=""
