@@ -52,6 +52,7 @@
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             ./nixos/configuration.nix
+            ./nisos/desktop-configuration.nix
             ./nixos/desktop-hardware-configuration.nix # here to easily manage many machines
             ./scripts/default.nix
             home-manager.nixosModules.home-manager
@@ -76,6 +77,8 @@
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             ./nixos/configuration.nix
+            ./nixos/laptop-configuration.nix
+            ./nixos/laptop-hardware-configuration.nix
             ./scripts/default.nix
             # import laptop hardware config when created
             home-manager.nixosModules.home-manager
