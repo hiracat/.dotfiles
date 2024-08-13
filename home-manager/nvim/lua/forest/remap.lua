@@ -47,6 +47,8 @@ k("n", "<A-j>", "<C-w>j", opts)
 k("n", "<A-k>", "<C-w>k", opts)
 k("n", "<A-l>", "<C-w>l", opts)
 
+k("n", "<A-v>", "<C-w>v", opts)
+
 -- clipboard stuff
 -- ##############
 
@@ -65,11 +67,7 @@ k("n", "<leader>mx", ":!chmod +x %<CR>", opts) --make executable
 
 k("n", "<C-j>", ":cnext<CR>zz", opts) --quick fix list navigation
 k("n", "<C-k>", ":cprev<CR>zz", opts)
-
 k("n", "<C-q>", ":cclose<CR>zz", opts)
-
-k("n", "<leader>j", ":lnext<CR>zz", opts)
-k("n", "<leader>k", ":lprev<CR>zz", opts)
 
 -- Plugin Remaps
 -- #############
