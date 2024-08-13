@@ -26,6 +26,7 @@
     opacity: 1.0
 }
 
+
 window#waybar {
     opacity:1.0; /*bar opacity*/
     background: transparent; /* background opacity */
@@ -39,12 +40,14 @@ window#waybar {
 
 
 #workspaces {
+    color: @base05;
     background-color: transparent;
     padding: 0px;
     margin: 0px 15px; /* top/bottom, left/right */
 }
 
 #workspaces button {
+    color: @base05;
     padding: 0px 9px;
     margin: 5px 2px; /* top/bottom, left/right */
     background-color: @base00;
@@ -66,6 +69,7 @@ window#waybar {
  * ----------------------------------------------------- */
 
 tooltip {
+    color: @base05;
     border-radius: 15px;
     background-color: @base02;
     opacity:0.8;
@@ -83,6 +87,7 @@ tooltip label {
  * ----------------------------------------------------- */
 
 #taskbar {
+    color: @base05;
     margin: 5px 15px 5px 5px;
     border-radius: 15px;
     background: @base00;
@@ -114,10 +119,19 @@ tooltip label {
 }
 
 /* -----------------------------------------------------
+ * Window Label
+ * ----------------------------------------------------- */
+
+#window {
+    color: @base05;
+}
+
+
+/* -----------------------------------------------------
  * Hardware Group
  * ----------------------------------------------------- */
 
-#memory,#cpu {
+#memory,#cpu,#temperature {
     background: transparent;
     margin:0px;
     padding:0px;
@@ -240,6 +254,7 @@ tooltip label {
 
 #tray {
     padding: 0px 15px 0px 0px;
+    color: @base05;
 }
 
 #tray > .passive {

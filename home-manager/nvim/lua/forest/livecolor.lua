@@ -2,7 +2,6 @@ local watchedPath = "/home/forest/.config/nvim/lua/forest/coloroverrides.lua"
 local function reloadColorscheme()
 	vim.cmd("so " .. watchedPath)
 	vim.cmd("colorscheme catppuccin")
-	print("it worked lol i hope")
 	require("lualine").setup({ options = { theme = "catppuccin-mocha" } })
 end
 
