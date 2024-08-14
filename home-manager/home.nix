@@ -15,7 +15,7 @@
     ./shell.nix
     ./waybar.nix
     ./dunst.nix
-    # ./obsidian.nix # dosent work
+    ./obsidian.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

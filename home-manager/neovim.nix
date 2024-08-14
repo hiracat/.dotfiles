@@ -28,6 +28,7 @@
               overlay0 = "#${base06}",
               overlay1 = "#${base07}",
               overlay2 = "#${base07}",
+
               rosewater = "#${base0F}",
               flamingo = "#${base0F}",
               pink = "#${base0E}",
