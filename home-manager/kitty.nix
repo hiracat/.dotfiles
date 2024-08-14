@@ -17,7 +17,7 @@
   home.file = {
     ".config/kitty/theme.conf" = {
       enable = true;
-      text = with config.colorScheme.palette; ''
+      text = with config.scheme; ''
         foreground              #${base05}
         background              #${base00}
 
@@ -59,7 +59,7 @@
 
         # black
         color0 #${base02}
-        color0 #${base03}
+        color8 #${base03}
 
         # red
         color1 #${base08}

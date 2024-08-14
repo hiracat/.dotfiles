@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
   home.file = {
-    ".config/dunst/dunstrc" = with config.colorScheme.palette; {
+    ".config/dunst/dunstrc" = with config.scheme; {
       enable = true;
       text = ''
               [global]

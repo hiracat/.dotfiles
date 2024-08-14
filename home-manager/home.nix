@@ -1,4 +1,4 @@
-{ pkgs, userSettings, inputs, ... }:
+{ userSettings, inputs, ... }:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -15,15 +15,8 @@
     ./shell.nix
     ./waybar.nix
     ./dunst.nix
-    inputs.nix-colors.homeManagerModules.default
+    # ./obsidian.nix # dosent work
   ];
-
-  # colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
-  # colorScheme = inputs.nix-colors.colorSchemes.rose-pine;
-  # colorScheme = inputs.nix-colors.colorSchemes.catppuccin-mocha;
-  # colorScheme = inputs.nix-colors.colorSchemes.colors;
-  colorScheme = inputs.nix-colors.colorSchemes.everforest;
-
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.

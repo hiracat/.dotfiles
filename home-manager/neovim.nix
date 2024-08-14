@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, home-manager, config, userSettings, systemSettings, lib, ... }:
+{ config, ... }:
 {
   home.file = {
     ".config/nvim" = {
@@ -12,7 +12,7 @@
     # at the source of the symlink instead of the link itself
     ".cache/colorschemes/nvimcolors.lua" = {
       enable = true;
-      text = with config.colorScheme.palette; ''
+      text = with config.scheme; ''
         require("catppuccin").setup {
           color_overrides = {
             mocha = {

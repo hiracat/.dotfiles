@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, pkgs, userSettings, systemSettings, ... }:
+{ config, pkgs, userSettings, systemSettings, ... }:
 
 {
   imports =
@@ -25,6 +25,46 @@
     };
     bluetooth.enable = true; # enables support for Bluetooth
     bluetooth.powerOnBoot = true;
+  };
+  console = {
+    earlySetup = true;
+    colors = with config.scheme; [
+      #black
+      "${base01}"
+      #red
+      "${base08}"
+      #green
+      "${base0B}"
+      #yellow
+      "${base0A}"
+      #blue
+      "${base0D}"
+      #magenta
+      "${base0E}"
+      #cyan
+      "${base0C}"
+      #white
+      "${base07}"
+
+      #background
+      #black
+      "${base00}"
+      #red
+      "${base08}"
+      #green
+      "${base0B}"
+      #yellow
+      "${base0A}"
+      #blue
+      "${base0D}"
+      #magenta
+      "${base0E}"
+      #cyan
+      "${base0C}"
+      #white
+      "${base06}"
+
+    ];
   };
 
   # Set your time zone.
@@ -101,7 +141,6 @@
     };
     displayManager.sddm = {
       enable = true;
-      package = pkgs.kdePackages.sddm;
     };
     avahi = {
       enable = true;
@@ -178,7 +217,7 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
-    discord
+      discord
       bear
       go
       swww
@@ -186,7 +225,6 @@
       adwaita-icon-theme
       glib
       gsettings-desktop-schemas
-      kdePackages.breeze
 
 
       nemo-with-extensions
