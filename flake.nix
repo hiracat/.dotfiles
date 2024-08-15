@@ -89,7 +89,6 @@
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             inputs.base16.nixosModule
-            { inherit scheme; }
             ./nixos/configuration.nix
             ./nixos/laptop-configuration.nix
             ./nixos/laptop-hardware-configuration.nix
