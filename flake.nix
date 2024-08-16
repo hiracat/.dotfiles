@@ -19,7 +19,6 @@
       inherit (self) outputs;
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${systemSettings.system};
-      scheme = "${inputs.tt-schemes}/base16/catppuccin-mocha.yaml";
       pkgs-stable = import inputs.nixpkgs-stable {
         config.allowUnfree = true;
         stable = inputs.nixpkgs-stable.legacyPackages.${systemSettings.system};
@@ -58,7 +57,7 @@
           specialArgs = { inherit inputs systemSettings userSettings; };
           modules = [
             inputs.base16.nixosModule
-            { inherit scheme; }
+            ./scheme.nix
             ./nixos/configuration.nix
             ./nixos/desktop-configuration.nix
             ./nixos/desktop-hardware-configuration.nix # here to easily manage many machines
@@ -74,7 +73,7 @@
               home-manager.users.${userSettings.username} = {
                 imports = [
                   ./home-manager/home.nix
-                  { inherit scheme; }
+                  ./scheme.nix
                   inputs.base16.homeManagerModule
                 ];
               };
@@ -93,6 +92,7 @@
             ./nixos/laptop-configuration.nix
             ./nixos/laptop-hardware-configuration.nix
             ./scripts/default.nix
+            ./scheme.nix
             inputs.base16.nixosModule
             # import laptop hardware config when created
             home-manager.nixosModules.home-manager
@@ -104,7 +104,6 @@
               home-manager.users.${userSettings.username} = {
                 imports = [
                   ./home-manager/home.nix
-                  { inherit scheme; }
                   inputs.base16.homeManagerModule
                 ];
               };
