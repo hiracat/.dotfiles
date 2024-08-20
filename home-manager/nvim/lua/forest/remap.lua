@@ -11,10 +11,6 @@ local opts = {
 --############################
 
 -- file and buffer stuff
-k("n", "<leader>fn", ":Ex<CR>", opts)
-
-k("n", "<Tab>", ":bn<CR>", opts)
-k("n", "<leader>x", ":w<cr>:bd<CR>", opts)
 k("t", "<Esc>", "<C-\\><C-n>", opts)
 
 -- terminal stuff

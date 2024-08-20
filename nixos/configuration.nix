@@ -11,6 +11,7 @@
       # moved to flake to more easily manage multiple machines
     ];
 
+  systemd.coredump.enable = false; # make core dumps appear in the working directory
 
   networking = {
     networkmanager.enable = true;
