@@ -218,6 +218,7 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+      qbittorrent
       discord
       bear
       go
