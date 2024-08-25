@@ -288,7 +288,7 @@
       lua
       gdb
       cmake
-      #cmake-language-server
+      cmake-language-server
       clang-tools
       vulkan-tools
       anki
