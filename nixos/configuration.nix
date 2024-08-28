@@ -212,7 +212,6 @@
       XMODIFIERS = "@im=fcitx";
       TERMINAL = userSettings.terminal;
       EDITOR = userSettings.editor;
-      GSETTINGS_SCHEMA_DIR = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/gsettings-desktop-schemas-46.0/glib-2.0/schemas";
     };
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
