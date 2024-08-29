@@ -93,7 +93,6 @@
             ./nixos/laptop-hardware-configuration.nix
             ./scripts/default.nix
             ./scheme.nix
-            inputs.base16.nixosModule
             # import laptop hardware config when created
             home-manager.nixosModules.home-manager
             {
@@ -104,6 +103,7 @@
               home-manager.users.${userSettings.username} = {
                 imports = [
                   ./home-manager/home.nix
+                  ./scheme.nix
                   inputs.base16.homeManagerModule
                 ];
               };

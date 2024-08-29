@@ -1,4 +1,4 @@
-{ userSettings, inputs, ... }:
+{ userSettings, inputs, pkgs, ... }:
 {
   nixpkgs.config = {
     allowUnfree = true;
@@ -32,6 +32,12 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
+
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 18;
+  };
 
 
   programs.git = {
