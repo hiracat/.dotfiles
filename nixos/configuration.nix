@@ -19,7 +19,10 @@
   };
 
   hardware = {
-    opentabletdriver.enable = true;
+    opentabletdriver = {
+      enable = true;
+      daemon.enable = true;
+    };
     graphics = {
       enable = true;
       enable32Bit = true;
