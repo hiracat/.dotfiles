@@ -1,18 +1,22 @@
 { pkgs, ... }:
 {
-  wayland.windowManager.hyprland = {
-    enable = true;
-    extraConfig = " ";
+  user.systemd.extraServices.polkit_gnome_agent = {
+    description = "gnome polkit graphical authentication agent";
+    wantedBy = [ "hyprland-session.target" ];
+    wants = [ "hyprland-session.target" ];
+    after = [ "hyprland-session.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
   };
-  home.file = {
-    ".config/hypr" = {
-      enable = true;
-      source = ./hypr;
-      recursive = true;
-    };
-    ".config/hypr/nixthings.conf" = {
-      enable = true;
-      text = "exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1 &";
-    };
+
+  wayland.windowManager.hyprland = {
+    systemd.enable = true;
+    enable = true;
+    extraConfig = builtins.readFile ./hypr/hyprland.conf;
   };
 }
