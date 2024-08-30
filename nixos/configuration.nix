@@ -13,7 +13,7 @@
 
   systemd.coredump.enable = false; # make core dumps appear in the working directory
 
-  systemd.user.services.polkit_gnome_agent = {
+  systemd.user.services.polkit-gnome-agent = {
     description = "gnome polkit graphical authentication agent";
     wantedBy = [ "hyprland-session.target" ];
     wants = [ "hyprland-session.target" ];
