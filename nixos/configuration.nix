@@ -30,7 +30,7 @@
 
   networking = {
     networkmanager.enable = true;
-    firewall.enable = false;
+    firewall.enable = true;
   };
 
   hardware = {
@@ -172,6 +172,10 @@
               EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
       '';
     };
+    openssh = {
+      enable = true;
+      settings.PermitRootLogin = "no";
+    };
   };
 
   xdg.portal = {
@@ -216,7 +220,7 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = "forest";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     initialPassword = "password"; # for vms
   };
   environment = {
@@ -231,6 +235,7 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+      hypridle
       qbittorrent
       discord
       bear
