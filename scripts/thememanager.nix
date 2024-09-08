@@ -3,7 +3,7 @@
   environment.systemPackages = [
     (pkgs.writeShellApplication
       {
-        name = "thememanager";
+        name = "th";
         runtimeInputs = [ ];
         text = ''
           set -e
@@ -55,8 +55,8 @@
           failed() {
               echo "bad args"
               echo "usage"
-              echo "theme wallpaper <path or random> <nomatch>"
-              echo "theme theme <themename> <nomatch>"
+              echo "th w <path or random> <nomatch>"
+              echo "th t <themename> <nomatch>"
               echo "nomatch, dont switch the wallpaper to match the theme, or generate colors to match the wallpaper"
               exit 1
           }
@@ -65,7 +65,7 @@
               failed
           fi
 
-          if [ "$1" = "wallpaper" ]; then
+          if [ "$1" = "w" ]; then
               if [ -z "$2" ]; then
                   failed
               else
@@ -77,7 +77,7 @@
                       failed
                   fi
               fi
-          elif [ "$1" = "theme" ]; then
+          elif [ "$1" = "t" ]; then
               if [ -z "$2" ]; then
                   failed
               else
@@ -89,8 +89,9 @@
           }
           EOL
                   )
+                  notify-send "Setting theme to $2"
                   echo "$file_content" >~/.dotfiles/scheme.nix
-                  rebuild switch
+                  rb sw
               fi
           fi
         '';

@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   environment.systemPackages = [
     (pkgs.writeShellApplication {
-      name = "rebuild";
+      name = "rb";
       runtimeInputs = [ ];
       text = ''
         set -e
@@ -9,15 +9,15 @@
 
         args=""
         if [ -z "$1" ]; then
-            echo "usage: rebuild <test/switch> <fast>"
+            echo "usage: rb <t(test)/sw(switch)> <fast>"
             exit 1
         else
-            if [ "$1" = "test" ]; then
+            if [ "$1" = "t" ]; then
                 args+='test '
-            elif [ "$1" = "switch" ]; then
+            elif [ "$1" = "sw" ]; then
                 args+='switch '
             else
-                echo "usage: rebuild <test/switch> <full>"
+                echo "usage: rb <t(test)/sw(switch)> <fast>"
                 exit 1
             fi
 
@@ -30,15 +30,16 @@
             fi
         fi
 
+
         rebuildcmd="sudo nixos-rebuild $args --flake ~/.dotfiles#$(hostname) -j 6"
         echo "running command: $rebuildcmd"
+        notify-send "running command: $rebuildcmd"
         eval "$rebuildcmd"
         echo "rebuild system"
 
         pkill --signal SIGUSR1 kitty || true
         pkill --signal SIGUSR2 cava || true
         pkill --signal SIGUSR2 waybar || true
-        echo "sent signals"
 
         pkill dunst || true
         dunst >/dev/null 2>&1 & #TODO: replace with dunstctl reload one that update comes out
@@ -52,6 +53,7 @@
         gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
         echo "reloaded gtk"
         echo "finished"
+        notify-send "Finished"
       '';
     })
   ];

@@ -113,6 +113,7 @@
   };
 
   programs = {
+
     hyprland.enable = true;
     neovim.enable = true;
     partition-manager.enable = true;
@@ -216,6 +217,15 @@
   security.rtkit.enable = true;
   security.polkit.enable = true;
 
+  security.sudo.extraRules = [{
+    users = [ userSettings.username ];
+    commands = [{
+      command = "/run/current-system/sw/bin/nixos-rebuild";
+      options = [ "NOPASSWD" ];
+    }];
+  }];
+
+
   users.defaultUserShell = pkgs.zsh;
   users.users.${userSettings.username} = {
     isNormalUser = true;
@@ -235,6 +245,7 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+      renderdoc
       hypridle
       qbittorrent
       discord

@@ -3,7 +3,7 @@
     ".config/dunst/dunstrc" = with config.scheme; {
       enable = true;
       text = ''
-              [global]
+            [global]
             follow = mouse
             width = 300
             height = 200
@@ -23,7 +23,7 @@
             icon_corners = all
             indicate_hidden = yes
 
-            separator_height = 2
+            separator_height = 3
 
             padding = 8
             horizontal_padding = 8
