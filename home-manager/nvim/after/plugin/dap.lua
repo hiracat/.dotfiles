@@ -8,6 +8,12 @@ dap.adapters.gdb = {
 	args = { "-i", "dap" },
 }
 
+dap.adapters.gdb = {
+	type = "executable",
+	command = "gdb",
+	args = { "-i", "dap" },
+}
+
 dap.configurations.c = {
 	{
 		name = "Launch",
@@ -44,3 +50,4 @@ dap.configurations.c = {
 	},
 }
 dap.configurations.cpp = dap.configurations.c
+dap.configurations.rust = dap.configurations.c
