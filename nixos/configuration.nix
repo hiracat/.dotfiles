@@ -246,6 +246,11 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+      rustc
+      rustfmt
+      cargo
+      rust-analyzer
+
       libimobiledevice
       ifuse
       renderdoc

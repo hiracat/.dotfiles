@@ -32,6 +32,10 @@ require("formatter").setup({
 			require("formatter.filetypes.cpp").clangformat,
 		},
 
+		rust = {
+			require("formatter.filetypes.rust").rustfmt,
+		},
+
 		nix = {
 			require("formatter.filetypes.nix").nixpkgs_fmt,
 		},

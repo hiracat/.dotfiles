@@ -35,6 +35,12 @@ local plugins = {
 	{ "mhartington/formatter.nvim" },
 	{ "ThePrimeagen/vim-be-good" },
 
+	{
+		"mrcjkb/rustaceanvim",
+		version = "^5", -- Recommended
+		-- This plugin is already lazy
+		lazy = false,
+	},
 	-- long things
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
