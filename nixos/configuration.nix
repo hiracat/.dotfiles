@@ -247,6 +247,7 @@
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
       rustc
+      clippy
       rustfmt
       cargo
       rust-analyzer

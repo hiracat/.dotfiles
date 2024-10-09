@@ -29,11 +29,11 @@ k("n", "J", "mzJ`z", opts) --keeps the mose in the same place and appends the ne
 
 -- fix quotes stuff
 -- ###########
-k("i", "(", "()<ESC>i", opts)
-k("i", "[", "[]<ESC>i", opts)
-k("i", "{", "{}<ESC>i", opts)
-k("i", '"', '""<ESC>i', opts)
-k("i", "'", "''<ESC>i", opts)
+-- k("i", "(", "()<ESC>i", opts)
+-- k("i", "[", "[]<ESC>i", opts)
+-- k("i", "{", "{}<ESC>i", opts)
+-- k("i", '"', '""<ESC>i', opts)
+-- k("i", "'", "''<ESC>i", opts)
 
 -- window stuff
 -- ###########
