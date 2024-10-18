@@ -54,7 +54,7 @@
       nixosConfigurations = {
         ${systemSettings.hostname} = lib.nixosSystem {
           system = systemSettings.system;
-          specialArgs = { inherit inputs systemSettings userSettings; };
+          specialArgs = { inherit inputs pkgs-stable systemSettings userSettings; };
           modules = [
             inputs.base16.nixosModule
             ./scheme.nix

@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, userSettings, systemSettings, ... }:
+{ config, pkgs, pkgs-stable, userSettings, systemSettings, ... }:
 
 {
   imports =
@@ -258,7 +258,6 @@
       hypridle
       qbittorrent
       discord
-      bear
       go
       swww
       nix-tree
@@ -279,7 +278,6 @@
       bottles
       kitty
       atuin
-      calibre
       nwg-look
 
       fastfetch
@@ -329,11 +327,10 @@
       cmake-language-server
       clang-tools
       vulkan-tools
-      anki
       feh
       grim
       slurp
-    ];
+    ] ++ [ pkgs-stable.anki pkgs-stable.calibre ];
   };
 
   # This value determines the NixOS release from which the default
