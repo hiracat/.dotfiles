@@ -246,7 +246,7 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
-    firejail
+      firejail
       rustc
       clippy
       rustfmt
@@ -257,7 +257,7 @@
       ifuse
       renderdoc
       hypridle
-      qbittorrent
+      qbittorrent-nox
       discord
       go
       swww
