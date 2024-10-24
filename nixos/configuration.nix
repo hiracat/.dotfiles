@@ -246,6 +246,7 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
+    firejail
       rustc
       clippy
       rustfmt
