@@ -15,6 +15,9 @@
     };
 
     initExtra = ''
+      export GEM_HOME="$HOME/gems"
+      export PATH="$HOME/gems/bin:$PATH"
+
       eval "$(starship init zsh)"
       eval "$(atuin init zsh)"
       clear

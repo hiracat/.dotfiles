@@ -113,8 +113,8 @@
   };
 
   programs = {
-
     hyprland.enable = true;
+    firejail.enable = true;
     neovim.enable = true;
     partition-manager.enable = true;
     zsh.enable = true;
@@ -246,7 +246,10 @@
     pathsToLink = [ "/share/zsh" ];
     shells = with pkgs; [ zsh ];
     systemPackages = with pkgs; [
-      firejail
+      tradingview
+      gcc
+      gnumake
+      ruby
       rustc
       clippy
       rustfmt
