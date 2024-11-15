@@ -7,11 +7,10 @@
 
   imports = [
     ./cava.nix
-    ./gtk.nix
+    # ./gtk.nix
     ./hyprland.nix
     ./kitty.nix
-    ./neovim.nix
-    ./qt.nix
+    # ./qt.nix
     ./shell.nix
     ./waybar.nix
     ./dunst.nix

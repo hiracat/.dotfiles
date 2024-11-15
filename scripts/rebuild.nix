@@ -41,17 +41,17 @@
         pkill --signal SIGUSR2 cava || true
         pkill --signal SIGUSR2 waybar || true
 
-        pkill dunst || true
-        dunst >/dev/null 2>&1 & #TODO: replace with dunstctl reload one that update comes out
+        # pkill dunst || true
+        # dunst >/dev/null 2>&1 & #TODO: replace with dunstctl reload one that update comes out
         echo "restarted programs"
 
         cat ~/.cache/colorschemes/nvimcolors.lua >~/.config/nvim/lua/forest/coloroverrides.lua
         echo "wrote files"
 
-        gsettings set org.gnome.desktop.interface gtk-theme ""
-        sleep .1
-        gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
-        echo "reloaded gtk"
+        # gsettings set org.gnome.desktop.interface gtk-theme ""
+        # sleep .1
+        # gsettings set org.gnome.desktop.interface gtk-theme "adw-gtk3"
+        # echo "reloaded gtk"
         echo "finished"
         notify-send "Finished"
       '';

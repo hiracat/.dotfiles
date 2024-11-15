@@ -11,6 +11,9 @@
       # moved to flake to more easily manage multiple machines
     ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   systemd.coredump.enable = false; # make core dumps appear in the working directory
 
   systemd.user.services.polkit-gnome-agent = {
@@ -148,6 +151,7 @@
       jack.enable = true;
       wireplumber.enable = true;
     };
+    xserver.desktopManager.gnome.enable = true;
     xserver.xkb = {
       layout = "us";
       variant = "";
@@ -156,9 +160,7 @@
       enable = true;
       videoDrivers = [ "amdgpu" ];
     };
-    displayManager.sddm = {
-      enable = true;
-    };
+    xserver.displayManager.gdm.enable = true;
     avahi = {
       enable = true;
       nssmdns4 = true;
@@ -231,7 +233,7 @@
   users.users.${userSettings.username} = {
     isNormalUser = true;
     description = "forest";
-    extraGroups = [ "networkmanager" "wheel" "video" ];
+    extraGroups = [ "networkmanager" "wheel" "video" "vboxusers"];
     initialPassword = "password"; # for vms
   };
   environment = {
