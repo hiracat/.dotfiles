@@ -1,5 +1,21 @@
-{ pkgs, ... }: {
+{ pkgs, settings, ... }: {
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      qemu = {
+        package = pkgs.qemu_kvm;
+        ovmf = {
+          enable = true;
+          packages = [ pkgs.OVMFFull.fd ];
+        };
+        swtpm.enable = true;
+      };
+    };
+  };
+
+  users.users.${settings.username}.extraGroups = [ "libvirtd" ];
   programs = {
+    virt-manager.enable = true;
     firejail.enable = true;
     partition-manager.enable = true;
     gamemode.enable = true;
