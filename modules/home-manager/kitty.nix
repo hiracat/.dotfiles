@@ -1,4 +1,4 @@
-{ userSettings, config, ... }:
+{ config, pkgs, ... }:
 {
   programs.kitty = {
     enable = true;
@@ -7,9 +7,9 @@
       enableZshIntegration = true;
       enableBashIntegration = true;
     };
-    font.name = userSettings.font;
+    font.name = "JetBrainsMono NF";
     font.size = 12;
-    font.package = userSettings.fontPkg;
+    font.package = pkgs.nerdfonts;
     extraConfig = ''
       include theme.conf
     '';

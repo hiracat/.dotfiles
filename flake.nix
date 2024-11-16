@@ -1,78 +1,85 @@
 {
   description = "hiracat's dotfiles flake";
-
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-24.05";
     base16.url = "github:SenchoPens/base16.nix";
     tt-schemes = {
-      url = "github:tinted-theming/schemes";
+      url = "github:tinted-theming/schemes/b3273211d5d1510aee669083fc5a1e0e4b5e310c";
       flake = false;
     };
-
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @inputs:
     let
-      inherit (self) outputs;
-      system = "x86_64-linux";
-      desktop = "nixos-desktop";
-
-      lib = nixpkgs.lib;
-      pkgs = nixpkgs.legacyPackages.${system};
-      pkgs-stable = import inputs.nixpkgs-stable {
-        config.allowUnfree = true;
-        stable = inputs.nixpkgs-stable.legacyPackages.${system};
-        system = system;
-
+      settings = {
+        system = "x86_64-linux";
+        username = "forest";
       };
 
+      lib = nixpkgs.lib;
+      pkgs = nixpkgs.legacyPackages.${settings.system};
+      pkgs-stable = import inputs.nixpkgs-stable {
+        config.allowUnfree = true;
+        stable = inputs.nixpkgs-stable.legacyPackages.${settings.system};
+        system = settings.system;
 
+      };
     in
     {
       nixosConfigurations = {
-        ${desktop} = lib.nixosSystem {
-          system = system;
-          specialArgs = { inherit inputs pkgs-stable; };
+        "nixos-desktop" = lib.nixosSystem {
+          specialArgs = { inherit inputs pkgs-stable settings; };
           modules = [
-            inputs.base16.nixosModule
-            ./scheme.nix
-            ./hosts/desktop/configuration.nix
             ./scripts/default.nix
+            inputs.base16.nixosModule
+
+            ./hosts/desktop/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs settings; };
+                users.forest = {
+                  imports = [
+                    inputs.base16.homeManagerModule
+                    ./hosts/desktop/home.nix
+                  ];
+                };
+              };
+            }
           ];
         };
       };
 
-      # nixosConfigurations = {
-      #   ${systemSettings.laptopHostname} = lib.nixosSystem {
-      #     system = systemSettings.system;
-      #     specialArgs = { inherit inputs; };
-      #     modules = [
-      #       inputs.base16.nixosModule
-      #       ./nixos/configuration.nix
-      #       ./nixos/laptop-configuration.nix
-      #       ./nixos/laptop-hardware-configuration.nix
-      #       ./scripts/default.nix
-      #       ./scheme.nix
-      #       # import laptop hardware config when created
-      #       home-manager.nixosModules.home-manager
-      #       {
-      #         home-manager.extraSpecialArgs = { inherit inputs; };
-      #         home-manager.useGlobalPkgs = true;
-      #         home-manager.useUserPackages = true;
-      #         home-manager.backupFileExtension = "backup";
-      #         home-manager.users.${userSettings.username} = {
-      #           imports = [
-      #             ./home-manager/home.nix
-      #             ./scheme.nix
-      #             inputs.base16.homeManagerModule
-      #           ];
-      #         };
-      #       }
-      #     ];
-      #   };
-      # };
+      nixosConfigurations = {
+        "nixos-laptop" = lib.nixosSystem {
+          specialArgs = { inherit inputs pkgs-stable settings; };
+          modules = [
+            ./scheme.nix
+            ./scripts/default.nix
+            ./hosts/laptop/configuration.nix
+            inputs.base16.nixosModule
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs settings; };
+                users.forest = {
+                  imports = [
+                    inputs.base16.homeManagerModule
+                    ./hosts/laptop/home.nix
+                  ];
+                };
+              };
+            }
+          ];
+        };
+      };
     };
+
 }

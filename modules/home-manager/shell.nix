@@ -1,11 +1,11 @@
-{ config, userSettings, ... }: {
+{ config, ... }: {
   programs.bash = {
     enable = true;
-    shellAliases = userSettings.aliases;
+    # shellAliases = "";
   };
   programs.zsh = {
     enable = true;
-    shellAliases = userSettings.aliases;
+    # shellAliases = "";
     defaultKeymap = "emacs";
     enableCompletion = true;
     history = {

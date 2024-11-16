@@ -1,27 +1,28 @@
-{ config, ... }:
-{
+{ settings, ... }: {
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = _: true;
   };
 
   imports = [
+    ../../scheme.nix
     ../../modules/home-manager/cava.nix
-    # ../../modules/home-manager/gtk.nix
-    ../../modules/home-manager/hyprland.nix
+    ../../modules/home-manager/cursor.nix
     ../../modules/home-manager/kitty.nix
-    # ../../modules/home-manager/qt.nix
     ../../modules/home-manager/shell.nix
     ../../modules/home-manager/waybar.nix
-    ../../modules/home-manager/dunst.nix
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/neovim.nix
+    ../../modules/home-manager/git.nix
+
+    # ../../modules/home-manager/dunst.nix
+    # ../../modules/home-manager/hyprland.nix
+    # ../../modules/home-manager/qt.nix
+    # ../../modules/home-manager/gtk.nix
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = config.base.username;
-  home.homeDirectory = "/home/${config.base.username}";
+  home.username = settings.username;
+  home.homeDirectory = "/home/${settings.username}";
 
 
   # This value determines the Home Manager release that your configuration is

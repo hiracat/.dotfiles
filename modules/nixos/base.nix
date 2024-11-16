@@ -1,22 +1,20 @@
 { pkgs, lib, config, ... }: {
-  options = {
-    base = {
-      locale = lib.mkOption {
-        default = "en_US.UTF-8";
-        description = "system locale";
-      };
-      timezone = lib.mkOption {
-        default = "America/New_York";
-        description = "system timezone";
-      };
-      username = lib.mkOption {
-        default = "forest";
-        description = "main users username";
-      };
-      hostname = lib.mkOption {
-        default = "nixos";
-        description = "system hostname";
-      };
+  options.base = {
+    locale = lib.mkOption {
+      default = "en_US.UTF-8";
+      description = "system locale";
+    };
+    timezone = lib.mkOption {
+      default = "America/New_York";
+      description = "system timezone";
+    };
+    username = lib.mkOption {
+      default = "forest";
+      description = "main users username";
+    };
+    hostname = lib.mkOption {
+      default = "nixos";
+      description = "system hostname";
     };
   };
 
@@ -46,7 +44,7 @@
         LC_TIME = config.base.locale;
       };
     };
-    interception-tools = {
+    services.interception-tools = {
       enable = true;
       plugins = [ pkgs.interception-tools-plugins.caps2esc ];
       udevmonConfig = ''
@@ -56,7 +54,8 @@
               EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
       '';
     };
-    openssh = {
+
+    services.openssh = {
       enable = true;
       settings.PermitRootLogin = "no";
     };
