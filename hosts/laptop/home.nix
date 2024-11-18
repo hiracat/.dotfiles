@@ -1,27 +1,28 @@
-{ inputs, pkgs, ... }:
-{
+{ settings, ... }: {
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = _: true;
   };
 
   imports = [
-    ./cava.nix
-    # ./gtk.nix
-    ./hyprland.nix
-    ./kitty.nix
-    # ./qt.nix
-    ./shell.nix
-    ./waybar.nix
-    ./dunst.nix
-    ./obsidian.nix
-    ./neovim.nix
+    ../../scheme.nix
+    ../../modules/home-manager/cava.nix
+    ../../modules/home-manager/cursor.nix
+    ../../modules/home-manager/kitty.nix
+    ../../modules/home-manager/shell.nix
+    ../../modules/home-manager/waybar.nix
+    ../../modules/home-manager/obsidian.nix
+    ../../modules/home-manager/neovim.nix
+    ../../modules/home-manager/git.nix
+
+    # ../../modules/home-manager/dunst.nix
+    # ../../modules/home-manager/hyprland.nix
+    # ../../modules/home-manager/qt.nix
+    # ../../modules/home-manager/gtk.nix
   ];
 
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = userSettings.username;
-  home.homeDirectory = "/home/${userSettings.username}";
+  home.username = settings.username;
+  home.homeDirectory = "/home/${settings.username}";
 
 
   # This value determines the Home Manager release that your configuration is
@@ -33,24 +34,6 @@
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
-  home.pointerCursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 18;
-  };
-
-
-  programs.git = {
-    enable = true;
-    userName = userSettings.username;
-    userEmail = userSettings.email;
-    extraConfig = {
-      init.defaultBranch = "main";
-      credential.helper = "store";
-      push.autoSetupRemote = true;
-      push.default = "simple";
-    };
-  };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
