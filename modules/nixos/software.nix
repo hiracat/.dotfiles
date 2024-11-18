@@ -33,6 +33,7 @@
     flatpak.enable = true;
   };
   environment.systemPackages = with pkgs; [
+    protonvpn-gui
     tradingview
     gcc
     gnumake
