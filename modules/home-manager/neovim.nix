@@ -1,7 +1,7 @@
 { config, ... }:
 {
-  home.file = {
-    ".config/nvim" = {
+  xdg.configFile = {
+    "nvim" = {
       enable = true;
       source = ./nvim;
       recursive = true;

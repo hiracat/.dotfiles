@@ -1,6 +1,6 @@
 { config, pkgs, ... }: {
-  home.file = {
-    ".config/dunst/dunstrc" = with config.scheme; {
+  xdg.configFile = {
+    "dunst/dunstrc" = with config.scheme; {
       enable = true;
       text = ''
             [global]

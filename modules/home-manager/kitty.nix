@@ -14,8 +14,8 @@
       include theme.conf
     '';
   };
-  home.file = {
-    ".config/kitty/theme.conf" = {
+  xdg.configFile = {
+    "kitty/theme.conf" = {
       enable = true;
       text = with config.scheme; ''
         foreground              #${base05}

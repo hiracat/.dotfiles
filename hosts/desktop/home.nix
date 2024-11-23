@@ -15,10 +15,7 @@
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/git.nix
 
-    # ../../modules/home-manager/dunst.nix
     # ../../modules/home-manager/hyprland.nix
-    # ../../modules/home-manager/qt.nix
-    # ../../modules/home-manager/gtk.nix
   ];
 
   home.username = settings.username;

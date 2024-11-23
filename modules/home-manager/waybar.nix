@@ -1,13 +1,13 @@
 { config, ... }:
 {
   programs.waybar.enable = true;
-  home.file = {
-    ".config/waybar" = {
+  xdg.configFile = {
+    "waybar" = {
       enable = true;
       source = ./waybar;
       recursive = true;
     };
-    ".config/waybar/colors.css" = {
+    "waybar/colors.css" = {
       enable = true;
       text = with config.scheme; ''
         @define-color base00 #${base00};

@@ -1,6 +1,6 @@
 { config, ... }: {
 
-  home.file.".config/cava/config" = {
+  xdg.configFile."cava/config" = {
     text = ''
       [general]
       framerate = 75
