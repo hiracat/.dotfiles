@@ -1,4 +1,4 @@
-{ pkgs, settings, ... }: {
+{ pkgs, pkgs-stable, settings, ... }: {
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -54,7 +54,6 @@
 
     nemo-with-extensions
     nemo-fileroller
-    cava
     base16-schemes
     git
     wl-clipboard
@@ -106,5 +105,5 @@
     feh
     anki
     calibre
-  ];
+  ] ++ [ pkgs-stable.cava ];
 }

@@ -19,8 +19,12 @@
   };
 
   config = {
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot = {
+      kernelPackages = pkgs.linuxPackages_latest;
+      loader.systemd-boot.enable = true;
+      loader.efi.canTouchEfiVariables = true;
+    };
+
     networking = {
       hostName = config.base.hostname;
       networkmanager.enable = true;
