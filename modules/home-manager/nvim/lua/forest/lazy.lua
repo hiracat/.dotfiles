@@ -35,12 +35,6 @@ local plugins = {
 	{ "mhartington/formatter.nvim" },
 	{ "ThePrimeagen/vim-be-good" },
 
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^5", -- Recommended
-		-- This plugin is already lazy
-		lazy = false,
-	},
 	-- long things
 	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
 
@@ -104,21 +98,17 @@ local plugins = {
 	},
 
 	{
-		"VonHeikemen/lsp-zero.nvim",
-		branch = "v3.x",
-		-- LSP Support
-		{
-			"neovim/nvim-lspconfig",
-			dependencies = {
-				{ "hrsh7th/cmp-nvim-lsp" },
-			},
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			{ "hrsh7th/cmp-nvim-lsp" },
 		},
-		-- Autocompletion
-		{
-			"hrsh7th/nvim-cmp",
-			dependencies = {
-				{ "L3MON4D3/LuaSnip" },
-			},
+	},
+	-- Autocompletion
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			{ "L3MON4D3/LuaSnip" },
+			{ "saadparwaiz1/cmp_luasnip" }, -- Snippets source for nvim-cmp
 		},
 	},
 }

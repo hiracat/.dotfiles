@@ -1,23 +1,43 @@
-local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-local lsp_zero = require("lsp-zero")
 local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_action()
 local lspconfig = require("lspconfig")
 
-lsp_zero.on_attach(function(client, bufnr)
-	lsp_zero.default_keymaps({ buffer = bufnr })
-end)
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+local luasnip = require("luasnip")
 
-lspconfig.clangd.setup({})
-lspconfig.lua_ls.setup({})
-lspconfig.cmake.setup({})
-lspconfig.nil_ls.setup({})
+local servers = {
+	"rust_analyzer",
+	"clangd",
+	"nil_ls",
+	"lua_ls",
+}
+
+for _, lsp in ipairs(servers) do
+	lspconfig[lsp].setup({
+		-- on_attach = my_custom_on_attach,
+		capabilities = capabilities,
+	})
+end
+
 
 cmp.setup({
 	mapping = cmp.mapping.preset.insert({
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<Tab>"] = cmp_action.luasnip_supertab(),
-		["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
+		["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
+		["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
+		["<C-j>"] = cmp.mapping.select_next_item(),
+		["<C-k>"] = cmp.mapping.select_prev_item(),
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<CR>"] = cmp.mapping.confirm({
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		}),
 	}),
+	snippet = {
+		expand = function(args)
+			luasnip.lsp_expand(args.body)
+		end,
+	},
+	sources = {
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
+	},
 })

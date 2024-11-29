@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, pkgs-stable, config, ... }: {
   options.base = {
     locale = lib.mkOption {
       default = "en_US.UTF-8";
@@ -23,6 +23,7 @@
       kernelPackages = pkgs.linuxPackages_latest;
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
+
     };
 
     networking = {
@@ -94,11 +95,11 @@
       systemPackages = with pkgs; [
         gcc
         gnumake
+
         rustc
         clippy
         rustfmt
         cargo
-        rust-analyzer
 
         nix-tree
         base16-schemes
@@ -125,7 +126,7 @@
         gdb
         clang-tools
         vulkan-tools
-      ];
+      ] ++ [ pkgs-stable.rust-analyzer ];
     };
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

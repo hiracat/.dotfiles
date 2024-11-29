@@ -35,14 +35,7 @@
   environment.systemPackages = with pkgs; [
     protonvpn-gui
     tradingview
-    gcc
-    gnumake
     ruby
-    rustc
-    clippy
-    rustfmt
-    cargo
-    rust-analyzer
 
     libimobiledevice
     ifuse
