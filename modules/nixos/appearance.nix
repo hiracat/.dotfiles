@@ -42,7 +42,7 @@
 
   fonts = {
     packages = with pkgs; [
-      nerdfonts
+      nerd-fonts.jetbrains-mono
       fira
       kochi-substitute
       paratype-pt-serif
