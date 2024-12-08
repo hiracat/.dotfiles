@@ -23,6 +23,7 @@
       kernelPackages = pkgs.linuxPackages_latest;
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
+      loader.timeout = 1;
 
     };
 
@@ -96,10 +97,12 @@
         gcc
         gnumake
 
+        rust-analyzer
         rustc
         clippy
         rustfmt
         cargo
+        glslls
 
         nix-tree
         base16-schemes
@@ -126,7 +129,8 @@
         gdb
         clang-tools
         vulkan-tools
-      ] ++ [ pkgs-stable.rust-analyzer ];
+      ] ++ [
+      ];
     };
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions

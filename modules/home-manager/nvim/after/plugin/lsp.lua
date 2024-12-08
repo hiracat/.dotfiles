@@ -9,6 +9,7 @@ local servers = {
 	"clangd",
 	"nil_ls",
 	"lua_ls",
+	"glslls",
 }
 
 for _, lsp in ipairs(servers) do
@@ -17,7 +18,6 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	})
 end
-
 
 cmp.setup({
 	mapping = cmp.mapping.preset.insert({
