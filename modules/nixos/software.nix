@@ -98,5 +98,6 @@
     feh
     anki
     calibre
+    google-chrome
   ] ++ [ pkgs-stable.cava ];
 }
