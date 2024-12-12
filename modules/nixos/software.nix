@@ -79,7 +79,6 @@
     spotify
     prismlauncher
     krita
-    blender-hip
     obsidian
     termdown
     fzf
