@@ -82,7 +82,7 @@
     users.users.${config.base.username} = {
       isNormalUser = true;
       description = "forest";
-      extraGroups = [ "networkmanager" "wheel" "video" "vboxusers" ];
+      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "vboxusers" ];
       initialPassword = "password"; # for vms
     };
     environment = {
