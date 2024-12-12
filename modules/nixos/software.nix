@@ -36,7 +36,6 @@
     protonvpn-gui
     tradingview
     ruby
-    google-chrome
 
     libimobiledevice
     ifuse
