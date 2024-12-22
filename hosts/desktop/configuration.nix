@@ -29,7 +29,7 @@
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
       settings = {
         devices = {
-          "server-laptop" = { id = "DEVICE-ID-GOES-HERE"; };
+          "server-laptop" = { id = "IBSKWS6-RSVTTNQ-7BYL3UU-HX4W3AO-TYH5QGQ-BRE5556-743ZJVD-TYHSPQW"; };
         };
         folders = {
           "Desktop" = {
