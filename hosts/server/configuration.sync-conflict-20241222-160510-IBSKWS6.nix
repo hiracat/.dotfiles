@@ -36,41 +36,42 @@
         folders = {
           "Desktop" = {
             path = "/home/${settings.username}/Desktop";
-            devices = [ "desktop" "laptop" ];
+            devices = [ "desktop" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Documents" = {
             path = "/home/${settings.username}/Documents";
-            devices = [ "desktop" "laptop" ];
+            devices = [ "desktop" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Downloads" = {
             path = "/home/${settings.username}/Downloads";
-            devices = [ "desktop" "laptop" ];
+            devices = [ "desktop" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Music" = {
             path = "/home/${settings.username}/Music";
-            devices = [ "desktop" "laptop" ];
+            devices = [ "desktop" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Pictures" = {
             path = "/home/${settings.username}/Pictures";
-            devices = [ "desktop" "laptop" ];
+            devices = [ "desktop" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Videos" = {
             path = "/home/${settings.username}/Videos";
-            devices = [ "desktop" "laptop" ];
+            devices = [ "desktop" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           ".dotfiles" = {
             path = "/home/${settings.username}/.dotfiles";
-            devices = [ "desktop" "laptop" ];
+            devices = [ "desktop" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
         };
       };
     };
   };
+
 }
