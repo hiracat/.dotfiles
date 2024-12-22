@@ -66,7 +66,7 @@
       settings.PermitRootLogin = "no";
       settings.PasswordAuthentication = false;
       settings.X11Forwarding = false;
-      settings.AllowUsers = "forest";
+      settings.AllowUsers = [ "forest" ];
 
       extraConfig = ''
         ClientAliveInterval 300
