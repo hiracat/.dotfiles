@@ -64,8 +64,13 @@
       enable = true;
       extraConfig = ''
         Port 1070
+        PermitRootLogin no
+        Protocol 2
+        ClientAliveInterval 300
         PasswordAuthentication no
         PubkeyAuthentication yes
+        AllowUsers forest
+        X11Forwarding no
       '';
     };
 
