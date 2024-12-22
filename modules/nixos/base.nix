@@ -93,9 +93,9 @@
       extraGroups = [ "dialout" "networkmanager" "wheel" "video" "vboxusers" ];
       initialPassword = "password"; # for vms
       openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGXOLedgv4YvypruWbRJZOpLHA8GjCX/G7GjtCVWX3dn forest@nixos-desktop"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWnGWDG2ooTzY+PCnLWpib1Yn9il+FWOB0Kw0KorTn+ forest@nixos-laptop"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFUxgeebT7z1hHD7b64eICy6G1IH2GNVQ/4ZHKJow1Me forest@nixos-server"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL2ibdvBvUtDk2DrgvDT98Q0jCuSLqVl+WhmQBpDh6dn forest@nixos-desktop"
       ];
 
     };
