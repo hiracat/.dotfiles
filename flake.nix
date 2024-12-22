@@ -80,6 +80,32 @@
           ];
         };
       };
+    
+      nixosConfigurations = {
+        "nixos-server" = lib.nixosSystem {
+          specialArgs = { inherit inputs pkgs-stable settings; };
+          modules = [
+            ./scheme.nix
+            ./scripts/default.nix
+            ./hosts/server/configuration.nix
+            inputs.base16.nixosModule
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = { inherit inputs settings; };
+                users.forest = {
+                  imports = [
+                    inputs.base16.homeManagerModule
+                    ./hosts/server/home.nix
+                  ];
+                };
+              };
+            }
+          ];
+        };
+      };
     };
 
 }
