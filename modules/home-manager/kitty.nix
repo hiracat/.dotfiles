@@ -9,7 +9,6 @@
     };
     font.name = "JetBrainsMono NF";
     font.size = 12;
-    font.package = pkgs.nerd-fonts.jetbrains-mono;
     extraConfig = ''
       include theme.conf
     '';

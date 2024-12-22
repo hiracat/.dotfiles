@@ -53,7 +53,6 @@
     ripgrep
     lutris
     bottles
-    kitty
     atuin
 
     fastfetch
@@ -98,5 +97,5 @@
     anki
     calibre
     google-chrome
-  ] ++ [ pkgs-stable.cava ];
+  ] ++ [ pkgs-stable.cava pkgs-stable.kitty ];
 }

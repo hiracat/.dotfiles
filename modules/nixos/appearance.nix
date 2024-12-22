@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs-stable, ... }: {
   console = {
     earlySetup = true;
     colors = with config.scheme; [
@@ -41,8 +41,8 @@
   };
 
   fonts = {
-    packages = with pkgs; [
-      nerd-fonts.jetbrains-mono
+    packages = with pkgs-stable; [
+      nerdfonts
       fira
       kochi-substitute
       paratype-pt-serif
