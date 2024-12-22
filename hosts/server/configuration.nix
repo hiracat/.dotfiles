@@ -31,6 +31,7 @@
       settings = {
         devices = {
           "desktop" = { id = "FU5NOIY-RG6LIJ3-VWA64FP-6CEZXOP-KZEGB7S-7L3ET5Y-4ITXCDY-YTXXGA4"; };
+          "laptop" = { id = "FU5NOIY-RG6LIJ3-VWA64FP-6CEZXOP-KZEGB7S-7L3ET5Y-4ITXCDY-YTXXGA4"; };
         };
         folders = {
           "Desktop" = {

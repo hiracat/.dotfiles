@@ -29,6 +29,7 @@
       hostName = config.base.hostname;
       networkmanager.enable = true;
       firewall.enable = true;
+      firewall.allowedTCPPorts = [ 1070 ];
     };
     services.fstrim.enable = true;
 
@@ -61,8 +62,13 @@
 
     services.openssh = {
       enable = true;
-      settings.PermitRootLogin = "no";
+      extraConfig = ''
+        Port 1070
+        PasswordAuthentication no
+        PubkeyAuthentication yes
+      '';
     };
+
     programs = {
       zsh.enable = true;
       neovim.enable = true;
