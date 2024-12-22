@@ -35,41 +35,33 @@
           "Desktop" = {
             path = "/home/${settings.username}/Desktop";
             devices = [ "server" ];
-            ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Documents" = {
             path = "/home/${settings.username}/Documents";
             devices = [ "server" ];
-            ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Downloads" = {
             path = "/home/${settings.username}/Downloads";
             devices = [ "server" ];
-            ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Music" = {
             path = "/home/${settings.username}/Music";
             devices = [ "server" ];
-            ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Pictures" = {
             path = "/home/${settings.username}/Pictures";
             devices = [ "server" ];
-            ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Videos" = {
             path = "/home/${settings.username}/Videos";
             devices = [ "server" ];
-            ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           ".dotfiles" = {
             path = "/home/${settings.username}/.dotfiles";
             devices = [ "server" ];
-            ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
         };
       };
     };
   };
-
 }
