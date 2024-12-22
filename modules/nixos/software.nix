@@ -17,7 +17,6 @@
   programs = {
     virt-manager.enable = true;
     firejail.enable = true;
-    partition-manager.enable = true;
     gamemode.enable = true;
     firefox.enable = true;
     steam = {
