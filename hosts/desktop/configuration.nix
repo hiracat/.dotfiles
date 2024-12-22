@@ -29,42 +29,42 @@
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
       settings = {
         devices = {
-          "server-laptop" = { id = "IBSKWS6-RSVTTNQ-7BYL3UU-HX4W3AO-TYH5QGQ-BRE5556-743ZJVD-TYHSPQW"; };
+          "server" = { id = "IBSKWS6-RSVTTNQ-7BYL3UU-HX4W3AO-TYH5QGQ-BRE5556-743ZJVD-TYHSPQW"; };
         };
         folders = {
           "Desktop" = {
             path = "/home/${settings.username}/Desktop";
-            devices = [ "server-laptop" ];
+            devices = [ "server" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Documents" = {
             path = "/home/${settings.username}/Documents";
-            devices = [ "server-laptop" ];
+            devices = [ "server" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Downloads" = {
             path = "/home/${settings.username}/Downloads";
-            devices = [ "server-laptop" ];
+            devices = [ "server" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Music" = {
             path = "/home/${settings.username}/Music";
-            devices = [ "server-laptop" ];
+            devices = [ "server" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Pictures" = {
             path = "/home/${settings.username}/Pictures";
-            devices = [ "server-laptop" ];
+            devices = [ "server" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           "Videos" = {
             path = "/home/${settings.username}/Videos";
-            devices = [ "server-laptop" ];
+            devices = [ "server" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
           ".dotfiles" = {
             path = "/home/${settings.username}/.dotfiles";
-            devices = [ "server-laptop" ];
+            devices = [ "server" ];
             ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
           };
         };
