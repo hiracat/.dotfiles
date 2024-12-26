@@ -48,4 +48,21 @@ vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
 vim.opt.autoread = true
 
+vim.opt.foldmethod = "manual" -- Set folding method to manual
+vim.opt.foldenable = true -- Enable folding
+vim.opt.viewoptions = "folds" -- Save folds in views
+
+-- Autocommands to save and restore folds
+vim.api.nvim_create_augroup("SaveFolds", { clear = true })
+vim.api.nvim_create_autocmd("BufWinLeave", {
+	group = "SaveFolds",
+	pattern = "*",
+	command = "silent! mkview",
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	group = "SaveFolds",
+	pattern = "*",
+	command = "silent! loadview",
+})
+
 vim.cmd("colorscheme catppuccin-mocha")
