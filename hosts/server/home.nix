@@ -7,7 +7,6 @@
   imports = [
     ../../scheme.nix
     ../../modules/home-manager/cava.nix
-    ../../modules/home-manager/cursor.nix
     ../../modules/home-manager/kitty.nix
     ../../modules/home-manager/shell.nix
     ../../modules/home-manager/waybar.nix
