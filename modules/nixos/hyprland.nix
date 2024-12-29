@@ -1,7 +1,12 @@
 { ... }: {
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
-  services.xserver.displayManager.gdm.enable = true;
+
+  programs.zsh.loginShellInit = ''
+    if uwsm check may-start && uwsm select; then
+      exec systemd-cat -t uwsm_start uwsm start default
+    fi
+  '';
 
   environment = {
     sessionVariables = {
