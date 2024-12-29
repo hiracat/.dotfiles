@@ -40,6 +40,7 @@
             home-manager.nixosModules.home-manager
             {
               home-manager = {
+                backupFileExtension = "backup";
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = { inherit inputs settings; };
@@ -80,7 +81,7 @@
           ];
         };
       };
-    
+
       nixosConfigurations = {
         "nixos-server" = lib.nixosSystem {
           specialArgs = { inherit inputs pkgs-stable settings; };

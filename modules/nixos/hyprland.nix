@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   programs.hyprland.enable = true;
   programs.hyprland.withUWSM = true;
 
@@ -12,5 +12,8 @@
     sessionVariables = {
       NIXOS_OZONE_WL = "1";
     };
+    systemPackages = with pkgs; [
+      tofi
+    ];
   };
 }
