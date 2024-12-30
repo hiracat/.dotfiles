@@ -51,8 +51,8 @@
     wl-clipboard
     ripgrep
     lutris
-    bottles
     atuin
+    playerctl
 
     fastfetch
     starship

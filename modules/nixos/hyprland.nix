@@ -14,6 +14,10 @@
     };
     systemPackages = with pkgs; [
       tofi
+      hyprland-qtutils
+      grim
+      slurp
+      dunst
     ];
   };
 }
