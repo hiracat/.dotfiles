@@ -20,9 +20,8 @@
 .modules {
     background: @base00;
     border: none;
-    border-radius: 15px;
     color: @base05;
-    font-size: 16px;
+    font-size: 12px;
     opacity: 1.0
 }
 
@@ -42,17 +41,18 @@ window#waybar {
 #workspaces {
     color: @base05;
     background-color: transparent;
-    padding: 0px;
-    margin: 0px 15px; /* top/bottom, left/right */
+    padding: 0px 3px;
+    margin: 0px 0px; /* top/bottom, left/right */
+    font-size: 12px;
 }
 
 #workspaces button {
     color: @base05;
-    padding: 0px 9px;
-    margin: 5px 2px; /* top/bottom, left/right */
+    padding: 0px 3px;
+    margin: 0px 0px; /* top/bottom, left/right */
     background-color: @base00;
     transition: all 0.3s ease-out;
-    border-radius: 15px;
+    border-radius: 0;
 }
 
 #workspaces button.active {
@@ -70,7 +70,6 @@ window#waybar {
 
 tooltip {
     color: @base05;
-    border-radius: 15px;
     background-color: @base02;
     opacity:0.8;
     padding:20px;
@@ -82,27 +81,6 @@ tooltip label {
 }
 
 
-/* -----------------------------------------------------
- * Taskbar
- * ----------------------------------------------------- */
-
-#taskbar {
-    background-color: @base00;
-    font-size: 16px;
-    color: @base05;
-    border-radius: 15px;
-    margin: 2px 15px 2px 2px;
-    border:3px solid @base04;
-}
-
-#taskbar button {
-    padding: 2px 7px;
-    background: @base00;
-    border-radius: 15px;
-}
-#taskbar button:hover {
-    background: @base04
-}
 
 /* -----------------------------------------------------
  * Idle Inhibator
@@ -110,10 +88,9 @@ tooltip label {
 
 #idle_inhibitor {
     background: @base00;
-    margin: 5px 15px;
-    padding: 0px 10px;
+    margin: 0px 0px;
+    padding: 0px 3px;
     color: @base05;
-    border-radius: 15px;
 }
 
 #idle_inhibitor.activated {
@@ -130,29 +107,16 @@ tooltip label {
 
 
 /* -----------------------------------------------------
- * Hardware Group
- * ----------------------------------------------------- */
-
-#memory,#cpu,#temperature {
-    background: transparent;
-    margin:0px;
-    padding:0px;
-    font-size:16px;
-    color:@base05;
-}
-
-/* -----------------------------------------------------
  * Clock
  * ----------------------------------------------------- */
 
 #clock {
     background-color: @base00;
-    font-size: 16px;
+    font-size: 12px;
     color: @base05;
-    border-radius: 15px;
-    padding: 1px 10px 0px 10px;
-    margin: 2px 15px 2px 0px;
-    border:3px solid @base04;
+    padding: 0px 3px;
+    margin: 0px ;
+    border:2px solid @base04;
 }
 
 /* -----------------------------------------------------
@@ -161,11 +125,10 @@ tooltip label {
 
 #pulseaudio {
     background-color: @base00;
-    font-size: 16px;
+    font-size: 12px;
     color: @base05;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 5px 15px 5px 0px;
+    padding: 0px 3px;
+    margin: 0px;
 }
 
 #pulseaudio.muted {
@@ -179,11 +142,10 @@ tooltip label {
 
 #network {
     background-color: @base00;
-    font-size: 16px;
+    font-size: 12px;
     color: @base05;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 5px 15px 5px 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 #network.ethernet {
@@ -197,35 +159,15 @@ tooltip label {
 }
 
 /* -----------------------------------------------------
- * Bluetooth
- * ----------------------------------------------------- */
-
-#bluetooth, #bluetooth.on, #bluetooth.connected {
-    background-color: @base00;
-    font-size: 16px;
-    color: @base05;
-    border-radius: 15px;
-    padding: 2px 10px 0px 10px;
-    margin: 5px 15px 5px 0px;
-}
-
-#bluetooth.off {
-    background-color: transparent;
-    padding: 0px;
-    margin: 0px;
-}
-
-/* -----------------------------------------------------
  * Battery
  * ----------------------------------------------------- */
 
 #battery {
     background-color: @base00;
-    font-size: 16px;
+    font-size: 12px;
     color: @base05;
-    border-radius: 15px;
-    padding: 2px 15px 0px 10px;
-    margin: 5px 15px 5px 0px;
+    padding: 0px;
+    margin: 0px;
 }
 
 #battery.charging, #battery.plugged {
