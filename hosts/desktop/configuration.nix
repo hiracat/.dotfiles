@@ -58,6 +58,10 @@
             path = "/home/${settings.username}/Videos";
             devices = [ "server" ];
           };
+          "Minecraft" = {
+            path = "/home/${settings.username}/.local/share/PrismLauncher";
+            devices = [ "server" ];
+          };
           ".dotfiles" = {
             path = "/home/${settings.username}/.dotfiles";
             devices = [ "server" ];

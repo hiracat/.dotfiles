@@ -73,6 +73,10 @@
       '';
     };
 
+    services.devmon.enable = true;
+    services.gvfs.enable = true;
+    services.udisks2.enable = true;
+
     programs = {
       zsh.enable = true;
       neovim.enable = true;

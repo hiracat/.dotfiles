@@ -15,6 +15,7 @@
 
   users.users.${settings.username}.extraGroups = [ "libvirtd" ];
   programs = {
+    partition-manager.enable = true;
     virt-manager.enable = true;
     firejail.enable = true;
     gamemode.enable = true;
@@ -32,8 +33,8 @@
     flatpak.enable = true;
   };
   environment.systemPackages = with pkgs; [
+    pika-backup
     protonvpn-gui
-    tradingview
     ruby
 
     libimobiledevice

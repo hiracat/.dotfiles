@@ -18,7 +18,6 @@
         system = "x86_64-linux";
         username = "forest";
       };
-
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${settings.system};
       pkgs-stable = import inputs.nixpkgs-stable {
@@ -34,9 +33,8 @@
           specialArgs = { inherit inputs pkgs-stable settings; };
           modules = [
             ./scripts/default.nix
-            inputs.base16.nixosModule
-
             ./hosts/desktop/configuration.nix
+            inputs.base16.nixosModule
             home-manager.nixosModules.home-manager
             {
               home-manager = {
@@ -55,12 +53,10 @@
           ];
         };
       };
-
       nixosConfigurations = {
         "nixos-laptop" = lib.nixosSystem {
           specialArgs = { inherit inputs pkgs-stable settings; };
           modules = [
-            ./scheme.nix
             ./scripts/default.nix
             ./hosts/laptop/configuration.nix
             inputs.base16.nixosModule
@@ -81,12 +77,10 @@
           ];
         };
       };
-
       nixosConfigurations = {
         "nixos-server" = lib.nixosSystem {
           specialArgs = { inherit inputs pkgs-stable settings; };
           modules = [
-            ./scheme.nix
             ./scripts/default.nix
             ./hosts/server/configuration.nix
             inputs.base16.nixosModule
