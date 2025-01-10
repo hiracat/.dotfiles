@@ -38,6 +38,7 @@
       slurp
       dunst
       networkmanagerapplet
+      swww
     ];
   };
 }
