@@ -79,7 +79,6 @@
 
     programs = {
       zsh.enable = true;
-      neovim.enable = true;
     };
     security.rtkit.enable = true;
     security.polkit.enable = true;
@@ -112,6 +111,7 @@
       shells = with pkgs; [ zsh ];
       pathsToLink = [ "/share/zsh" ];
       systemPackages = with pkgs; [
+        neovim
         gcc
         gnumake
 
