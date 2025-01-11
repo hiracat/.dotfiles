@@ -39,6 +39,9 @@
       dunst
       networkmanagerapplet
       swww
+      adwaita-icon-theme
+      adwaita-icon-theme-legacy
+      kdePackages.breeze-icons
     ];
   };
 }

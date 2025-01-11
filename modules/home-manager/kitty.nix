@@ -9,6 +9,9 @@
     };
     font.name = "JetBrainsMono NF";
     font.size = 12;
+    settings = {
+      confirm_os_window_close = 0;
+    };
     extraConfig = ''
       include theme.conf
     '';

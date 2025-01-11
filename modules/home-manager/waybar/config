@@ -9,7 +9,7 @@
 
     // Choose the order of the modules
     "modules-left": ["hyprland/workspaces"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "battery", "clock", "tray"],
+    "modules-right": ["tray", "idle_inhibitor", "pulseaudio", "network", "battery", "clock"],
 
      // Modules configuration
     "hyprland/workspaces": {
