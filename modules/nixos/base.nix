@@ -114,6 +114,9 @@
         neovim
         gcc
         gnumake
+        adwaita-icon-theme
+        adwaita-icon-theme-legacy
+        kdePackages.breeze-icons
 
         rust-analyzer
         rustc
