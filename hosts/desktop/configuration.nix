@@ -1,4 +1,4 @@
-{ settings, ... }: {
+{ settings, pkgs, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../scheme.nix
@@ -19,6 +19,14 @@
   };
 
   periferals.drawingTablet.enable = true;
+  environment.systemPackages = with pkgs; [
+    (renderdoc.overrideAttrs (oldAttrs: rec {
+      cmakeFlags = oldAttrs.cmakeFlags or [ ] ++ [
+        "-DENABLE_UNSUPPORTED_EXPERIMENTAL_POSSIBLY_BROKEN_WAYLAND=ON"
+      ];
+    }))
+  ];
+
 
   fileSystems."/run/media/forest/backups" = {
     device = "/dev/disk/by-uuid/26975e28-ef0a-4681-8e45-5c0af5da170a";

@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   services = {
     xserver.displayManager.gdm.enable = true;
     xserver.desktopManager.gnome.enable = true;
@@ -13,6 +13,7 @@
       videoDrivers = [ "amdgpu" ];
     };
   };
+
 
   environment = {
     sessionVariables = {

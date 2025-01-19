@@ -25,6 +25,8 @@
   };
 
   xdg.terminal-exec.enable = true;
+  programs.nm-applet.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   environment = {
     sessionVariables = {
@@ -37,7 +39,6 @@
       grim
       slurp
       dunst
-      networkmanagerapplet
       swww
     ];
   };

@@ -30,6 +30,8 @@
       networkmanager.enable = true;
       firewall.enable = true;
       firewall.allowedTCPPorts = [ 1070 ];
+      firewall.allowedUDPPorts = [ 10101 ];
+
     };
     services.fstrim.enable = true;
 

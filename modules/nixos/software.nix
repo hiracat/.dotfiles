@@ -33,13 +33,13 @@
     flatpak.enable = true;
   };
   environment.systemPackages = with pkgs; [
+    gh
     pika-backup
     protonvpn-gui
     ruby
 
     libimobiledevice
     ifuse
-    renderdoc
     qbittorrent-nox
     discord
     go

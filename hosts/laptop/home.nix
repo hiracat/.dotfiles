@@ -1,4 +1,4 @@
-{ settings, ... }: {
+{ pkgs, settings, ... }: {
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = _: true;
@@ -22,6 +22,13 @@
 
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
+  home.pointerCursor = {
+    gtk.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 16;
+  };
+
 
 
   # This value determines the Home Manager release that your configuration is
