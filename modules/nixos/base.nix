@@ -1,4 +1,4 @@
-{ pkgs, lib, pkgs-stable, config, ... }: {
+{ pkgs, lib, config, ... }: {
   options.base = {
     locale = lib.mkOption {
       default = "en_US.UTF-8";
@@ -19,6 +19,7 @@
   };
 
   config = {
+    nix.gc.automatic = true;
     boot = {
       kernelPackages = pkgs.linuxPackages_latest;
       loader.systemd-boot.enable = true;

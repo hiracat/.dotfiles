@@ -12,7 +12,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... } @inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... } @inputs:
     let
       settings = {
         system = "x86_64-linux";
@@ -21,86 +21,40 @@
       lib = nixpkgs.lib;
       pkgs = nixpkgs.legacyPackages.${settings.system};
       pkgs-stable = import inputs.nixpkgs-stable {
-        config.allowUnfree = true;
-        stable = inputs.nixpkgs-stable.legacyPackages.${settings.system};
         system = settings.system;
+        config.allowUnfree = true;
+      };
 
+      mkHost = name: lib.nixosSystem {
+        specialArgs = { inherit inputs pkgs-stable settings; };
+        modules = [
+          ./scripts/default.nix
+          (./hosts + "/${name}/configuration.nix")
+          inputs.base16.nixosModule
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              backupFileExtension = "backup";
+              extraSpecialArgs = { inherit inputs settings; };
+              users.${settings.username} = {
+                imports = [
+                  inputs.base16.homeManagerModule
+                  (./hosts + "/${name}/home.nix")
+                ];
+              };
+            };
+          }
+        ];
       };
     in
+
     {
       nixosConfigurations = {
-        "nixos-desktop" = lib.nixosSystem {
-          specialArgs = { inherit inputs pkgs-stable settings; };
-          modules = [
-            ./scripts/default.nix
-            ./hosts/desktop/configuration.nix
-            inputs.base16.nixosModule
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                backupFileExtension = "backup";
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs settings; };
-                users.forest = {
-                  imports = [
-                    inputs.base16.homeManagerModule
-                    ./hosts/desktop/home.nix
-                  ];
-                };
-              };
-            }
-          ];
-        };
-      };
-      nixosConfigurations = {
-        "nixos-laptop" = lib.nixosSystem {
-          specialArgs = { inherit inputs pkgs-stable settings; };
-          modules = [
-            ./scripts/default.nix
-            ./hosts/laptop/configuration.nix
-            inputs.base16.nixosModule
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs settings; };
-                users.forest = {
-                  imports = [
-                    inputs.base16.homeManagerModule
-                    ./hosts/laptop/home.nix
-                  ];
-                };
-              };
-            }
-          ];
-        };
-      };
-      nixosConfigurations = {
-        "nixos-server" = lib.nixosSystem {
-          specialArgs = { inherit inputs pkgs-stable settings; };
-          modules = [
-            ./scripts/default.nix
-            ./hosts/server/configuration.nix
-            inputs.base16.nixosModule
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = { inherit inputs settings; };
-                users.forest = {
-                  imports = [
-                    inputs.base16.homeManagerModule
-                    ./hosts/server/home.nix
-                  ];
-                };
-              };
-            }
-          ];
-        };
+        "nixos-desktop" = mkHost "desktop";
+        "nixos-laptop" = mkHost "laptop";
+        "nixos-server" = mkHost "server";
       };
     };
-
 }

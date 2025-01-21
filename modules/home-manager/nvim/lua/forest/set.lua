@@ -34,7 +34,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
-vim.opt.timeoutlen = 200
+vim.opt.timeoutlen = 500
 
 vim.opt.colorcolumn = "130"
 vim.opt.mouse = "a"

@@ -75,7 +75,6 @@
     alsa-utils
     mangohud
 
-    spotify
     prismlauncher
     krita
     obsidian
@@ -97,5 +96,5 @@
     anki
     calibre
     google-chrome
-  ] ++ [ pkgs-stable.cava pkgs-stable.kitty ];
+  ] ++ [ pkgs-stable.spotify ];
 }
