@@ -35,7 +35,6 @@
   environment.systemPackages = with pkgs; [
     gh
     pika-backup
-    protonvpn-gui
     ruby
 
     libimobiledevice
@@ -96,5 +95,5 @@
     anki
     calibre
     google-chrome
-  ] ++ [ pkgs-stable.spotify ];
+  ] ++ [ pkgs-stable.spotify pkgs-stable.protonvpn-gui];
 }
