@@ -31,6 +31,11 @@
     cron.enable = true;
     printing.enable = true;
     flatpak.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
   };
   environment.systemPackages = with pkgs; [
     gh
@@ -95,5 +100,5 @@
     anki
     calibre
     google-chrome
-  ] ++ [ pkgs-stable.spotify pkgs-stable.protonvpn-gui];
+  ] ++ [ pkgs-stable.spotify pkgs-stable.protonvpn-gui ];
 }

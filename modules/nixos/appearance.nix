@@ -1,6 +1,8 @@
-{ config, pkgs-stable, ... }: {
+{ config, pkgs-stable, pkgs, ... }: {
   console = {
     earlySetup = true;
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-v24b.psf.gz";
+    packages = with pkgs; [ terminus_font ];
     colors = with config.scheme; [
       #black
       "${base01}"
