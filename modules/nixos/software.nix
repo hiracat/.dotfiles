@@ -13,7 +13,7 @@
     };
   };
 
-  users.users.${settings.username}.extraGroups = [ "libvirtd" ];
+  users.users.${settings.username}.extraGroups = [ "libvirtd" "input" ];
   programs = {
     partition-manager.enable = true;
     virt-manager.enable = true;
@@ -37,7 +37,10 @@
       openFirewall = true;
     };
   };
+  # for davanci resolve
+  hardware.amdgpu.opencl.enable = true;
   environment.systemPackages = with pkgs; [
+    wl-clicker
     gh
     pika-backup
     ruby
@@ -48,6 +51,7 @@
     discord
     go
     nix-tree
+    davinci-resolve
 
     nemo-with-extensions
     nemo-fileroller
