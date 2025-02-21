@@ -18,6 +18,8 @@
     hostname = "nixos-desktop";
   };
 
+  networking.interfaces."enp4s0".wakeOnLan.enable = true;
+
   periferals.drawingTablet.enable = true;
   environment.systemPackages = with pkgs; [
     (renderdoc.overrideAttrs (oldAttrs: rec {
@@ -38,6 +40,17 @@
       "nofail" # Prevent system from failing if this drive doesn't mount
       "x-gvfs-show" # snow drive in fileexplorer
     ];
+  };
+
+  systemd = {
+    services.gpp0disable = {
+      description = "fixes gpp0 waking up system";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "/bin/sh -c \"echo GPP0 > /proc/acpi/wakeup\"";
+      };
+    };
   };
 
   services = {
