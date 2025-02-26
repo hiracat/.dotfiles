@@ -40,6 +40,7 @@
   # for davanci resolve
   hardware.amdgpu.opencl.enable = true;
   environment.systemPackages = with pkgs; [
+    blender-hip
     wl-clicker
     gh
     pika-backup
