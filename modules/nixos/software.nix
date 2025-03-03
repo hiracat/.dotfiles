@@ -40,6 +40,9 @@
   # for davanci resolve
   hardware.amdgpu.opencl.enable = true;
   environment.systemPackages = with pkgs; [
+    audacity
+    brave
+    obs-studio
     blender-hip
     wl-clicker
     gh
