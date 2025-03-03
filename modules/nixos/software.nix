@@ -1,4 +1,8 @@
-{ pkgs, pkgs-stable, settings, ... }: {
+{ inputs, pkgs, pkgs-stable, settings, ... }:
+let
+  spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
+in
+{
   virtualisation = {
     libvirtd = {
       enable = true;
@@ -24,6 +28,14 @@
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    };
+    spicetify = {
+      enable = true;
+      enabledExtensions = with spicePkgs.extensions; [
+        shuffle
+      ];
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "mocha";
     };
   };
   services = {
@@ -108,5 +120,5 @@
     anki
     calibre
     google-chrome
-  ] ++ [ pkgs-stable.spotify pkgs-stable.protonvpn-gui ];
+  ] ++ [ pkgs-stable.protonvpn-gui ];
 }

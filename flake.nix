@@ -10,6 +10,7 @@
     };
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... } @inputs:
@@ -24,14 +25,15 @@
         system = settings.system;
         config.allowUnfree = true;
       };
-
       mkHost = name: lib.nixosSystem {
         specialArgs = { inherit inputs pkgs-stable settings; };
         modules = [
+          inputs.spicetify-nix.nixosModules.spicetify
           ./scripts/default.nix
           (./hosts + "/${name}/configuration.nix")
           inputs.base16.nixosModule
           home-manager.nixosModules.home-manager
+
           {
             home-manager = {
               useUserPackages = true;
