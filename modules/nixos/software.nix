@@ -23,7 +23,8 @@ in
     virt-manager.enable = true;
     firejail.enable = true;
     gamemode.enable = true;
-    firefox.enable = true;
+    chromium.enable = true;
+
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play

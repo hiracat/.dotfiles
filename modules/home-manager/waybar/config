@@ -16,7 +16,6 @@
        "all-outputs": true,
        "format":"{id}: {icon}",
        "format-icons": {
-            "1": "", //firefox icon
             "urgent": "",
             "focused": "",
             "default": ""
