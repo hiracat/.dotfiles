@@ -5,12 +5,45 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local luasnip = require("luasnip")
 
 local servers = {
-	"rust_analyzer",
 	"clangd",
 	"nil_ls",
 	"lua_ls",
 	"glslls",
 }
+
+lspconfig.rust_analyzer.setup({
+	capabilities = capabilities,
+	settings = {
+		["rust-analyzer"] = {
+			cargo = {
+				allFeatures = true,
+				loadOutDirsFromCheck = true,
+				runBuildScripts = true,
+			},
+			-- Add clippy lints for Rust.
+			checkOnSave = {
+				allFeatures = true,
+				command = "clippy",
+				extraArgs = {
+					"--",
+					"--no-deps",
+					"-Dclippy::correctness",
+					"-Dclippy::complexity",
+					"-Wclippy::perf",
+					"-Wclippy::pedantic",
+				},
+			},
+			procMacro = {
+				enable = true,
+				ignored = {
+					["async-trait"] = { "async_trait" },
+					["napi-derive"] = { "napi" },
+					["async-recursion"] = { "async_recursion" },
+				},
+			},
+		},
+	},
+})
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
