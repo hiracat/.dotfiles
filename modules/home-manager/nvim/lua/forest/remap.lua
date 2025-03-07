@@ -122,9 +122,8 @@ local autocmd = vim.api.nvim_create_autocmd
 augroup("__formatter__", { clear = true })
 autocmd("BufWritePost", {
 	group = "__formatter__",
-	command = ":FormatWrite",
+	command = "silent! FormatWrite",
 })
-
 -- Fugitive.nvim
 k("n", "<leader>gs", vim.cmd.Git, opts) --vim fugitive
 
@@ -137,6 +136,17 @@ k("n", "<leader>u", vim.cmd.UndotreeToggle, opts)
 k({ "n", "i" }, "<C-s>", function()
 	vim.lsp.buf.code_action({ apply = true })
 end)
+
+-- Command to toggle inline diagnostics
+vim.api.nvim_create_user_command("DiagnosticsToggleVirtualText", function()
+	local current_value = vim.diagnostic.config().virtual_text
+	if current_value then
+		vim.diagnostic.config({ virtual_text = false })
+	else
+		vim.diagnostic.config({ virtual_text = true })
+	end
+end, {})
+k("n", "<Leader>ii", ':lua vim.cmd("DiagnosticsToggleVirtualText")<CR>', opts)
 
 k("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 
