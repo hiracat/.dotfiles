@@ -76,7 +76,6 @@ in
     git
     wl-clipboard
     ripgrep
-    lutris
     atuin
     playerctl
 
