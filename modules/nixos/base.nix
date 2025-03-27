@@ -39,17 +39,11 @@
     time.timeZone = config.base.timezone;
     i18n = {
       # Select internationalisation properties.
-      defaultLocale = config.base.locale;
+      defaultLocale = "en_US.UTF-8";
+      supportedLocales = [ "en_US.UTF-8/UTF-8" "ja_JP.UTF-8/UTF-8" "ko_KR.UTF-8/UTF-8" ];
+
       extraLocaleSettings = {
-        LC_ADDRESS = config.base.locale;
-        LC_IDENTIFICATION = config.base.locale;
-        LC_MEASUREMENT = config.base.locale;
-        LC_MONETARY = config.base.locale;
-        LC_NAME = config.base.locale;
-        LC_NUMERIC = config.base.locale;
-        LC_PAPER = config.base.locale;
-        LC_TELEPHONE = config.base.locale;
-        LC_TIME = config.base.locale;
+        LC_ALL = "en_US.UTF-8";
       };
     };
     services.interception-tools = {

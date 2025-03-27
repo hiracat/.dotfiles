@@ -44,6 +44,7 @@
 
   fonts = {
     packages = with pkgs-stable; [
+      nanum
       nerdfonts
       fira
       kochi-substitute

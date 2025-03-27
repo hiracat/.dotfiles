@@ -8,6 +8,7 @@
         fcitx5-gtk
         fcitx5-catppuccin
         fcitx5-mozc
+        fcitx5-hangul
       ];
     };
   };
