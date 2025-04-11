@@ -33,6 +33,7 @@
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
+    hyprsunset
       glib
       tofi
       hyprland-qtutils

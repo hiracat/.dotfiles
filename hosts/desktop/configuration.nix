@@ -44,11 +44,11 @@
 
   systemd = {
     services.gpp0disable = {
-      description = "fixes gpp0 waking up system";
+      description = "fixes gpp0 waking up system, sleep";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "/bin/sh -c \"echo GPP0 > /proc/acpi/wakeup\"";
+        ExecStart = ''/bin/sh -c "if grep -q '^GPP0.*\\*enabled' /proc/acpi/wakeup; then echo Disabling GPP0; echo GPP0 | tee /proc/acpi/wakeup; else echo GPP0 already disabled; fi" '';
       };
     };
   };
