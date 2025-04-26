@@ -59,8 +59,11 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
+  pavucontrol
+    bottles
     bambu-studio
     orca-slicer
+    protonvpn-gui
     audacity
     brave
     obs-studio
@@ -78,8 +81,6 @@ in
     nix-tree
     davinci-resolve
 
-    nemo-with-extensions
-    nemo-fileroller
     base16-schemes
     git
     wl-clipboard
@@ -128,5 +129,9 @@ in
     anki
     calibre
     google-chrome
-  ] ++ [ pkgs-stable.protonvpn-gui ];
+  ] ++ [
+    pkgs-stable.nemo-with-extensions
+    pkgs-stable.nemo-fileroller
+  ];
+
 }
