@@ -14,7 +14,7 @@
       path = "${config.home.homeDirectory}/.histfile";
     };
 
-    initExtra = ''
+    initContent = ''
       export GEM_HOME="$HOME/gems"
       export PATH="$HOME/gems/bin:$PATH"
 

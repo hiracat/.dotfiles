@@ -59,8 +59,9 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-  pavucontrol
+    watchexec
     bottles
+    pavucontrol
     bambu-studio
     orca-slicer
     protonvpn-gui
@@ -79,7 +80,6 @@ in
     discord
     go
     nix-tree
-    davinci-resolve
 
     base16-schemes
     git
@@ -132,6 +132,7 @@ in
   ] ++ [
     pkgs-stable.nemo-with-extensions
     pkgs-stable.nemo-fileroller
+    pkgs-stable.davinci-resolve
   ];
 
 }

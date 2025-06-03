@@ -21,17 +21,15 @@ lspconfig.rust_analyzer.setup({
 				runBuildScripts = true,
 			},
 			-- Add clippy lints for Rust.
-			checkOnSave = {
-				allFeatures = true,
-				command = "clippy",
-				extraArgs = {
-					"--",
-					"--no-deps",
-					"-Dclippy::correctness",
-					"-Dclippy::complexity",
-					"-Wclippy::perf",
-					"-Wclippy::pedantic",
-				},
+			checkOnSave = true,
+			allFeatures = true,
+			command = "clippy",
+			extraArgs = {
+				"--",
+				"--no-deps",
+				"-Dclippy::correctness",
+				"-Dclippy::complexity",
+				"-Wclippy::perf",
 			},
 			procMacro = {
 				enable = true,

@@ -43,9 +43,9 @@
   };
 
   fonts = {
-    packages = with pkgs-stable; [
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
       nanum
-      nerdfonts
       fira
       kochi-substitute
       paratype-pt-serif
