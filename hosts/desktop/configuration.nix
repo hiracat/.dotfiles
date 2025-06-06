@@ -20,8 +20,13 @@
 
   networking.interfaces."enp4s0".wakeOnLan.enable = true;
 
+
+  hardware.amdgpu.opencl.enable = true;
+
   periferals.drawingTablet.enable = true;
   environment.systemPackages = with pkgs; [
+    blender-hip
+    davinci-resolve
     (renderdoc.overrideAttrs (oldAttrs: rec {
       cmakeFlags = oldAttrs.cmakeFlags or [ ] ++ [
         "-DENABLE_UNSUPPORTED_EXPERIMENTAL_POSSIBLY_BROKEN_WAYLAND=ON"

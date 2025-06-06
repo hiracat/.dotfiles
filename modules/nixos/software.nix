@@ -18,8 +18,11 @@ in
   };
 
   users.users.${settings.username}.extraGroups = [ "libvirtd" "input" ];
+  virtualisation.docker.enable = true;
+
   programs = {
     partition-manager.enable = true;
+
     virt-manager.enable = true;
     firejail.enable = true;
     gamemode.enable = true;
@@ -51,12 +54,12 @@ in
     };
   };
   # for davanci resolve
-  hardware.amdgpu.opencl.enable = true;
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [
     pkgs.xdg-desktop-portal-gtk
     pkgs.xdg-desktop-portal-hyprland
   ];
+
 
   environment.systemPackages = with pkgs; [
     watchexec
@@ -68,7 +71,6 @@ in
     audacity
     brave
     obs-studio
-    blender-hip
     wl-clicker
     gh
     pika-backup

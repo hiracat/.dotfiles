@@ -14,20 +14,11 @@
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/git.nix
 
-    # ../../modules/home-manager/dunst.nix
-    # ../../modules/home-manager/hyprland.nix
-    # ../../modules/home-manager/qt.nix
-    # ../../modules/home-manager/gtk.nix
+    ../../modules/home-manager/hyprland.nix
   ];
 
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
-  home.pointerCursor = {
-    gtk.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 16;
-  };
 
 
 
