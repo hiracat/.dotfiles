@@ -10,6 +10,7 @@
     font.name = "JetBrainsMono NF";
     font.size = 12;
     settings = {
+      background_opacity = 0.7;
       confirm_os_window_close = 0;
     };
     extraConfig = ''
