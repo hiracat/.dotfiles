@@ -1,4 +1,4 @@
-{ pkgs, settings, ... }: {
+{ settings, ... }: {
   nixpkgs.config = {
     allowUnfree = true;
     allowUnfreePredicate = _: true;
@@ -19,7 +19,6 @@
 
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
-
 
 
   # This value determines the Home Manager release that your configuration is

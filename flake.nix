@@ -20,7 +20,6 @@
         username = "forest";
       };
       lib = nixpkgs.lib;
-      pkgs = nixpkgs.legacyPackages.${settings.system};
       pkgs-stable = import inputs.nixpkgs-stable {
         system = settings.system;
         config.allowUnfree = true;

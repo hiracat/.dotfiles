@@ -6,15 +6,15 @@
     in
     [ "${schema}/share/gsettings-schemas/${schema.name}" ];
 
-  home.activation.flatpakTheming = lib.hm.dag.entryAfter [ "writeBoundary" ]
-    ''
-      gtk_css_path=$(readlink ~/.config/gtk-4.0/gtk.css)
-      ${pkgs.flatpak}/bin/flatpak override --user --filesystem=~/.config/gtk-4.0:ro --filesystem="$gtk_css_path":ro
-
-      gtk_css_path=$(readlink ~/.config/gtk-3.0/gtk.css)
-      ${pkgs.flatpak}/bin/flatpak override --user --filesystem=~/.config/gtk-3.0:ro --filesystem="$gtk_css_path":ro
-    ''
-  ;
+  # home.activation.flatpakTheming = lib.hm.dag.entryAfter [ "writeBoundary" ]
+  #   ''
+  #     gtk_css_path=$(readlink ~/.config/gtk-4.0/gtk.css)
+  #     ${pkgs.flatpak}/bin/flatpak override --user --filesystem=~/.config/gtk-4.0:ro --filesystem="$gtk_css_path":ro
+  #
+  #     gtk_css_path=$(readlink ~/.config/gtk-3.0/gtk.css)
+  #     ${pkgs.flatpak}/bin/flatpak override --user --filesystem=~/.config/gtk-3.0:ro --filesystem="$gtk_css_path":ro
+  #   ''
+  # ;
 
   gtk = {
     enable = true;

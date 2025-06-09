@@ -53,7 +53,6 @@ in
       openFirewall = true;
     };
   };
-  # for davanci resolve
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [
     pkgs.xdg-desktop-portal-gtk
@@ -134,7 +133,6 @@ in
   ] ++ [
     pkgs-stable.nemo-with-extensions
     pkgs-stable.nemo-fileroller
-    pkgs-stable.davinci-resolve
   ];
 
 }

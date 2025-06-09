@@ -6,7 +6,6 @@
     ../../modules/nixos/base.nix
     ../../modules/nixos/appearance.nix
     ../../modules/nixos/audio.nix
-    # ../../modules/nixos/gnome.nix
     ../../modules/nixos/ime.nix
     ../../modules/nixos/periferals.nix
     ../../modules/nixos/software.nix
@@ -20,10 +19,10 @@
 
   networking.interfaces."enp4s0".wakeOnLan.enable = true;
 
-
   hardware.amdgpu.opencl.enable = true;
 
   periferals.drawingTablet.enable = true;
+
   environment.systemPackages = with pkgs; [
     blender-hip
     davinci-resolve
