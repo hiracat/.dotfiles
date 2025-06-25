@@ -23,7 +23,7 @@
       gradient_color_1 = '#${config.scheme.base0E}'
 
       [smoothing]
-      ; noise_reduction = 77
+      ; noise_reduction = 30
     '';
   };
 }

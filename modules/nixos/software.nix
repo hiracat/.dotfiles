@@ -130,6 +130,8 @@ in
     anki
     calibre
     google-chrome
+    brightnessctl
+    cava
   ] ++ [
     pkgs-stable.nemo-with-extensions
     pkgs-stable.nemo-fileroller
