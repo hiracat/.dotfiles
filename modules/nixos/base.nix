@@ -19,6 +19,7 @@
   };
 
   config = {
+
     boot = {
       kernelPackages = pkgs.linuxPackages_latest;
       loader.systemd-boot.enable = true;
@@ -30,10 +31,11 @@
       networkmanager.enable = true;
       firewall.enable = true;
       firewall.allowedTCPPorts = [ 1070 25565 ];
-      firewall.allowedUDPPorts = [ 10101 25565 ];
+      firewall.allowedUDPPorts = [ 25565 ];
 
     };
     services.fstrim.enable = true;
+
 
     time.timeZone = config.base.timezone;
     i18n = {
@@ -63,11 +65,23 @@
       settings.PasswordAuthentication = false;
       settings.X11Forwarding = false;
       settings.AllowUsers = [ "forest" ];
+      hostKeys = [{
+        path = "/etc/ssh/ssh_host_ed25519_key";
+        rounds = 100;
+        type = "ed25519";
+      }];
+
 
       extraConfig = ''
         ClientAliveInterval 300
       '';
     };
+    age.secrets.ssh_config = {
+      file = ../../secrets/ssh_config.age;
+      owner = config.base.username;
+      mode = "0600";
+    };
+    programs.ssh.extraConfig = "Include ${config.age.secrets.ssh_config.path}";
 
     services.devmon.enable = true;
     services.gvfs.enable = true;

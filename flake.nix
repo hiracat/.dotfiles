@@ -11,6 +11,11 @@
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+
+    agenix.url = "github:ryantm/agenix";
+    agenix.inputs.nixpkgs.follows = "nixpkgs";
+    agenix.inputs.darwin.follows = "";
+
   };
 
   outputs = { self, nixpkgs, nixpkgs-stable, home-manager, ... } @inputs:
@@ -29,10 +34,15 @@
         modules = [
           inputs.spicetify-nix.nixosModules.spicetify
           ./scripts/default.nix
-          (./hosts + "/${name}/configuration.nix")
           inputs.base16.nixosModule
           home-manager.nixosModules.home-manager
-
+          inputs.agenix.nixosModules.default
+          {
+            environment.systemPackages = [
+              inputs.agenix.packages.${settings.system}.default
+            ];
+          }
+          (./hosts + "/${name}/configuration.nix")
           {
             home-manager = {
               useUserPackages = true;
@@ -40,6 +50,7 @@
               extraSpecialArgs = { inherit inputs settings; };
               users.${settings.username} = {
                 imports = [
+                  inputs.agenix.homeManagerModules.default
                   inputs.base16.homeManagerModule
                   (./hosts + "/${name}/home.nix")
                 ];

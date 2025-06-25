@@ -38,15 +38,5 @@
         ".dotfiles"
       ];
     };
-    folders = [
-      "Desktop"
-      "Documents"
-      "Downloads"
-      "Music"
-      "Pictures"
-      "Videos"
-      ".local/share/PrismLauncher"
-      ".dotfiles"
-    ];
   };
 }
