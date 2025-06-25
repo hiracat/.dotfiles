@@ -9,6 +9,7 @@
     ../../modules/nixos/ime.nix
     ../../modules/nixos/periferals.nix
     ../../modules/nixos/software.nix
+    ../../modules/nixos/syncthing.nix
 
     ../../modules/nixos/hyprland.nix
   ];
@@ -18,51 +19,24 @@
   };
   services.xserver.wacom.enable = true;
 
-
   services = {
-    syncthing = {
+    syncthingSync = {
       enable = true;
-      group = "users";
-      user = settings.username;
-      dataDir = "/home/${settings.username}/Syncthing";
-      configDir = "/home/${settings.username}/.config/syncthing";
-      overrideDevices = true; # overrides any devices added or deleted through the WebUI
-      overrideFolders = true; # overrides any folders added or deleted through the WebUI
-      settings = {
-        devices = {
-          "server" = { id = "IBSKWS6-RSVTTNQ-7BYL3UU-HX4W3AO-TYH5QGQ-BRE5556-743ZJVD-TYHSPQW"; };
-        };
-        folders = {
-          "Desktop" = {
-            path = "/home/${settings.username}/Desktop";
-            devices = [ "server" ];
-          };
-          "Documents" = {
-            path = "/home/${settings.username}/Documents";
-            devices = [ "server" ];
-          };
-          "Downloads" = {
-            path = "/home/${settings.username}/Downloads";
-            devices = [ "server" ];
-          };
-          "Music" = {
-            path = "/home/${settings.username}/Music";
-            devices = [ "server" ];
-          };
-          "Pictures" = {
-            path = "/home/${settings.username}/Pictures";
-            devices = [ "server" ];
-          };
-          "Videos" = {
-            path = "/home/${settings.username}/Videos";
-            devices = [ "server" ];
-          };
-          ".dotfiles" = {
-            path = "/home/${settings.username}/.dotfiles";
-            devices = [ "server" ];
-          };
-        };
+      username = settings.username;
+      devices = {
+        desktop = "FU5NOIY-RG6LIJ3-VWA64FP-6CEZXOP-KZEGB7S-7L3ET5Y-4ITXCDY-YTXXGA4";
+        server = "IBSKWS6-RSVTTNQ-7BYL3UU-HX4W3AO-TYH5QGQ-BRE5556-743ZJVD-TYHSPQW";
       };
     };
+    folders = [
+      "Desktop"
+      "Documents"
+      "Downloads"
+      "Music"
+      "Pictures"
+      "Videos"
+      ".local/share/PrismLauncher"
+      ".dotfiles"
+    ];
   };
 }

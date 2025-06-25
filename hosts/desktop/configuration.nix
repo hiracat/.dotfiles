@@ -11,7 +11,9 @@
     ../../modules/nixos/software.nix
 
     ../../modules/nixos/hyprland.nix
+    ../../modules/nixos/syncthing.nix
   ];
+
   base = {
     username = settings.username;
     hostname = "nixos-desktop";
@@ -33,7 +35,6 @@
     }))
   ];
 
-
   fileSystems."/run/media/forest/backups" = {
     device = "/dev/disk/by-uuid/26975e28-ef0a-4681-8e45-5c0af5da170a";
     fsType = "ext4";
@@ -45,10 +46,9 @@
       "x-gvfs-show" # snow drive in fileexplorer
     ];
   };
-
   systemd = {
     services.gpp0disable = {
-      description = "fixes gpp0 waking up system, sleep";
+      description = "fixes gpp0 waking up system, and breaking sleep";
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "oneshot";
@@ -58,53 +58,23 @@
   };
 
   services = {
-    syncthing = {
+    syncthingSync = {
       enable = true;
-      group = "users";
-      user = settings.username;
-      dataDir = "/home/${settings.username}/Syncthing";
-      configDir = "/home/${settings.username}/.config/syncthing";
-      overrideDevices = true; # overrides any devices added or deleted through the WebUI
-      overrideFolders = true; # overrides any folders added or deleted through the WebUI
-      settings = {
-        devices = {
-          "server" = { id = "IBSKWS6-RSVTTNQ-7BYL3UU-HX4W3AO-TYH5QGQ-BRE5556-743ZJVD-TYHSPQW"; };
-        };
-        folders = {
-          "Desktop" = {
-            path = "/home/${settings.username}/Desktop";
-            devices = [ "server" ];
-          };
-          "Documents" = {
-            path = "/home/${settings.username}/Documents";
-            devices = [ "server" ];
-          };
-          "Downloads" = {
-            path = "/home/${settings.username}/Downloads";
-            devices = [ "server" ];
-          };
-          "Music" = {
-            path = "/home/${settings.username}/Music";
-            devices = [ "server" ];
-          };
-          "Pictures" = {
-            path = "/home/${settings.username}/Pictures";
-            devices = [ "server" ];
-          };
-          "Videos" = {
-            path = "/home/${settings.username}/Videos";
-            devices = [ "server" ];
-          };
-          "Minecraft" = {
-            path = "/home/${settings.username}/.local/share/PrismLauncher";
-            devices = [ "server" ];
-          };
-          ".dotfiles" = {
-            path = "/home/${settings.username}/.dotfiles";
-            devices = [ "server" ];
-          };
-        };
+      username = settings.username;
+      devices = {
+        server = "IBSKWS6-RSVTTNQ-7BYL3UU-HX4W3AO-TYH5QGQ-BRE5556-743ZJVD-TYHSPQW";
+        laptop = "VZOYB44-PL3RROB-ZXQAYVC-GEPOXOK-ISOGJ26-CRZ6BBU-4HMTIML-6LHENQU";
       };
+      folders = [
+        "Desktop"
+        "Documents"
+        "Downloads"
+        "Music"
+        "Pictures"
+        "Videos"
+        ".local/share/PrismLauncher"
+        ".dotfiles"
+      ];
     };
   };
 }
