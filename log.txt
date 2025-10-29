@@ -1,0 +1,21 @@
+Running phase: patchPhase
+@nix { "action": "setPhase", "phase": "patchPhase" }
+Running phase: updateAutotoolsGnuConfigScriptsPhase
+@nix { "action": "setPhase", "phase": "updateAutotoolsGnuConfigScriptsPhase" }
+Running phase: configurePhase
+@nix { "action": "setPhase", "phase": "configurePhase" }
+no configure script, doing nothing
+Running phase: buildPhase
+@nix { "action": "setPhase", "phase": "buildPhase" }
+no Makefile or custom buildPhase, doing nothing
+Running phase: installPhase
+@nix { "action": "setPhase", "phase": "installPhase" }
+Downloading Minecraft server
+Exception in thread "main" java.lang.RuntimeException: Failed to setup fabric server
+        at net.fabricmc.installer.ServerLauncher.main(ServerLauncher.java:56)
+Caused by: java.io.IOException: Request to https://launchermeta.mojang.com/mc/game/version_manifest_v2.json using DIRECT failed: launchermeta.mojang.com
+        at net.fabricmc.installer.util.HttpClient.tryWithProxies(HttpClient.java:179)
+        at net.fabricmc.installer.util.HttpClient.readString(HttpClient.java:54)
+        at net.fabricmc.installer.util.FabricService.queryJsonSubstitutedMaven(FabricService.java:44)
+        at net.fabricmc.installer.util.LauncherMeta.getVersionsFromUrl(LauncherMeta.java:46)
+        at net.fabricmc.installer.util.LauncherMeta.load(LauncherMeta.java:39)

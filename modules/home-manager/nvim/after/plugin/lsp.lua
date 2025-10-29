@@ -9,6 +9,7 @@ local servers = {
 	"nil_ls",
 	"lua_ls",
 	"glslls",
+	"zls",
 }
 
 lspconfig.rust_analyzer.setup({
@@ -26,6 +27,7 @@ lspconfig.rust_analyzer.setup({
 			command = "clippy",
 			extraArgs = {
 				"--",
+				"--parallel",
 				"--no-deps",
 				"-Dclippy::correctness",
 				"-Dclippy::complexity",

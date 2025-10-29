@@ -154,7 +154,7 @@ k("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 k("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
 k("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
 k("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
-k("n", "ge", "<cmd>lua vim.lsp.buf.references()<cr>", opts)
+k("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", { noremap = true })
 k("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 
 k("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)

@@ -1,4 +1,4 @@
-{ settings, pkgs, ... }: {
+{ settings, pkgs, pkgs-stable, ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../scheme.nix
@@ -28,7 +28,8 @@
   environment.systemPackages = with pkgs; [
     blender-hip
     davinci-resolve
-    (renderdoc.overrideAttrs (oldAttrs: rec {
+  ] ++ [
+    (pkgs-stable.renderdoc.overrideAttrs (oldAttrs: rec {
       cmakeFlags = oldAttrs.cmakeFlags or [ ] ++ [
         "-DENABLE_UNSUPPORTED_EXPERIMENTAL_POSSIBLY_BROKEN_WAYLAND=ON"
       ];

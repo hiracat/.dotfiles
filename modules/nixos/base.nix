@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, pkgs-stable, lib, config, ... }: {
   options.base = {
     locale = lib.mkOption {
       default = "en_US.UTF-8";
@@ -30,11 +30,19 @@
       hostName = config.base.hostname;
       networkmanager.enable = true;
       firewall.enable = true;
-      firewall.allowedTCPPorts = [ 1070 25565 ];
-      firewall.allowedUDPPorts = [ 25565 ];
+      firewall.allowedTCPPorts = [ 1070 25565 8080 ];
+      firewall.allowedUDPPorts = [ 25565 8080 ];
+    };
+
+    services.fstrim.enable = true;
+
+    services.logind.settings.Login = {
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchDocked = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
 
     };
-    services.fstrim.enable = true;
+
 
 
     time.timeZone = config.base.timezone;
@@ -49,13 +57,14 @@
     };
     services.interception-tools = {
       enable = true;
-      plugins = [ pkgs.interception-tools-plugins.caps2esc ];
+      plugins = [ pkgs-stable.interception-tools-plugins.caps2esc ];
       udevmonConfig = ''
-        - JOB: "${pkgs.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs.interception-tools}/bin/uinput -d $DEVNODE"
+        - JOB: "${pkgs-stable.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs-stable.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs-stable.interception-tools}/bin/uinput -d $DEVNODE"
           DEVICE:
             EVENTS:
               EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
       '';
+
     };
 
     services.openssh = {
@@ -87,9 +96,6 @@
     services.gvfs.enable = true;
     services.udisks2.enable = true;
 
-    programs = {
-      zsh.enable = true;
-    };
     security.rtkit.enable = true;
     security.polkit.enable = true;
     security.sudo.extraRules = [{
@@ -99,12 +105,16 @@
         options = [ "NOPASSWD" ];
       }];
     }];
+    programs = {
+      zsh.enable = true;
+    };
     users.defaultUserShell = pkgs.zsh;
     users.users.${config.base.username} = {
       isNormalUser = true;
       description = "forest";
       extraGroups = [ "dialout" "networkmanager" "wheel" "video" "vboxusers" ];
       initialPassword = "password"; # for vms
+      shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINWnGWDG2ooTzY+PCnLWpib1Yn9il+FWOB0Kw0KorTn+ forest@nixos-laptop"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFUxgeebT7z1hHD7b64eICy6G1IH2GNVQ/4ZHKJow1Me forest@nixos-server"
@@ -121,6 +131,9 @@
       shells = with pkgs; [ zsh ];
       pathsToLink = [ "/share/zsh" ];
       systemPackages = with pkgs; [
+        perf
+
+
         neovim
         gcc
         gnumake
@@ -128,12 +141,7 @@
         adwaita-icon-theme-legacy
         kdePackages.breeze-icons
 
-        rust-analyzer
-        rustc
-        clippy
-        rustfmt
-        cargo
-        glslls
+        rustup
 
         nix-tree
         base16-schemes
@@ -157,10 +165,10 @@
         nil
         lua-language-server
         lua
-        gdb
         clang-tools
         vulkan-tools
       ] ++ [
+        pkgs-stable.glslls
       ];
     };
     # This value determines the NixOS release from which the default
@@ -171,8 +179,16 @@
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     system = {
       stateVersion = "24.05"; # Did you read the comment?
-      autoUpgrade.enable = false;
-      autoUpgrade.allowReboot = false;
+      autoUpgrade = {
+        enable = true;
+        allowReboot = true;
+        randomizedDelaySec = "45m";
+        rebootWindow = {
+          lower = "01:00";
+          upper = "06:00";
+        };
+        flake = "/home/${config.base.username}/.dotfiles/flake.nix";
+      };
     };
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];

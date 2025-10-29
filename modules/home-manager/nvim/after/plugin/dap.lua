@@ -8,10 +8,14 @@ dap.adapters.gdb = {
 	args = { "-i", "dap" },
 }
 
-dap.adapters.gdb = {
+local codelldb_path = os.getenv("CODELLDB_PATH")
+
+dap.adapters.lldb = {
 	type = "executable",
-	command = "gdb",
-	args = { "-i", "dap" },
+	command = codelldb_path,
+
+	-- On windows you may have to uncomment this:
+	-- detached = false,
 }
 
 dap.configurations.c = {
@@ -50,4 +54,23 @@ dap.configurations.c = {
 	},
 }
 dap.configurations.cpp = dap.configurations.c
-dap.configurations.rust = dap.configurations.c
+
+dap.configurations.rust = {
+	{
+		name = "Launch file",
+		type = "lldb",
+		request = "launch",
+		program = function()
+			return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+		end,
+		cwd = "${workspaceFolder}",
+		stopAtBeginningOfMainSubprogram = true,
+		initCommands = {
+			"command script import /home/forest/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/etc/lldb_lookup.py",
+			"command script import /home/forest/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/etc/lldb_providers.py",
+			"command script import /home/forest/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/etc/rust_types.py",
+			"command source /home/forest/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/etc/lldb_commands",
+			"type category enable Rust",
+		},
+	},
+}

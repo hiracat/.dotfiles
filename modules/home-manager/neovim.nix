@@ -1,4 +1,9 @@
-{ config, ... }:
+{ config, pkgs, ... }:
+let
+  codelldbPath = builtins.toString (
+    pkgs.vscode-extensions.vadimcn.vscode-lldb + "/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb"
+  );
+in
 {
   xdg.configFile = {
     "nvim" = {
@@ -7,6 +12,9 @@
       recursive = true;
     };
   };
+  home.sessionVariables = {
+    CODELLDB_PATH = codelldbPath;
+  };
   home.file = {
     # have to hack around the fact that file watchers automatically look
     # at the source of the symlink instead of the link itself
@@ -14,13 +22,19 @@
       enable = true;
       text = with config.scheme; ''
         require("catppuccin").setup {
+          custom_highlights = function(colors)
+            return {
+              LineNr = { fg = colors.subtext1 },
+            }
+          end,
+
           color_overrides = {
             mocha = {
               base = "#${base00}",
               mantle = "#${base01}",
               crust = "#${base01}",
               surface0 = "#${base02}",
-              surfacet = "#${base03}",
+              surface1 = "#${base03}",
               surface2 = "#${base04}",
               text = "#${base05}",
               subtext0 = "#${base05}",

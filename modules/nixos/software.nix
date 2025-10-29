@@ -8,10 +8,6 @@ in
       enable = true;
       qemu = {
         package = pkgs.qemu_kvm;
-        ovmf = {
-          enable = true;
-          packages = [ pkgs.OVMFFull.fd ];
-        };
         swtpm.enable = true;
       };
     };
@@ -27,6 +23,7 @@ in
     firejail.enable = true;
     gamemode.enable = true;
     chromium.enable = true;
+    droidcam.enable = true;
 
     steam = {
       enable = true;
@@ -51,6 +48,7 @@ in
       enable = true;
       nssmdns4 = true;
       openFirewall = true;
+      publish.enable = true;
     };
   };
   xdg.portal.enable = true;
@@ -64,8 +62,6 @@ in
     watchexec
     bottles
     pavucontrol
-    bambu-studio
-    orca-slicer
     protonvpn-gui
     audacity
     brave
@@ -95,10 +91,9 @@ in
     unzip
     nodePackages.npm
     fd
-    cargo
     curl
     rar
-    libsForQt5.ark
+    kdePackages.ark
     vlc
     htop
     btop
@@ -122,6 +117,8 @@ in
     lua-language-server
     lua
     gdb
+    lldb
+    vscode-extensions.vadimcn.vscode-lldb
     cmake
     cmake-language-server
     clang-tools
