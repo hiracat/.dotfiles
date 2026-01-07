@@ -9,6 +9,7 @@
     ../../modules/nixos/ime.nix
     ../../modules/nixos/periferals.nix
     ../../modules/nixos/software.nix
+    ../../modules/nixos/resolve.nix
 
     ../../modules/nixos/hyprland.nix
     ../../modules/nixos/syncthing.nix
@@ -27,7 +28,6 @@
 
   environment.systemPackages = with pkgs; [
     blender-hip
-    davinci-resolve
   ] ++ [
     (pkgs-stable.renderdoc.overrideAttrs (oldAttrs: rec {
       cmakeFlags = oldAttrs.cmakeFlags or [ ] ++ [

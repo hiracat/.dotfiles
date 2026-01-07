@@ -25,6 +25,7 @@ in
     chromium.enable = true;
     droidcam.enable = true;
 
+
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
@@ -59,6 +60,7 @@ in
 
 
   environment.systemPackages = with pkgs; [
+    hyprsunset
     watchexec
     bottles
     pavucontrol

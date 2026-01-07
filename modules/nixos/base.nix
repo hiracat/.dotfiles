@@ -132,7 +132,7 @@
       pathsToLink = [ "/share/zsh" ];
       systemPackages = with pkgs; [
         perf
-
+        orca-slicer
 
         neovim
         gcc

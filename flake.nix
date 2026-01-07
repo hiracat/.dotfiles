@@ -1,8 +1,10 @@
 {
   description = "hiracat's dotfiles flake";
   inputs = {
+
+    mesa-good.url = "github:nixos/nixpkgs?ref=599ddd2b79331c1e6153e1659bdaab65d62c4c82";
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-25.05";
+    nixpkgs-stable.url = "nixpkgs/nixos-25.11";
     base16.url = "github:SenchoPens/base16.nix";
     tt-schemes = {
       url = "github:tinted-theming/schemes/b3273211d5d1510aee669083fc5a1e0e4b5e310c";
