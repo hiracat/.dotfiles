@@ -12,7 +12,6 @@
     ../../modules/home-manager/git.nix
 
     ../../modules/home-manager/hyprland.nix
-    ../../modules/home-manager/coloring.nix
   ];
 
   home.username = settings.username;

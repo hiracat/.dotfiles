@@ -5,7 +5,6 @@
   };
 
   imports = [
-    ../../modules/home-manager/cava.nix
     ../../modules/home-manager/kitty.nix
     ../../modules/home-manager/shell.nix
     ../../modules/home-manager/obsidian.nix

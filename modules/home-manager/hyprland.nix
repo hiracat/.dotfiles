@@ -3,6 +3,7 @@
   imports = [
     # ./qt.nix
     ./gtk.nix
+    ./coloring.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;
