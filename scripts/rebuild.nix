@@ -37,9 +37,6 @@
         eval "$rebuildcmd"
         echo "rebuild system"
 
-        pkill --signal SIGUSR1 kitty || true
-        pkill --signal SIGUSR2 cava || true
-        pkill --signal SIGUSR2 waybar || true
 
         # pkill dunst || true
         # dunst >/dev/null 2>&1 & #TODO: replace with dunstctl reload one that update comes out

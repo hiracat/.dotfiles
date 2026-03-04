@@ -1,7 +1,6 @@
-{ settings, ... }: {
+{ settings, pkgs-stable, ... }: {
   imports = [
     ./hardware-configuration.nix
-    ../../scheme.nix
 
     ../../modules/nixos/base.nix
     ../../modules/nixos/appearance.nix
@@ -18,6 +17,7 @@
     hostname = "nixos-laptop";
   };
   services.xserver.wacom.enable = true;
+
 
   services = {
     syncthingSync = {

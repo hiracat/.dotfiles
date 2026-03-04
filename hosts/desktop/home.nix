@@ -5,16 +5,14 @@
   };
 
   imports = [
-    ../../scheme.nix
-    ../../modules/home-manager/cava.nix
     ../../modules/home-manager/kitty.nix
     ../../modules/home-manager/shell.nix
-    ../../modules/home-manager/waybar.nix
     ../../modules/home-manager/obsidian.nix
     ../../modules/home-manager/neovim.nix
     ../../modules/home-manager/git.nix
 
     ../../modules/home-manager/hyprland.nix
+    ../../modules/home-manager/coloring.nix
   ];
 
   home.username = settings.username;

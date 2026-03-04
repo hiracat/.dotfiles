@@ -1,12 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
-    ./dunst.nix
     # ./qt.nix
     ./gtk.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd.enable = true;
     extraConfig = builtins.readFile ./hypr/hyprland.conf;
   };
   home.pointerCursor = {
@@ -14,6 +14,14 @@
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
     size = 16;
+  };
+
+  xdg.configFile = {
+    "waybar" = {
+      enable = true;
+      source = ./waybar;
+      recursive = true;
+    };
   };
   xdg.configFile."hypr/hyprsunset.conf" = {
     source = ./hypr/hyprsunset.conf;

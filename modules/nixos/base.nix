@@ -1,4 +1,4 @@
-{ pkgs, pkgs-stable, lib, config, ... }: {
+{ pkgs, settings, inputs, pkgs-stable, lib, config, ... }: {
   options.base = {
     locale = lib.mkOption {
       default = "en_US.UTF-8";
@@ -73,6 +73,7 @@
       settings.PermitRootLogin = "no";
       settings.PasswordAuthentication = false;
       settings.X11Forwarding = false;
+
       settings.AllowUsers = [ "forest" ];
       hostKeys = [{
         path = "/etc/ssh/ssh_host_ed25519_key";
@@ -91,6 +92,8 @@
       mode = "0600";
     };
     programs.ssh.extraConfig = "Include ${config.age.secrets.ssh_config.path}";
+    programs.nix-ld.enable = true;
+
 
     services.devmon.enable = true;
     services.gvfs.enable = true;
@@ -112,7 +115,7 @@
     users.users.${config.base.username} = {
       isNormalUser = true;
       description = "forest";
-      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "vboxusers" ];
+      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "vboxusers" "disk" ];
       initialPassword = "password"; # for vms
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
@@ -169,6 +172,7 @@
         vulkan-tools
       ] ++ [
         pkgs-stable.glslls
+        inputs.matugen.packages.${settings.system}.default
       ];
     };
     # This value determines the NixOS release from which the default

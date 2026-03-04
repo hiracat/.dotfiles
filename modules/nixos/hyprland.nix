@@ -1,19 +1,22 @@
 { pkgs, ... }: {
   programs.hyprland.enable = true;
-  programs.hyprland.withUWSM = true;
-
-  programs.zsh.loginShellInit = ''
-    if uwsm check may-start; then
-      exec uwsm start hyprland-uwsm.desktop
-    fi
-  '';
+  programs.waybar.enable = true;
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "start-hyprland";
+        user = "forest";
+      };
+    };
+  };
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = [ "default.target" ];
+      wants = [ "default.target" ];
+      after = [ "default.target" ];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -42,6 +45,8 @@
       slurp
       dunst
       swww
+      # autostart aps
+      dex
     ];
   };
 }
