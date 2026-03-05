@@ -33,6 +33,7 @@ in
     [templates.dunst]
     input_path = "${dotfiles_dir}/templates/dunst.conf"
     output_path = "~/.config/dunst/dunstrc"
+    post_hook = "dunstctl reload"
 
     [templates.obsidian]
     input_path = "${dotfiles_dir}/templates/obsidian.css"
@@ -41,6 +42,5 @@ in
     [templates.nvim]
     input_path = "${dotfiles_dir}/templates/nvim.lua"
     output_path = "~/.config/nvim/lua/forest/coloroverrides.lua"
-
   '';
 }

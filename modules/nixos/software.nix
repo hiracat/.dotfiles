@@ -65,6 +65,7 @@ in
       ];
       theme = spicePkgs.themes.catppuccin;
       colorScheme = "mocha";
+      windowManagerPatch = true;
     };
   };
   services = {
@@ -157,7 +158,6 @@ in
     vulkan-tools
     feh
     anki
-    calibre
     google-chrome
     brightnessctl
     cava
@@ -165,6 +165,7 @@ in
     nemo-fileroller
   ] ++ [
     pkgs-stable.pika-backup
+    pkgs-stable.calibre
     bambu-studio
   ];
 

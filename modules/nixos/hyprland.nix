@@ -1,6 +1,5 @@
 { pkgs, ... }: {
   programs.hyprland.enable = true;
-  programs.waybar.enable = true;
   services.greetd = {
     enable = true;
     settings = {
@@ -47,6 +46,7 @@
       swww
       # autostart aps
       dex
+      waybar
     ];
   };
 }

@@ -1,5 +1,10 @@
 { inputs, pkgs, ... }: {
   environment.systemPackages = [
-    (pkgs.writeScriptBin "rb" builtins.readFile ./rb.py)
+    (pkgs.writers.writePython3Bin "rb"
+      {
+        flakeIgnore = [ "E" "W" "F" ];
+      }
+      (builtins.readFile ./rb.py))
+
   ];
 }
