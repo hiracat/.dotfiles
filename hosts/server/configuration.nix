@@ -15,7 +15,6 @@
     username = settings.username;
     hostname = "nixos-server";
   };
-  periferals.drawingTablet.enable = true;
 
 
   networking = {
