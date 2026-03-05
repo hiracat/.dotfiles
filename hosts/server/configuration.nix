@@ -5,13 +5,11 @@
     ../../modules/nixos/base.nix
     ../../modules/nixos/appearance.nix
     ../../modules/nixos/audio.nix
-    ../../modules/nixos/gnome.nix
     ../../modules/nixos/ime.nix
-    ../../modules/nixos/periferals.nix
     ../../modules/nixos/software.nix
-    ../../modules/nixos/syncthing.nix
 
-    # ../../modules/nixos/hyprland.nix
+    ../../modules/nixos/syncthing.nix
+    ../../modules/nixos/hyprland.nix
   ];
   base = {
     username = settings.username;
@@ -28,10 +26,10 @@
     minecraft-server = {
       package = pkgs.stdenv.mkDerivation {
         pname = "fabric-server";
-        version = "1.21.9"; # adjust version
+        version = "1.21.9";
         src = pkgs.fetchurl {
           url = "https://meta.fabricmc.net/v2/versions/loader/1.21.9/0.17.3/1.1.0/server/jar";
-          sha256 = "sha256-MYNG/SAJOQrnSHC05v6lTeXz+BKChBF+IqCLJdwVHIQ="; # replace with actual hash
+          sha256 = "sha256-MYNG/SAJOQrnSHC05v6lTeXz+BKChBF+IqCLJdwVHIQ=";
         };
         nativeBuildInputs = [ pkgs.makeWrapper ];
         dontUnpack = true;
