@@ -1,7 +1,5 @@
 local cmp = require("cmp")
-local lspconfig = require("lspconfig")
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local luasnip = require("luasnip")
 
 local servers = {
@@ -10,10 +8,10 @@ local servers = {
 	"lua_ls",
 	"glslls",
 	"zls",
+	"rust_analyzer",
 }
 
-lspconfig.rust_analyzer.setup({
-	capabilities = capabilities,
+vim.lsp.config("rust_analyzer", {
 	settings = {
 		["rust-analyzer"] = {
 			cargo = {
@@ -46,10 +44,7 @@ lspconfig.rust_analyzer.setup({
 })
 
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		-- on_attach = my_custom_on_attach,
-		capabilities = capabilities,
-	})
+	vim.lsp.enable(lsp)
 end
 
 cmp.setup({
