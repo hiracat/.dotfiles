@@ -44,7 +44,7 @@ def select_random_image(wallpaper_dir):
         sys.exit(1)
 
     try:
-        result = subprocess.check_output(["swww", "query"]).decode()
+        result = subprocess.check_output(["awww", "query"]).decode()
         current = result.split("image: ")[-1].strip()
     except Exception:
         current = None
@@ -78,7 +78,7 @@ def cmd_wall(args):
             sys.exit(1)
 
     print(f"Selected wallpaper: {image}")
-    subprocess.run(["swww", "img", image], check=True)
+    subprocess.run(["awww", "img", image], check=True)
     return image
 
 def cmd_theme(args):

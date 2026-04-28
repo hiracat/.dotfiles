@@ -1,33 +1,6 @@
 { inputs, pkgs, pkgs-stable, settings, ... }:
 let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
-  bambu-studio = pkgs.appimageTools.wrapType2 rec {
-    name = "BambuStudio";
-    pname = "bambu-studio";
-    version = "02.05.00.67";
-    ubuntu_version = "24.04_PR-9540";
-
-    src = pkgs.fetchurl {
-      url = "https://github.com/bambulab/BambuStudio/releases/download/v${version}/Bambu_Studio_ubuntu-${ubuntu_version}.AppImage";
-      sha256 = "sha256:3ubZblrsOJzz1p34QiiwiagKaB7nI8xDeadFWHBkWfg=";
-    };
-
-    profile = ''
-      export SSL_CERT_FILE="${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
-      export GIO_MODULE_DIR="${pkgs.glib-networking}/lib/gio/modules/"
-    '';
-
-    extraPkgs =
-      pkgs: with pkgs; [
-        cacert
-        glib
-        glib-networking
-        gst_all_1.gst-plugins-bad
-        gst_all_1.gst-plugins-base
-        gst_all_1.gst-plugins-good
-        webkitgtk_4_1
-      ];
-  };
 in
 {
   virtualisation = {
@@ -43,8 +16,16 @@ in
   users.users.${settings.username}.extraGroups = [ "libvirtd" "input" ];
   virtualisation.docker.enable = true;
 
+  hardware.keyboard.qmk.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  services.blueman.enable = true; # optional but nice GUI
+  hardware.steam-hardware.enable = true; # adds udev rules for controllers
+
   programs = {
     partition-manager.enable = true;
+    appimage.enable = true;
+
 
     virt-manager.enable = true;
     firejail.enable = true;
@@ -53,11 +34,15 @@ in
     droidcam.enable = true;
 
 
+    gamescope.enable = true;
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
+
+
+
     spicetify = {
       enable = true;
       enabledExtensions = with spicePkgs.extensions; [
@@ -69,6 +54,10 @@ in
     };
   };
   services = {
+    udev.enable = true;
+    udev.extraRules = ''
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+    '';
     atd.enable = true;
     cron.enable = true;
     printing.enable = true;
@@ -90,9 +79,8 @@ in
   environment.systemPackages = with pkgs; [
     hyprsunset
     watchexec
-    bottles
     pavucontrol
-    protonvpn-gui
+    proton-vpn
     audacity
     brave
     obs-studio
@@ -122,7 +110,6 @@ in
     starship
     wget
     unzip
-    nodePackages.npm
     fd
     curl
     rar
@@ -143,6 +130,7 @@ in
     termdown
     fzf
 
+    tree-sitter
     stylua
     shfmt
     nixpkgs-fmt
@@ -163,10 +151,11 @@ in
     cava
     nemo-with-extensions
     nemo-fileroller
+    bambu-studio
   ] ++ [
     pkgs-stable.pika-backup
     pkgs-stable.calibre
-    bambu-studio
+    pkgs-stable.bottles
   ];
 
 }

@@ -30,8 +30,9 @@
       hostName = config.base.hostname;
       networkmanager.enable = true;
       firewall.enable = true;
-      firewall.allowedTCPPorts = [ 1070 25565 8080 ];
-      firewall.allowedUDPPorts = [ 25565 8080 ];
+      firewall.allowedTCPPorts = [ 1070 25565 8080 5050 ];
+      firewall.allowedUDPPorts = [ 25565 8080 5050 ];
+
     };
 
     services.fstrim.enable = true;

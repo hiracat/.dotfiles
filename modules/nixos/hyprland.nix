@@ -43,7 +43,7 @@
       grim
       slurp
       dunst
-      swww
+      awww
       # autostart aps
       dex
       waybar
