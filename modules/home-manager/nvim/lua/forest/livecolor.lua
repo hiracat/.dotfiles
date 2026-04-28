@@ -3,6 +3,12 @@ local function reloadColorscheme()
 	vim.cmd("so " .. watchedPath)
 	vim.cmd("colorscheme catppuccin")
 	require("lualine").setup({ options = { theme = "catppuccin-mocha" } })
+	local p = require("catppuccin.palettes").get_palette("mocha")
+	vim.api.nvim_set_hl(0, "DapBreakpoint", { fg = p.red })
+	vim.api.nvim_set_hl(0, "DapBreakpointCondition", { fg = p.red })
+	vim.api.nvim_set_hl(0, "DapLogPoint", { fg = p.blue })
+	vim.api.nvim_set_hl(0, "DapStopped", { fg = p.green })
+	vim.api.nvim_set_hl(0, "DapBreakpointRejected", { fg = p.overlay0 })
 end
 
 local event = vim.uv.new_fs_event()
