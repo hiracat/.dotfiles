@@ -1,15 +1,24 @@
-local cmp = require("cmp")
+local ok, blink = pcall(require, "blink.cmp")
+local capabilities = ok and blink.get_lsp_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
-local luasnip = require("luasnip")
+vim.lsp.config("*", {
+	capabilities = capabilities,
+})
 
-local servers = {
-	"clangd",
-	"nil_ls",
-	"lua_ls",
-	"glslls",
-	"zls",
-	"rust_analyzer",
-}
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			runtime = { version = "LuaJIT" },
+			workspace = {
+				checkThirdParty = false,
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+		},
+	},
+})
 
 vim.lsp.config("rust_analyzer", {
 	settings = {
@@ -19,17 +28,15 @@ vim.lsp.config("rust_analyzer", {
 				loadOutDirsFromCheck = true,
 				runBuildScripts = true,
 			},
-			-- Add clippy lints for Rust.
-			checkOnSave = true,
-			allFeatures = true,
-			command = "clippy",
-			extraArgs = {
-				"--",
-				"--parallel",
-				"--no-deps",
-				"-Dclippy::correctness",
-				"-Dclippy::complexity",
-				"-Wclippy::perf",
+			check = {
+				command = "clippy",
+				extraArgs = {
+					"--no-deps",
+					"--",
+					"-Dclippy::correctness",
+					"-Dclippy::complexity",
+					"-Wclippy::perf",
+				},
 			},
 			procMacro = {
 				enable = true,
@@ -43,29 +50,11 @@ vim.lsp.config("rust_analyzer", {
 	},
 })
 
-for _, lsp in ipairs(servers) do
-	vim.lsp.enable(lsp)
-end
-
-cmp.setup({
-	mapping = cmp.mapping.preset.insert({
-		["<C-u>"] = cmp.mapping.scroll_docs(-4), -- Up
-		["<C-d>"] = cmp.mapping.scroll_docs(4), -- Down
-		["<C-j>"] = cmp.mapping.select_next_item(),
-		["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-p>"] = cmp.mapping.complete(),
-		["<CR>"] = cmp.mapping.confirm({
-			behavior = cmp.ConfirmBehavior.Replace,
-			select = true,
-		}),
-	}),
-	snippet = {
-		expand = function(args)
-			luasnip.lsp_expand(args.body)
-		end,
-	},
-	sources = {
-		{ name = "nvim_lsp" },
-		{ name = "buffer" },
-	},
+vim.lsp.enable({
+	"clangd",
+	"nil_ls",
+	"lua_ls",
+	"zls",
+	"glslls",
+	"rust_analyzer",
 })

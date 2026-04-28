@@ -13,27 +13,14 @@ local opts = {
 -- file and buffer stuff
 k("t", "<Esc>", "<C-\\><C-n>", opts)
 
--- terminal stuff
-k("n", "<leader>t", ":w<CR>:term<CR>i", opts)
-k("t", ":q<cr>", "<C-\\><C-n>:bd!<CR>", opts)
-
 -- text editing stuff
-
-k("n", "<C-d>", "<C-d>zz", opts) --keeps mouse in hte same position while doing half page jumping
+k("n", "<C-d>", "<C-d>zz", opts)
 k("n", "<C-u>", "<C-u>zz", opts)
 
-k("n", "n", "nzzzv", opts) --when searching it keeps the cursor in the middle
+k("n", "n", "nzzzv", opts)
 k("n", "N", "Nzzzv", opts)
 
-k("n", "J", "mzJ`z", opts) --keeps the mose in the same place and appends the next line onto the current like with a space
-
--- fix quotes stuff
--- ###########
--- k("i", "(", "()<ESC>i", opts)
--- k("i", "[", "[]<ESC>i", opts)
--- k("i", "{", "{}<ESC>i", opts)
--- k("i", '"', '""<ESC>i', opts)
--- k("i", "'", "''<ESC>i", opts)
+k("n", "J", "mzJ`z", opts)
 
 -- window stuff
 -- ###########
@@ -48,96 +35,97 @@ k("n", "<A-v>", "<C-w>v", opts)
 -- clipboard stuff
 -- ##############
 
-k("x", "<leader>p", [["_dP]]) --allows you to paste over a highlighted word without the highlighted word replacing the current word
-k({ "n", "v" }, "<leader>y", [["+y]], opts) --allows cpying into the system register with leader y
+k("x", "<leader>p", [["_dP]])
+k({ "n", "v" }, "<leader>y", [["+y]], opts)
 k("n", "<leader>Y", [["+Y]], opts)
 
-k({ "n", "v" }, "<leader>d", [["_d]], opts) --allows more deleting to void regiest in noremal and visual
+k({ "n", "v" }, "<leader>d", [["_d]], opts)
 
--- external stuff
--- ##############
-k("n", "<leader>mx", ":!chmod +x %<CR>", opts) --make executable
-
--- stuff i dont understand
+-- quick fix list
 -- #######################
 
-k("n", "<C-j>", ":cnext<CR>zz", opts) --quick fix list navigation
+k("n", "<C-j>", ":cnext<CR>zz", opts)
 k("n", "<C-k>", ":cprev<CR>zz", opts)
 k("n", "<C-q>", ":cclose<CR>zz", opts)
 
 -- Plugin Remaps
 -- #############
---
+
 -- Telescope
 local telescope = require("telescope.builtin")
 
-k("n", "<leader>fd", function()
-	telescope.find_files()
-end, {}, opts) --file find
+k("n", "<leader>fd", telescope.find_files, opts)
+k("n", "<leader>fs", telescope.live_grep, opts)
+k("n", "<leader>fo", telescope.buffers, opts)
+k("n", "<leader>fh", telescope.help_tags, opts)
 
-k("n", "<leader>fs", function()
-	telescope.live_grep()
-end, {}, opts) --file search
-
-k("n", "<leader>fo", function()
-	telescope.buffers()
-end, {}, opts) --file open
-
-k("n", "<leader>fh", function()
-	telescope.help_tags()
-end, {}, opts) --file help
+require("telescope").setup({
+	defaults = {
+		mappings = {
+			i = {
+				["<C-j>"] = "move_selection_next",
+				["<C-k>"] = "move_selection_previous",
+			},
+			n = {
+				["<C-j>"] = "move_selection_next",
+				["<C-k>"] = "move_selection_previous",
+			},
+		},
+	},
+})
 
 -- Dap
-k("n", "<leader>dut", ":lua require'dapui'.toggle()<CR>", opts) --dap ui toggle
-k("n", "<F5>", ":lua require'dap'.toggle_breakpoint()<CR>", opts) --dap toggle breakpoint
-k("n", "<F6>", ":lua require'dap'.continue()<CR>", opts) --dap continue
-k("n", "<F7>", ":lua require'dap'.step_into()<CR>", opts) --dap setp into
-k("n", "<F8>", ":lua require'dap'.step_over()<CR>", opts) --dap set over
+k("n", "<leader>dut", ":lua require'dapui'.toggle()<CR>", opts)
+k("n", "<F9>", ":lua require'dap'.toggle_breakpoint()<CR>", opts) -- F9 matches VS Code / JetBrains convention
+k("n", "<F5>", ":lua require'dap'.continue()<CR>", opts) -- F5 = run/continue (standard)
+k("n", "<F11>", ":lua require'dap'.step_into()<CR>", opts) -- F11 = step into (standard)
+k("n", "<F10>", ":lua require'dap'.step_over()<CR>", opts) -- F10 = step over (standard)
 
-k("n", "<A>k", ':lua require("dap.ui.widgets").hover()<CR>', { noremap = true })
+k("n", "<A-m>", ':lua require("dap.ui.widgets").hover()<CR>', { noremap = true }) -- fixed from broken <A>k
 
--- Harpoon.nvim
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
+-- Harpoon2
+local harpoon = require("harpoon")
+harpoon:setup()
 
-vim.keymap.set("n", "<leader>mf", mark.add_file)
-vim.keymap.set("n", "<A-e>", ui.toggle_quick_menu)
-
-vim.keymap.set("n", "<A-f>", function()
-	ui.nav_file(1)
+k("n", "<leader>mf", function()
+	harpoon:list():add()
 end)
-vim.keymap.set("n", "<A-d>", function()
-	ui.nav_file(2)
-end)
-vim.keymap.set("n", "<A-s>", function()
-	ui.nav_file(3)
-end)
-vim.keymap.set("n", "<A-a>", function()
-	ui.nav_file(4)
+k("n", "<A-e>", function()
+	harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
--- Formatter.nvim
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
-augroup("__formatter__", { clear = true })
-autocmd("BufWritePost", {
-	group = "__formatter__",
-	command = "silent! FormatWrite",
-})
--- Fugitive.nvim
-k("n", "<leader>gs", vim.cmd.Git, opts) --vim fugitive
+k("n", "<A-f>", function()
+	harpoon:list():select(1)
+end)
+k("n", "<A-d>", function()
+	harpoon:list():select(2)
+end)
+k("n", "<A-s>", function()
+	harpoon:list():select(3)
+end)
+k("n", "<A-a>", function()
+	harpoon:list():select(4)
+end)
 
--- Undotree
-k("n", "<leader>u", vim.cmd.UndotreeToggle, opts)
-
--- Cellular automation.nvim
+-- Fugitive
+-- All git ops live under <leader>g
+k("n", "<leader>gg", vim.cmd.Git, opts) -- open fugitive status (main panel)
+k("n", "<leader>gp", "<cmd>Git push<CR>", opts) -- push
+k("n", "<leader>gl", "<cmd>Git pull<CR>", opts) -- pull
+k("n", "<leader>gb", "<cmd>Git blame<CR>", opts) -- blame current file
+k("n", "<leader>gd", "<cmd>Gdiffsplit<CR>", opts) -- diff current file vs HEAD
+k("n", "<leader>gc", "<cmd>Git commit<CR>", opts) -- commit
+k("n", "<leader>gL", "<cmd>Git log --oneline<CR>", opts) -- quick log
 
 -- LSP
+-- ##
+
+-- Code actions
 k({ "n", "i" }, "<C-s>", function()
 	vim.lsp.buf.code_action({ apply = true })
 end)
 
--- Command to toggle inline diagnostics
+-- Diagnostics toggle
 vim.api.nvim_create_user_command("DiagnosticsToggleVirtualText", function()
 	local current_value = vim.diagnostic.config().virtual_text
 	if current_value then
@@ -146,10 +134,13 @@ vim.api.nvim_create_user_command("DiagnosticsToggleVirtualText", function()
 		vim.diagnostic.config({ virtual_text = true })
 	end
 end, {})
-k("n", "<Leader>ii", ':lua vim.cmd("DiagnosticsToggleVirtualText")<CR>', opts)
 
+k("n", "<leader>ii", ':lua vim.cmd("DiagnosticsToggleVirtualText")<CR>', opts)
+
+-- Hover / docs
 k("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>", opts)
 
+-- Go-to navigation (standard conventions)
 k("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>", opts)
 k("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", opts)
 k("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>", opts)
@@ -157,10 +148,12 @@ k("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>", opts)
 k("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>", { noremap = true })
 k("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", opts)
 
+-- Refactor
 k("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 
+-- Diagnostics
 k("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-k("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-k("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
-
-k({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>", opts)
+k("n", "[d", "<cmd>lua vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })<cr>")
+k("n", "]d", "<cmd>lua vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })<cr>")
+k("n", "[f", "<cmd>lua vim.diagnostic.jump({ count = -1 })<cr>")
+k("n", "]f", "<cmd>lua vim.diagnostic.jump({ count = 1 })<cr>")

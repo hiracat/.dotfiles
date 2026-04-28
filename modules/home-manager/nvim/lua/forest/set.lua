@@ -33,6 +33,8 @@ vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
+vim.opt.completeopt = { "menu", "menuone", "noinsert" }
+
 vim.opt.updatetime = 50
 vim.opt.timeoutlen = 500
 
