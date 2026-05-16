@@ -27,4 +27,15 @@
   xdg.configFile."hypr/hyprsunset.conf" = {
     source = ./hypr/hyprsunset.conf;
   };
+  xdg.configFile."hypr/hypridle.conf".text = ''
+    listener {
+        timeout = 300
+        on-timeout = hyprctl dispatch dpms off
+        on-resume = hyprctl dispatch dpms on
+    }
+    listener {
+        timeout = 900
+        on-timeout = systemctl suspend
+    }
+  '';
 }

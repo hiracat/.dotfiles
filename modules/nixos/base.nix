@@ -172,8 +172,8 @@
         lua
         clang-tools
         vulkan-tools
+        glsl_analyzer
       ] ++ [
-        pkgs-stable.glslls
         inputs.matugen.packages.${settings.system}.default
       ];
     };
@@ -198,5 +198,8 @@
     };
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    nix.channel.enable = false;
+    nix.registry.nixpkgs.flake = inputs.nixpkgs;
+    nix.registry.nixpkgs-stable.flake = inputs.nixpkgs-stable;
   };
 }

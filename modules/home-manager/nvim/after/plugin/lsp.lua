@@ -33,8 +33,8 @@ vim.lsp.config("rust_analyzer", {
 				extraArgs = {
 					"--no-deps",
 					"--",
-					"-Dclippy::correctness",
-					"-Dclippy::complexity",
+					"-Wclippy::correctness",
+					"-Wclippy::complexity",
 					"-Wclippy::perf",
 				},
 			},
@@ -55,6 +55,6 @@ vim.lsp.enable({
 	"nil_ls",
 	"lua_ls",
 	"zls",
-	"glslls",
+	"glsl_analyzer",
 	"rust_analyzer",
 })

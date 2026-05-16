@@ -75,13 +75,69 @@ require("telescope").setup({
 })
 
 -- Dap
-k("n", "<leader>dut", ":lua require'dapui'.toggle()<CR>", opts)
-k("n", "<F9>", ":lua require'dap'.toggle_breakpoint()<CR>", opts) -- F9 matches VS Code / JetBrains convention
-k("n", "<F5>", ":lua require'dap'.continue()<CR>", opts) -- F5 = run/continue (standard)
-k("n", "<F11>", ":lua require'dap'.step_into()<CR>", opts) -- F11 = step into (standard)
-k("n", "<F10>", ":lua require'dap'.step_over()<CR>", opts) -- F10 = step over (standard)
 
-k("n", "<A-m>", ':lua require("dap.ui.widgets").hover()<CR>', { noremap = true }) -- fixed from broken <A>k
+local function safe_step(action)
+	return function()
+		local session = require("dap").session()
+		if session == nil then
+			vim.notify("No active debug session", vim.log.levels.WARN)
+			return
+		end
+		local current_thread_id = session.current_thread_id
+		if current_thread_id then
+			local thread = session.threads[current_thread_id]
+			if thread and thread.status == "running" then
+				vim.notify("Wait for debugger to pause before stepping", vim.log.levels.WARN)
+				return
+			end
+		end
+		action()
+	end
+end
+
+local dap = require("dap")
+
+k("n", "<leader>dut", ":lua require'dapui'.toggle()<CR>", opts)
+k("n", "<F9>", ":lua require'dap'.toggle_breakpoint()<CR>", opts)
+k(
+	"n",
+	"<F5>",
+	safe_step(function()
+		dap.continue()
+	end),
+	opts
+)
+k(
+	"n",
+	"<F11>",
+	safe_step(function()
+		dap.step_into()
+	end),
+	opts
+)
+k(
+	"n",
+	"<F10>",
+	safe_step(function()
+		dap.step_over()
+	end),
+	opts
+)
+k("n", "<A-m>", function()
+	local widget = require("dap.ui.widgets").hover()
+	local buf = widget.buf
+	vim.keymap.set("n", "q", function()
+		widget.close()
+	end, { buffer = buf })
+	vim.api.nvim_create_autocmd("CursorMoved", {
+		callback = function()
+			if vim.api.nvim_get_current_win() ~= widget.win then
+				widget.close()
+				return true
+			end
+		end,
+	})
+end, opts)
 
 -- Harpoon2
 local harpoon = require("harpoon")
@@ -153,7 +209,15 @@ k("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 
 -- Diagnostics
 k("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-k("n", "[d", "<cmd>lua vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })<cr>")
-k("n", "]d", "<cmd>lua vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })<cr>")
-k("n", "[f", "<cmd>lua vim.diagnostic.jump({ count = -1 })<cr>")
-k("n", "]f", "<cmd>lua vim.diagnostic.jump({ count = 1 })<cr>")
+k(
+	"n",
+	"[d",
+	"<cmd>lua vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR })<cr><cmd>lua vim.diagnostic.open_float()<cr>"
+)
+k(
+	"n",
+	"]d",
+	"<cmd>lua vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR })<cr><cmd>lua vim.diagnostic.open_float()<cr>"
+)
+k("n", "[f", "<cmd>lua vim.diagnostic.jump({ count = -1 })<cr><cmd>lua vim.diagnostic.open_float()<cr>")
+k("n", "]f", "<cmd>lua vim.diagnostic.jump({ count = 1 })<cr><cmd>lua vim.diagnostic.open_float()<cr>")

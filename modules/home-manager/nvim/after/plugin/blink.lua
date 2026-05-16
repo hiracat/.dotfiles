@@ -11,9 +11,6 @@ require("blink.cmp").setup({
 		nerd_font_variant = "mono",
 	},
 	completion = {
-		trigger = {
-			show_on_insert = true,
-		},
 		documentation = {
 			auto_show = true,
 		},

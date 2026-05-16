@@ -37,6 +37,7 @@
     systemPackages = with pkgs; [
       networkmanagerapplet
       hyprsunset
+      hypridle
       glib
       tofi
       hyprland-qtutils
