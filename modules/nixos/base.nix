@@ -35,7 +35,17 @@
 
     };
 
+    systemd.services.NetworkManager-wait-online.enable = false;
+
+
     services.fstrim.enable = true;
+
+    zramSwap = {
+      enable = true;
+      algorithm = "zstd";
+      memoryPercent = 90;
+    };
+
 
     services.logind.settings.Login = {
       HandleLidSwitch = "suspend";
@@ -116,7 +126,7 @@
     users.users.${config.base.username} = {
       isNormalUser = true;
       description = "forest";
-      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "vboxusers" "disk" ];
+      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "vboxusers" "disk" "docker" "render" ];
       initialPassword = "password"; # for vms
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
@@ -168,7 +178,6 @@
         shfmt
         nixpkgs-fmt
         nil
-        lua-language-server
         lua
         clang-tools
         vulkan-tools
@@ -196,6 +205,12 @@
         flake = "/home/${config.base.username}/.dotfiles/flake.nix";
       };
     };
+    nix.gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+    nix.settings.auto-optimise-store = true;
     nixpkgs.config.allowUnfree = true;
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     nix.channel.enable = false;

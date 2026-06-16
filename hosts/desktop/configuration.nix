@@ -74,6 +74,12 @@
     };
   };
 
+
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+  };
+
   services = {
     syncthingSync = {
       enable = true;

@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 #
-# TEMPORARY, ADAPTED FROM https://github.com/NixOS/nixpkgs/issues/448456#issuecomment-3453859659
+# TODO: TEMPORARY, ADAPTED FROM https://github.com/NixOS/nixpkgs/issues/448456#issuecomment-3453859659 — re-check whether upstream fix has landed
 #
 let
   inherit (inputs) mesa-good;

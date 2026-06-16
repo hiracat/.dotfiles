@@ -1,14 +1,15 @@
 { pkgs, ... }:
 {
   imports = [
-    # ./qt.nix
+    # TODO: ./qt.nix
     ./gtk.nix
     ./coloring.nix
   ];
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
-    extraConfig = builtins.readFile ./hypr/hyprland.conf;
+    configType = "lua";
+    extraConfig = builtins.readFile ./hypr/hyprland.lua;
   };
   home.pointerCursor = {
     gtk.enable = true;
@@ -16,7 +17,6 @@
     name = "Bibata-Modern-Classic";
     size = 16;
   };
-
   xdg.configFile = {
     "waybar" = {
       enable = true;
@@ -27,15 +27,7 @@
   xdg.configFile."hypr/hyprsunset.conf" = {
     source = ./hypr/hyprsunset.conf;
   };
-  xdg.configFile."hypr/hypridle.conf".text = ''
-    listener {
-        timeout = 300
-        on-timeout = hyprctl dispatch dpms off
-        on-resume = hyprctl dispatch dpms on
-    }
-    listener {
-        timeout = 900
-        on-timeout = systemctl suspend
-    }
-  '';
+  xdg.configFile."hypr/hypridle.conf" = {
+    source = ./hypr/hypridle.conf;
+  };
 }

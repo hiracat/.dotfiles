@@ -57,4 +57,5 @@ vim.lsp.enable({
 	"zls",
 	"glsl_analyzer",
 	"rust_analyzer",
+	"ts_ls",
 })

@@ -7,6 +7,9 @@ require("conform").setup({
 		glsl = { "clang_format" },
 		rust = { "rustfmt" },
 		nix = { "nixpkgs_fmt" },
+		json = { "prettier" },
+		typescript = { "prettier" },
+		html = { "prettier" },
 	},
 	format_on_save = {
 		timeout_ms = 500,

@@ -18,9 +18,15 @@
   };
   services.xserver.wacom.enable = true;
 
+  nix.settings = {
+    cores = 2;
+    max-jobs = 2;
+  };
+
 
   services = {
     syncthingSync = {
+
       enable = true;
       username = settings.username;
       devices = {

@@ -2,6 +2,7 @@
   console = {
     font = "${pkgs.terminus_font}/share/consolefonts/ter-v24b.psf.gz";
     packages = with pkgs; [ terminus_font ];
+    # TODO: re-enable console colors via matugen palette
     # colors = with config.scheme; [
     #   #black
     #   "${base01}"

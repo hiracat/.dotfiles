@@ -22,9 +22,25 @@ in
   services.blueman.enable = true; # optional but nice GUI
   hardware.steam-hardware.enable = true; # adds udev rules for controllers
 
+
   programs = {
     partition-manager.enable = true;
     appimage.enable = true;
+    obs-studio = {
+      enable = true;
+      package = pkgs.obs-studio.override {
+        ffmpeg = pkgs.ffmpeg-full;
+      };
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-backgroundremoval
+        obs-pipewire-audio-capture
+        obs-vaapi
+        obs-gstreamer
+        obs-vkcapture
+      ];
+      enableVirtualCamera = true;
+    };
 
 
     virt-manager.enable = true;
@@ -58,8 +74,6 @@ in
     udev.extraRules = ''
       KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
     '';
-    atd.enable = true;
-    cron.enable = true;
     printing.enable = true;
     flatpak.enable = true;
     avahi = {
@@ -83,14 +97,13 @@ in
     proton-vpn
     audacity
     brave
-    obs-studio
     wl-clicker
     gh
     ruby
     mpv
     qbittorrent
     kvirc
-    ffmpeg
+    ffmpeg-full
 
     libimobiledevice
     ifuse
@@ -136,6 +149,9 @@ in
     nixpkgs-fmt
     nil
     lua-language-server
+    typescript-language-server
+    prettier
+    nodejs
     lua
     gdb
     lldb
