@@ -167,8 +167,8 @@ in
     cava
     nemo-with-extensions
     nemo-fileroller
-    bambu-studio
   ] ++ [
+    pkgs-stable.bambu-studio
     pkgs-stable.pika-backup
     pkgs-stable.calibre
     pkgs-stable.bottles

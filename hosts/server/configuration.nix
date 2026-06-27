@@ -25,10 +25,10 @@
     minecraft-server = {
       package = pkgs.stdenv.mkDerivation {
         pname = "fabric-server";
-        version = "1.21.9";
+        version = "26.1.2";
         src = pkgs.fetchurl {
-          url = "https://meta.fabricmc.net/v2/versions/loader/1.21.9/0.17.3/1.1.0/server/jar";
-          sha256 = "sha256-MYNG/SAJOQrnSHC05v6lTeXz+BKChBF+IqCLJdwVHIQ=";
+          url = "https://meta.fabricmc.net/v2/versions/loader/26.1.2/0.19.3/1.1.1/server/jar";
+          sha256 = "sha256-2Dd+CWOoTxt+tMXosmMGj2NcSkMM+hWnkkFUjSjw/aA=";
         };
         nativeBuildInputs = [ pkgs.makeWrapper ];
         dontUnpack = true;
@@ -37,7 +37,7 @@
           mkdir -p $out/lib/minecraft
           cp $src $out/lib/minecraft/server.jar
 
-          makeWrapper ${pkgs.lib.getExe pkgs.jre_headless} $out/bin/minecraft-server \
+          makeWrapper ${pkgs.lib.getExe pkgs.openjdk25_headless} $out/bin/minecraft-server \
             --append-flags "-jar $out/lib/minecraft/server.jar nogui"
 
         '';
@@ -46,7 +46,7 @@
       eula = true;
       enable = true;
       openFirewall = true;
-      jvmOpts = "-Xmx5000M -Xms5000M";
+      jvmOpts = "-Xmx6000M -Xms6000M";
     };
     syncthingSync = {
       enable = true;

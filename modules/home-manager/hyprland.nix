@@ -27,7 +27,4 @@
   xdg.configFile."hypr/hyprsunset.conf" = {
     source = ./hypr/hyprsunset.conf;
   };
-  xdg.configFile."hypr/hypridle.conf" = {
-    source = ./hypr/hypridle.conf;
-  };
 }

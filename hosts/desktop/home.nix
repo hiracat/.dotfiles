@@ -15,6 +15,10 @@
 
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
+  xdg.configFile."hypr/hypridle.conf" = {
+    source = ../../modules/home-manager/hypr/hypridle.conf;
+
+  };
 
 
   # This value determines the Home Manager release that your configuration is
