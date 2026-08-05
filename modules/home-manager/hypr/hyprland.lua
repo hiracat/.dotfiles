@@ -26,6 +26,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("awww-daemon")
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("[workspace special:spotify silent] spotify")
+	hl.exec_cmd("[workspace special:discord silent] discord")
 	hl.exec_cmd("steam -silent")
 	hl.exec_cmd("hyprsunset")
 	hl.exec_cmd("hypridle")
@@ -173,6 +174,8 @@ hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("spotify"))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:spotify" }))
 hl.bind(mainMod .. " + B", hl.dsp.workspace.toggle_special("obs"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.window.move({ workspace = "special:obs" }))
+hl.bind(mainMod .. " + D", hl.dsp.workspace.toggle_special("discord"))
+hl.bind(mainMod .. " + SHIFT + D", hl.dsp.window.move({ workspace = "special:discord" }))
 
 -- Screenshots
 hl.bind(

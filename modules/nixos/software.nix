@@ -118,6 +118,7 @@ in
     ripgrep
     atuin
     playerctl
+    osu-lazer-bin
 
     fastfetch
     starship
@@ -160,7 +161,7 @@ in
     cmake-language-server
     clang-tools
     vulkan-tools
-    feh
+    qimgv
     anki
     google-chrome
     brightnessctl

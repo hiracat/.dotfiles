@@ -17,6 +17,7 @@
     hostname = "nixos-laptop";
   };
   services.xserver.wacom.enable = true;
+  periferals.drawingTablet.enable = true;
 
   nix.settings = {
     cores = 2;
