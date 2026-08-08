@@ -1,5 +1,31 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+let
+  glazeSrc = pkgs.fetchFromGitHub {
+    owner = "stephenberry";
+    repo = "glaze";
+    rev = "v7.2.0";
+    hash = "sha256-f3NVRi3SXKo42hn0WCw7JsOK3EkdOVJIcuzhPorKjFY=";
+  };
+in
+
+{
   programs.hyprland.enable = true;
+  nixpkgs.overlays = [
+    (final: prev: {
+      hyprland = prev.hyprland.overrideAttrs (old: {
+        cmakeFlags = (old.cmakeFlags or [ ]) ++ [
+          "-DFETCHCONTENT_SOURCE_DIR_GLAZE=${glazeSrc}"
+          "-DFETCHCONTENT_FULLY_DISCONNECTED=ON"
+        ];
+        postPatch = (old.postPatch or "") + ''
+          substituteInPlace CMakeLists.txt \
+            --replace-fail 'find_package(glaze 7...<8 QUIET)' 'find_package(glaze QUIET)'
+        '';
+      });
+    })
+  ];
+
+
   services.greetd = {
     enable = true;
     settings = {

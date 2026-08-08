@@ -30,12 +30,38 @@
       hostName = config.base.hostname;
       networkmanager.enable = true;
       firewall.enable = true;
-      firewall.allowedTCPPorts = [ 1070 25565 8080 5050 ];
+      firewall.allowedTCPPorts = [ 1070 25565 8080 5050 80 ];
       firewall.allowedUDPPorts = [ 25565 8080 5050 ];
 
     };
 
     systemd.services.NetworkManager-wait-online.enable = false;
+
+    services.tailscale = {
+      enable = true;
+      useRoutingFeatures = "both";
+      extraUpFlags = [
+        "--advertise-exit-node"
+        "--advertise-routes=192.168.1.0/24"
+        "--accept-routes"
+      ];
+    };
+    systemd.services.tailscaled-resume = {
+      description = "Restart tailscaled after resume";
+      wantedBy = [ "sleep.target" ];
+      after = [ "sleep.target" ];
+      serviceConfig.Type = "oneshot";
+      script = "sleep 3 && systemctl restart tailscaled";
+    };
+
+
+    networking.firewall.checkReversePath = "loose";
+    services.ntfy-sh.enable = true;
+    services.ntfy-sh.settings = {
+      base-url = "http://${config.networking.hostName}";
+      listen-http = ":80";
+      upstream-base-url = "https://ntfy.sh";
+    };
 
 
     services.fstrim.enable = true;
@@ -80,7 +106,6 @@
 
     services.openssh = {
       enable = true;
-      ports = [ 1070 ];
       settings.PermitRootLogin = "no";
       settings.PasswordAuthentication = false;
       settings.X11Forwarding = false;

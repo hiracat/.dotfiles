@@ -58,7 +58,6 @@ in
     };
 
 
-
     spicetify = {
       enable = true;
       enabledExtensions = with spicePkgs.extensions; [
@@ -88,15 +87,21 @@ in
     pkgs.xdg-desktop-portal-gtk
     pkgs.xdg-desktop-portal-hyprland
   ];
+  xdg.portal.config = {
+    common.default = [ "gtk" ];
+    hyprland.default = [ "hyprland" "gtk" ];
+  };
 
 
   environment.systemPackages = with pkgs; [
+    linux-wifi-hotspot
     hyprsunset
     watchexec
     pavucontrol
     proton-vpn
     audacity
     brave
+    firefox
     wl-clicker
     gh
     ruby
@@ -169,7 +174,6 @@ in
     nemo-with-extensions
     nemo-fileroller
   ] ++ [
-    pkgs-stable.bambu-studio
     pkgs-stable.pika-backup
     pkgs-stable.calibre
     pkgs-stable.bottles

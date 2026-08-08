@@ -1,8 +1,4 @@
 { settings, ... }: {
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnfreePredicate = _: true;
-  };
 
   imports = [
     ../../modules/home-manager/kitty.nix

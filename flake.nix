@@ -46,6 +46,8 @@
           {
             home-manager = {
               useUserPackages = true;
+              useGlobalPkgs = true;
+
               backupFileExtension = "backup";
               extraSpecialArgs = { inherit inputs settings; };
               users.${settings.username} = {

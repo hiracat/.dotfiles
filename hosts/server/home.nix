@@ -1,8 +1,4 @@
 { settings, ... }: {
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnfreePredicate = _: true;
-  };
 
   imports = [
     ../../modules/home-manager/kitty.nix
@@ -15,6 +11,10 @@
 
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
+  xdg.configFile."hypr/hypridle.conf" = {
+    source = ../../modules/home-manager/hypr/hypridleserver.conf;
+
+  };
 
 
   # This value determines the Home Manager release that your configuration is

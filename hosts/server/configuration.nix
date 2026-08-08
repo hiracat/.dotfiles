@@ -17,6 +17,15 @@
   };
 
 
+  services.calibre-server = {
+    enable = true;
+    libraries = [ "/home/forest/Documents/Calibre Library" ];
+    openFirewall = true;
+    user = "forest";
+    group = "users";
+
+  };
+
   networking = {
     firewall.allowedUDPPorts = [ 24454 ];
   };
