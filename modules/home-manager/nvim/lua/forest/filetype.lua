@@ -1,6 +1,7 @@
 vim.filetype.add({
 	extension = {
 		rasi = "rasi",
+		slang = "shaderslang",
 		glsl = "glsl",
 		vert = "glsl",
 		frag = "glsl",

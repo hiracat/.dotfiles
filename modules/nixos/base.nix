@@ -24,6 +24,7 @@
       kernelPackages = pkgs.linuxPackages_latest;
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
+      kernelModules = [ "snd-aloop" ];
     };
 
     networking = {
@@ -151,7 +152,7 @@
     users.users.${config.base.username} = {
       isNormalUser = true;
       description = "forest";
-      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "vboxusers" "disk" "docker" "render" ];
+      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "audio" "vboxusers" "disk" "docker" "render" ];
       initialPassword = "password"; # for vms
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [

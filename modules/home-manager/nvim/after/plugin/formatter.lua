@@ -5,6 +5,7 @@ require("conform").setup({
 		lua = { "stylua" },
 		cpp = { "clang_format" },
 		glsl = { "clang_format" },
+		shaderslang = { lsp_format = "prefer" },
 		rust = { "rustfmt" },
 		nix = { "nixpkgs_fmt" },
 		json = { "prettier" },

@@ -1,3 +1,18 @@
+-- skip semantic highlighting if it fails to return the right shape
+for _, method in ipairs({
+	"textDocument/semanticTokens/full",
+	"textDocument/semanticTokens/full/delta",
+	"textDocument/semanticTokens/range",
+}) do
+	local orig = vim.lsp.handlers[method]
+	vim.lsp.handlers[method] = function(...)
+		local ok, err = pcall(orig, ...)
+		if not ok then
+			vim.notify("[lsp] semantic tokens handler error (ignored): " .. tostring(err), vim.log.levels.DEBUG)
+		end
+	end
+end
+
 local ok, blink = pcall(require, "blink.cmp")
 local capabilities = ok and blink.get_lsp_capabilities() or vim.lsp.protocol.make_client_capabilities()
 
@@ -58,4 +73,5 @@ vim.lsp.enable({
 	"glsl_analyzer",
 	"rust_analyzer",
 	"ts_ls",
+	"slangd",
 })

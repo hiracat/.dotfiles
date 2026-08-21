@@ -22,8 +22,10 @@ in
   services.blueman.enable = true; # optional but nice GUI
   hardware.steam-hardware.enable = true; # adds udev rules for controllers
 
+  services.usbmuxd.enable = true;
 
   programs = {
+    droidcam.enable = true;
     partition-manager.enable = true;
     appimage.enable = true;
     obs-studio = {
@@ -38,6 +40,7 @@ in
         obs-vaapi
         obs-gstreamer
         obs-vkcapture
+        droidcam-obs
       ];
       enableVirtualCamera = true;
     };
@@ -47,7 +50,6 @@ in
     firejail.enable = true;
     gamemode.enable = true;
     chromium.enable = true;
-    droidcam.enable = true;
 
 
     gamescope.enable = true;
@@ -155,6 +157,7 @@ in
     nixpkgs-fmt
     nil
     lua-language-server
+    shader-slang
     typescript-language-server
     prettier
     nodejs
