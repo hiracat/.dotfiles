@@ -105,7 +105,6 @@ in
     brave
     firefox
     slack
-    bed93
     wl-clicker
     gh
     ruby
