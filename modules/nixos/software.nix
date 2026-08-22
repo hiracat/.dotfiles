@@ -28,22 +28,6 @@ in
     droidcam.enable = true;
     partition-manager.enable = true;
     appimage.enable = true;
-    obs-studio = {
-      enable = true;
-      package = pkgs.obs-studio.override {
-        ffmpeg = pkgs.ffmpeg-full;
-      };
-      plugins = with pkgs.obs-studio-plugins; [
-        wlrobs
-        obs-backgroundremoval
-        obs-pipewire-audio-capture
-        obs-vaapi
-        obs-gstreamer
-        obs-vkcapture
-        droidcam-obs
-      ];
-      enableVirtualCamera = true;
-    };
 
 
     virt-manager.enable = true;
