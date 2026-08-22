@@ -25,6 +25,18 @@
 
   periferals.drawingTablet.enable = true;
 
+  systemd.user.services.wayvnc = {
+    description = "wayvnc VNC server";
+    after = [ "graphical-session.target" ];
+    partOf = [ "graphical-session.target" ];
+    wantedBy = [ "graphical-session.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.wayvnc}/bin/wayvnc";
+      Restart = "on-failure";
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     (blender.override {
       rocmSupport = true;
@@ -73,6 +85,22 @@
         ExecStart = ''/bin/sh -c "if grep -q '^GPP0.*\\*enabled' /proc/acpi/wakeup; then echo Disabling GPP0; echo GPP0 | tee /proc/acpi/wakeup; else echo GPP0 already disabled; fi" '';
       };
     };
+  };
+  programs.obs-studio = {
+    enable = true;
+    package = pkgs.obs-studio.override {
+      ffmpeg = pkgs.ffmpeg-full;
+    };
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vaapi
+      obs-gstreamer
+      obs-vkcapture
+      droidcam-obs
+    ];
+    enableVirtualCamera = true;
   };
 
 

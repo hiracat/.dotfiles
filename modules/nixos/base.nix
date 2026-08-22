@@ -34,6 +34,34 @@
       firewall.allowedTCPPorts = [ 1070 25565 8080 5050 80 ];
       firewall.allowedUDPPorts = [ 25565 8080 5050 ];
 
+      networkmanager.ensureProfiles.profiles = {
+        eduroam = {
+          connection = {
+            id = "eduroam";
+            type = "wifi";
+          };
+          wifi = {
+            mode = "infrastructure";
+            ssid = "eduroam";
+          };
+          wifi-security = {
+            key-mgmt = "wpa-eap";
+          };
+          "802-1x" = {
+            eap = "tls";
+            anonymous-identity = "anonymous@rit.edu";
+            identity = "frl4915@rit.edu";
+            client-cert = "/etc/NetworkManager/certs/eduroam.p12";
+            private-key = "/etc/NetworkManager/certs/eduroam.p12";
+            ca-cert = "/etc/NetworkManager/certs/eduroam-ca.cer";
+            private-key-password-flags = 0;
+
+            private-key-password = "V%DX@5mB%q9WHfTt";
+          };
+          ipv4.method = "auto";
+          ipv6.method = "auto";
+        };
+      };
     };
 
     systemd.services.NetworkManager-wait-online.enable = false;
@@ -175,6 +203,7 @@
         perf
         orca-slicer
 
+        remmina
         neovim
         gcc
         gnumake

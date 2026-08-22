@@ -104,6 +104,8 @@ in
     audacity
     brave
     firefox
+    slack
+    bed93
     wl-clicker
     gh
     ruby
@@ -111,6 +113,7 @@ in
     qbittorrent
     kvirc
     ffmpeg-full
+    ironwail
 
     libimobiledevice
     ifuse

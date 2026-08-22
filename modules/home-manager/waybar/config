@@ -1,7 +1,7 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 20,
+    "height": 30,
 
     // "width": 1280, // Waybar width
     "spacing": 0, // Gaps between modules (4px)
@@ -61,15 +61,11 @@
             "critical": 15
          },
          "format": "{capacity}% {icon}",
-         "format-charging": "{capacity}% ",
+         "format-charging": "{capacity}% 󰂄",
          "format-plugged": "{capacity}% ",
          "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
         "format-icons": ["", "", "", "", ""],
         "bat": "BAT0"
-
-
      },
      "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
