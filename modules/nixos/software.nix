@@ -35,14 +35,12 @@ in
     gamemode.enable = true;
     chromium.enable = true;
 
-
     gamescope.enable = true;
     steam = {
       enable = true;
       remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
       dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     };
-
 
     spicetify = {
       enable = true;
@@ -78,8 +76,9 @@ in
     hyprland.default = [ "hyprland" "gtk" ];
   };
 
-
   environment.systemPackages = with pkgs; [
+    jetbrains.clion
+    jetbrains.pycharm
     linux-wifi-hotspot
     hyprsunset
     watchexec
@@ -97,6 +96,9 @@ in
     kvirc
     ffmpeg-full
     ironwail
+    (python3.withPackages (ps: with ps; [ tkinter ]))
+
+    archipelago
 
     libimobiledevice
     ifuse

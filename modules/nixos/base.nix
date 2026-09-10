@@ -106,7 +106,6 @@
       HandleLidSwitch = "suspend";
       HandleLidSwitchDocked = "ignore";
       HandleLidSwitchExternalPower = "ignore";
-
     };
 
 
@@ -180,7 +179,7 @@
     users.users.${config.base.username} = {
       isNormalUser = true;
       description = "forest";
-      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "audio" "vboxusers" "disk" "docker" "render" ];
+      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "audio" "vboxusers" "disk" "render" ];
       initialPassword = "password"; # for vms
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [

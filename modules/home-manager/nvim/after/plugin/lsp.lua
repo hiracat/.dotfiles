@@ -65,6 +65,13 @@ vim.lsp.config("rust_analyzer", {
 	},
 })
 
+vim.lsp.config("clangd", {
+	cmd = {
+		"clangd",
+		"--query-driver=/nix/store/**/bin/xtensa-esp32-elf-gcc,/nix/store/**/bin/riscv32-esp-elf-gcc",
+	},
+})
+
 vim.lsp.enable({
 	"clangd",
 	"nil_ls",

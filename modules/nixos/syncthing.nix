@@ -32,6 +32,7 @@ in
   config = lib.mkIf config.services.syncthingSync.enable {
     services.syncthing = {
       enable = true;
+      openDefaultPorts = true;
       user = config.services.syncthingSync.username;
       group = "users";
       dataDir = "/home/${config.services.syncthingSync.username}/Syncthing";
