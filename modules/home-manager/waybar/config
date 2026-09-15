@@ -118,14 +118,10 @@
         "format-source": "{volume}% 󰍬",
         "format-source-muted": "󰍭",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
+            "headphone": "󰋋 ",
+            "headset": "󰋋 ",
             "default": ["󰕿", "󰖀 ", "󰕾 "]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pwvucontrol"
      }
 }

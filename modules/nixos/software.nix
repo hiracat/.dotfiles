@@ -82,7 +82,7 @@ in
     linux-wifi-hotspot
     hyprsunset
     watchexec
-    pavucontrol
+    pwvucontrol
     proton-vpn
     audacity
     brave
@@ -95,6 +95,8 @@ in
     qbittorrent
     kvirc
     ffmpeg-full
+    (python3.withPackages (ps: with ps; [ tkinter ]))
+
     ironwail
     (python3.withPackages (ps: with ps; [ tkinter ]))
 
