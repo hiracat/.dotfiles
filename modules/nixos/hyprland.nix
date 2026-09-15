@@ -32,6 +32,8 @@
   programs.nm-applet.enable = true;
   services.gnome.gnome-keyring.enable = true;
 
+  environment.etc."hypr-stubs".source = "${pkgs.hyprland}/share/hypr/stubs";
+
   environment = {
     sessionVariables = {
       NIXOS_OZONE_WL = "1";

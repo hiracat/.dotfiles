@@ -1,0 +1,4 @@
+{
+  "workspace": { "library": ["/etc/hypr-stubs"] },
+  "diagnostics": { "globals": ["hl"] }
+}
