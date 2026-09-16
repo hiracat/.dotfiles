@@ -24,6 +24,8 @@
   hardware.amdgpu.opencl.enable = true;
 
   periferals.drawingTablet.enable = true;
+  virtualisation.podman.enable = true;
+  virtualisation.podman.dockerCompat = true;
 
   systemd.user.services.wayvnc = {
     description = "wayvnc VNC server";

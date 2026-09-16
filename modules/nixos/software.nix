@@ -14,7 +14,6 @@ in
   };
 
   users.users.${settings.username}.extraGroups = [ "libvirtd" "input" ];
-  virtualisation.docker.enable = true;
 
   hardware.keyboard.qmk.enable = true;
   hardware.bluetooth.enable = true;

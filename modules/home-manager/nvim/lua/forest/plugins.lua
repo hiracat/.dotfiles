@@ -45,6 +45,9 @@ local plugins = {
 	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
 	{ src = "https://github.com/nvim-telescope/telescope-dap.nvim" },
 
+	-- Images
+	{ src = "https://github.com/3rd/image.nvim" },
+
 	-- Treesitter
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 
