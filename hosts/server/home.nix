@@ -7,13 +7,15 @@
     ../../modules/home-manager/git.nix
 
     ../../modules/home-manager/hyprland.nix
+    ../../modules/home-manager/wayvnc.nix
   ];
 
   home.username = settings.username;
   home.homeDirectory = "/home/${settings.username}";
-  xdg.configFile."hypr/hypridle.conf" = {
-    source = ../../modules/home-manager/hypr/hypridleserver.conf;
 
+  hypr = {
+    hypridleConfig = ../../modules/home-manager/hypr/hypridleserver.conf;
+    autostartConfig = ../../modules/home-manager/hypr/autostart-server.lua;
   };
 
 

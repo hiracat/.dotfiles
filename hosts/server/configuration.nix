@@ -19,9 +19,9 @@
 
   services.calibre-server = {
     enable = true;
-    libraries = [ "/home/forest/Documents/Calibre Library" ];
+    libraries = [ "/home/${settings.username}/Documents/Calibre Library" ];
     openFirewall = true;
-    user = "forest";
+    user = settings.username;
     group = "users";
 
   };
@@ -29,6 +29,7 @@
   networking = {
     firewall.allowedUDPPorts = [ 24454 ];
   };
+  programs.wayvnc.enable = true;
 
   services = {
     minecraft-server = {

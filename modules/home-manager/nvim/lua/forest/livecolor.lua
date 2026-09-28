@@ -1,4 +1,4 @@
-local watchedPath = "/home/forest/.config/nvim/lua/forest/coloroverrides.lua"
+local watchedPath = vim.fs.joinpath(vim.fn.stdpath("config"), "lua/forest/coloroverrides.lua")
 local function reloadColorscheme()
 	vim.cmd("so " .. watchedPath)
 	vim.cmd("colorscheme catppuccin")

@@ -1,45 +1,12 @@
-{ config, pkgs-stable, pkgs, ... }: {
+{ pkgs, ... }: {
   console = {
     font = "${pkgs.terminus_font}/share/consolefonts/ter-v24b.psf.gz";
     packages = with pkgs; [ terminus_font ];
-    # TODO: re-enable console colors via matugen palette
-    # colors = with config.scheme; [
-    #   #black
-    #   "${base01}"
-    #   #red
-    #   "${base08}"
-    #   #green
-    #   "${base0B}"
-    #   #yellow
-    #   "${base0A}"
-    #   #blue
-    #   "${base0D}"
-    #   #magenta
-    #   "${base0E}"
-    #   #cyan
-    #   "${base0C}"
-    #   #white
-    #   "${base07}"
-    #
-    #   #background
-    #   #black
-    #   "${base00}"
-    #   #red
-    #   "${base08}"
-    #   #green
-    #   "${base0B}"
-    #   #yellow
-    #   "${base0A}"
-    #   #blue
-    #   "${base0D}"
-    #   #magenta
-    #   "${base0E}"
-    #   #cyan
-    #   "${base0C}"
-    #   #white
-    #   "${base06}"
-    #
-    # ];
+    # console.colors is deliberately left unset. It is a build-time option, so it
+    # cannot follow matugen, which regenerates the palette at runtime whenever the
+    # wallpaper changes. The TTY palette is instead applied at runtime from
+    # templates/console_colors.sh -> ~/.config/console/colors.sh, sourced by
+    # modules/home-manager/shell.nix when $TERM = linux.
   };
 
   fonts = {

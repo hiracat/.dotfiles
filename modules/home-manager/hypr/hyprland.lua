@@ -20,17 +20,9 @@ local fileManager = "nemo"
 ---- AUTOSTART ----
 -------------------
 
-hl.on("hyprland.start", function()
-	hl.exec_cmd("dex -a -e Hyprland")
-	hl.exec_cmd("nm-applet --indicator")
-	hl.exec_cmd("awww-daemon")
-	hl.exec_cmd("waybar")
-	hl.exec_cmd("[workspace special:spotify silent] spotify")
-	hl.exec_cmd("[workspace special:discord silent] discord")
-	hl.exec_cmd("steam -silent")
-	hl.exec_cmd("hyprsunset")
-	hl.exec_cmd("hypridle")
-end)
+-- autostart lives in a per-host file appended after this one, selected by the
+-- hypr.autostartConfig option in modules/home-manager/hyprland.nix.
+-- see hypr/autostart.lua (desktop/laptop) and hypr/autostart-server.lua.
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
@@ -135,8 +127,7 @@ hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "a
 ---- INPUT ----
 ---------------
 
--- TODO: not sure how to fix, do later
--- hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -190,6 +181,7 @@ hl.bind(
 		'filename="$(xdg-user-dir PICTURES)/screenshots/$(date +\'%F_%T_grim.png\')" && grim -g "$(slurp)" "$filename" && cat "$filename" | wl-copy'
 	)
 )
+hl.bind("ALT + Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | tesseract stdin stdout | wl-copy'))
 
 -- Move/resize
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })

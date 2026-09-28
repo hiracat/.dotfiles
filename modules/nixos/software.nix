@@ -13,7 +13,7 @@ in
     };
   };
 
-  users.users.${settings.username}.extraGroups = [ "libvirtd" "input" ];
+  users.users.${settings.username}.extraGroups = [ "libvirtd" "input" "docker" ];
 
   hardware.keyboard.qmk.enable = true;
   hardware.bluetooth.enable = true;
@@ -23,6 +23,7 @@ in
 
   services.usbmuxd.enable = true;
 
+  virtualisation.docker.enable = true;
   programs = {
     droidcam.enable = true;
     partition-manager.enable = true;
@@ -75,11 +76,15 @@ in
     hyprland.default = [ "hyprland" "gtk" ];
   };
 
+  environment.etc."jdks/bellsoft-25".source = pkgs.bellsoft-jdk;
+
+  # NOTE: shared CLI tooling (git, ripgrep, fzf, btop, nil, clang-tools, ...) lives in
+  # base.nix and is deliberately NOT repeated here.
   environment.systemPackages = with pkgs; [
-    jetbrains.clion
     jetbrains.pycharm
+    jetbrains.idea
+    bellsoft-jdk
     linux-wifi-hotspot
-    hyprsunset
     watchexec
     pwvucontrol
     proton-vpn
@@ -94,10 +99,8 @@ in
     qbittorrent
     kvirc
     ffmpeg-full
-    (python3.withPackages (ps: with ps; [ tkinter ]))
-
     ironwail
-    (python3.withPackages (ps: with ps; [ tkinter ]))
+    (python3.withPackages (ps: with ps; [ tkinter matplotlib typer ]))
 
     archipelago
 
@@ -106,27 +109,13 @@ in
     qbittorrent-nox
     discord
     go
-    nix-tree
 
-    base16-schemes
-    git
-    wl-clipboard
-    ripgrep
-    atuin
     playerctl
     osu-lazer-bin
 
-    fastfetch
-    starship
-    wget
-    unzip
-    fd
     curl
-    rar
     kdePackages.ark
     vlc
-    htop
-    btop
     gimp
     xdg-user-dirs
 
@@ -137,32 +126,23 @@ in
     prismlauncher
     krita
     obsidian
-    termdown
-    fzf
 
     tree-sitter
-    stylua
-    shfmt
-    nixpkgs-fmt
-    nil
     lua-language-server
     shader-slang
     typescript-language-server
     prettier
     nodejs
-    lua
     gdb
     lldb
     vscode-extensions.vadimcn.vscode-lldb
     cmake
     cmake-language-server
-    clang-tools
-    vulkan-tools
     qimgv
     anki
     google-chrome
     brightnessctl
-    cava
+    (pkgs.cava.override { withSDL2 = true; })
     nemo-with-extensions
     nemo-fileroller
   ] ++ [

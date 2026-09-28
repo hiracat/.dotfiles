@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   programs.hyprland.enable = true;
@@ -7,7 +7,7 @@
     settings = {
       default_session = {
         command = "start-hyprland";
-        user = "forest";
+        user = config.base.username;
       };
     };
   };
@@ -46,6 +46,7 @@
       tofi
       hyprland-qtutils
       grim
+      tesseract
       slurp
       dunst
       awww

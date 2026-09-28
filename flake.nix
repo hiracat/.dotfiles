@@ -25,6 +25,10 @@
         system = "x86_64-linux";
         username = "forest";
       };
+      myOverlay = final: prev: {
+        bellsoft-jdk = prev.callPackage ./pkgs/bellsoft-jdk.nix { };
+      };
+
       lib = nixpkgs.lib;
       pkgs-stable = import inputs.nixpkgs-stable {
         system = settings.system;
@@ -38,6 +42,7 @@
           home-manager.nixosModules.home-manager
           inputs.agenix.nixosModules.default
           {
+            nixpkgs.overlays = [ myOverlay ];
             environment.systemPackages = [
               inputs.agenix.packages.${settings.system}.default
             ];
@@ -63,6 +68,8 @@
     in
 
     {
+      overlays.default = myOverlay;
+
       nixosConfigurations = {
         "nixos-desktop" = mkHost "desktop";
         "nixos-laptop" = mkHost "laptop";

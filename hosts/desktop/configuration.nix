@@ -24,20 +24,7 @@
   hardware.amdgpu.opencl.enable = true;
 
   periferals.drawingTablet.enable = true;
-  virtualisation.podman.enable = true;
-  virtualisation.podman.dockerCompat = true;
 
-  systemd.user.services.wayvnc = {
-    description = "wayvnc VNC server";
-    after = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-
-    serviceConfig = {
-      ExecStart = "${pkgs.wayvnc}/bin/wayvnc";
-      Restart = "on-failure";
-    };
-  };
 
   environment.systemPackages = with pkgs; [
     (blender.override {

@@ -42,5 +42,9 @@ in
     [templates.nvim]
     input_path = "${dotfiles_dir}/templates/nvim.lua"
     output_path = "~/.config/nvim/lua/forest/coloroverrides.lua"
+
+    [templates.console]
+    input_path = "${dotfiles_dir}/templates/console_colors.sh"
+    output_path = "~/.config/console/colors.sh"
   '';
 }

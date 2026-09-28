@@ -1,18 +1,22 @@
 { pkgs, settings, inputs, pkgs-stable, lib, config, ... }: {
   options.base = {
     locale = lib.mkOption {
+      type = lib.types.str;
       default = "en_US.UTF-8";
       description = "system locale";
     };
     timezone = lib.mkOption {
+      type = lib.types.str;
       default = "America/New_York";
       description = "system timezone";
     };
     username = lib.mkOption {
+      type = lib.types.str;
       default = "forest";
       description = "main users username";
     };
     hostname = lib.mkOption {
+      type = lib.types.str;
       default = "nixos";
       description = "system hostname";
     };
@@ -25,14 +29,27 @@
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
       kernelModules = [ "snd-aloop" ];
+      extraModprobeConfig = ''
+        options bluetooth disable_ertm=0
+      '';
+
     };
+    services.hardware.bolt.enable = true;
 
     networking = {
       hostName = config.base.hostname;
       networkmanager.enable = true;
       firewall.enable = true;
-      firewall.allowedTCPPorts = [ 1070 25565 8080 5050 80 ];
+      # NOTE: tailscale0 is a trusted interface (see below), so anything reachable
+      # over the tailnet does NOT need to be listed here. These entries only exist
+      # to expose ports on the LAN/WAN interface. Port 80 (ntfy) was removed because
+      # ntfy runs unauthenticated and is only ever used over tailscale.
+      # TODO: 1070/8080/5050 are only actually needed on the server; move them to
+      # hosts/server/configuration.nix when splitting these modules up.
+      firewall.allowedTCPPorts = [ 1070 25565 8080 5050 ];
       firewall.allowedUDPPorts = [ 25565 8080 5050 ];
+
+
 
       networkmanager.ensureProfiles.profiles = {
         eduroam = {
@@ -75,6 +92,7 @@
         "--accept-routes"
       ];
     };
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
     systemd.services.tailscaled-resume = {
       description = "Restart tailscaled after resume";
       wantedBy = [ "sleep.target" ];
@@ -157,6 +175,7 @@
     };
     programs.ssh.extraConfig = "Include ${config.age.secrets.ssh_config.path}";
     programs.nix-ld.enable = true;
+
 
 
     services.devmon.enable = true;
