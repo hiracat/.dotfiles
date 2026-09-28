@@ -11,4 +11,5 @@ let
 in
 {
   "ssh_config.age".publicKeys = users ++ systems;
+  "eduroam_password.age".publicKeys = users ++ systems;
 }
