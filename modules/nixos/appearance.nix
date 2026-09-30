@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   console = {
     font = "${pkgs.terminus_font}/share/consolefonts/ter-v24b.psf.gz";
+    earlySetup = true;
     packages = with pkgs; [ terminus_font ];
     # console.colors is deliberately left unset. It is a build-time option, so it
     # cannot follow matugen, which regenerates the palette at runtime whenever the
