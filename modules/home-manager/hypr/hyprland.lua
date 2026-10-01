@@ -7,7 +7,7 @@
 hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@75", position = "0x0", scale = 1 })
 hl.monitor({ output = "DP-2", mode = "preferred", position = "auto-left", scale = "auto" })
 hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto", scale = 1 })
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = "auto" })
+hl.monitor({ output = "", mode = "1920x1080@60", position = "auto", scale = "auto" })
 
 ---------------------
 ---- MY PROGRAMS ----
@@ -212,12 +212,17 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl s 10%-"), { repe
 
 -- Volume
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 2%+"), { repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"), { repeating = true })
 hl.bind(
-	"SHIFT + XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("wpctl set-volume -l -1 @DEFAULT_AUDIO_SINK@ 2%+"),
+	"ALT + XF86AudioRaiseVolume",
+	hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+"),
 	{ repeating = true }
 )
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"), { repeating = true })
+hl.bind(
+	"ALT + XF86AudioLowerVolume",
+	hl.dsp.exec_cmd("wpctl set-volume -l -1 @DEFAULT_AUDIO_SINK@ 2%-"),
+	{ repeating = true }
+)
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { repeating = true })
 hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"), { repeating = true })
 
