@@ -33,7 +33,6 @@
 
     })
   ] ++ [
-    pkgs-stable.bambu-studio
     (pkgs-stable.renderdoc.overrideAttrs (oldAttrs: rec {
       cmakeFlags = oldAttrs.cmakeFlags or [ ] ++ [
         "-DENABLE_UNSUPPORTED_EXPERIMENTAL_POSSIBLY_BROKEN_WAYLAND=ON"

@@ -49,7 +49,7 @@ local plugins = {
 	{ src = "https://github.com/3rd/image.nvim" },
 
 	-- Treesitter
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
 
 	-- DAP (Debug Adapter Protocol)
 	{ src = "https://github.com/mfussenegger/nvim-dap" },

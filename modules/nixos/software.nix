@@ -85,6 +85,7 @@ in
     jetbrains.idea
     bellsoft-jdk
     linux-wifi-hotspot
+    pritunl-client
     watchexec
     pwvucontrol
     proton-vpn
@@ -94,6 +95,7 @@ in
     slack
     wl-clicker
     gh
+    qpwgraph
     ruby
     mpv
     qbittorrent
