@@ -24,6 +24,7 @@
   hardware.amdgpu.opencl.enable = true;
 
   periferals.drawingTablet.enable = true;
+  programs.wayvnc.enable = true;
 
 
   environment.systemPackages = with pkgs; [
@@ -86,7 +87,6 @@
       obs-vaapi
       obs-gstreamer
       obs-vkcapture
-      droidcam-obs
     ];
     enableVirtualCamera = true;
   };

@@ -9,16 +9,17 @@ def notify(msg):
 def usage():
     print("Usage:")
     print("ommiting the theme or wallpaper will open tofi")
-    print("  rb sw <fast>   - rebuild switch, fast uses the --fast flag")
+    print("  rb sw  - rebuild and switch to new configuration")
     print("  rb theme <themename>    - set theme and rebuild")
-    print("  rb wall <wallpapername>    - change wallpaper and theme based on the wallpaper and rebuild")
+    print("  rb wall <wallpapername>    - change wallpaper")
+    print("  rb wallcolor <wallpapername>    - change wallpaper and theme based on the wallpaper and run matugen")
     sys.exit(1)
 
 def nixos_rebuild(subcmd):
     hostname = subprocess.check_output(["hostname"]).decode().strip()
     home = os.path.expanduser("~")
 
-    cmd = f"sudo nixos-rebuild {subcmd} --flake {home}/.dotfiles#{hostname} -j 6"
+    cmd = f"sudo nixos-rebuild {subcmd} --flake {home}/.dotfiles#{hostname}"
 
     print(f"running command: {cmd}")
     notify(f"running command: {cmd}")
@@ -98,6 +99,21 @@ def cmd_wallcolor(args):
 def cmd_sw(args):
     nixos_rebuild("switch")
 
+def cmd_tofi(args):
+    listing="sw \n theme \n wallcolor \n wall"
+    result = subprocess.run(["tofi"], input=listing, capture_output=True, text=True)
+    selected = result.stdout.strip()
+    print(selected)
+
+    if selected == "sw":
+        cmd_sw(rest)
+    elif selected == "theme":
+        cmd_theme(rest)
+    elif selected == "wallcolor":
+        cmd_wallcolor(rest)
+    elif selected == "wall":
+        cmd_wall(rest)
+
 
 args = sys.argv[1:]
 if not args:
@@ -114,5 +130,7 @@ elif command == "wallcolor":
     cmd_wallcolor(rest)
 elif command == "wall":
     cmd_wall(rest)
+elif command == "tofi":
+    cmd_tofi(rest)
 else:
     usage()

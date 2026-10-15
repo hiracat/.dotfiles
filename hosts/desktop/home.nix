@@ -7,6 +7,7 @@
     ../../modules/home-manager/git.nix
 
     ../../modules/home-manager/hyprland.nix
+    ../../modules/home-manager/wayvnc.nix
   ];
 
   home.username = settings.username;

@@ -33,6 +33,11 @@
   services.gnome.gnome-keyring.enable = true;
 
   environment.etc."hypr-stubs".source = "${pkgs.hyprland}/share/hypr/stubs";
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
+    config.hyprland.default = [ "hyprland" "gtk" ];
+  };
 
   environment = {
     sessionVariables = {

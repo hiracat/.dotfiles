@@ -11,7 +11,6 @@
 
     agenix.url = "github:ryantm/agenix";
     agenix.inputs.nixpkgs.follows = "nixpkgs";
-    agenix.inputs.darwin.follows = "";
     matugen = {
       url = "github:/InioX/Matugen";
       inputs.nixpkgs.follows = "nixpkgs";

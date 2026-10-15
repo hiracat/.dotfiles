@@ -13,7 +13,8 @@ in
     };
   };
 
-  users.users.${settings.username}.extraGroups = [ "libvirtd" "input" "docker" ];
+  users.users.${settings.username}.extraGroups = [ "libvirtd" "input" ];
+
 
   hardware.keyboard.qmk.enable = true;
   hardware.bluetooth.enable = true;
@@ -23,7 +24,9 @@ in
 
   services.usbmuxd.enable = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.podman.enable = true;
+  virtualisation.podman.dockerCompat = true;
+
   programs = {
     droidcam.enable = true;
     partition-manager.enable = true;
@@ -66,21 +69,13 @@ in
       publish.enable = true;
     };
   };
-  xdg.portal.enable = true;
-  xdg.portal.extraPortals = [
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-hyprland
-  ];
-  xdg.portal.config = {
-    common.default = [ "gtk" ];
-    hyprland.default = [ "hyprland" "gtk" ];
-  };
 
   environment.etc."jdks/bellsoft-25".source = pkgs.bellsoft-jdk;
 
   # NOTE: shared CLI tooling (git, ripgrep, fzf, btop, nil, clang-tools, ...) lives in
   # base.nix and is deliberately NOT repeated here.
   environment.systemPackages = with pkgs; [
+    android-tools
     jetbrains.pycharm
     jetbrains.idea
     bellsoft-jdk
@@ -101,6 +96,7 @@ in
     qbittorrent
     kvirc
     ffmpeg-full
+    inkscape
     ironwail
     (python3.withPackages (ps: with ps; [ tkinter matplotlib typer ]))
 
@@ -131,6 +127,8 @@ in
 
     tree-sitter
     lua-language-server
+    gopls
+    astro-language-server
     shader-slang
     typescript-language-server
     prettier
@@ -150,7 +148,6 @@ in
   ] ++ [
     pkgs-stable.pika-backup
     pkgs-stable.calibre
-    pkgs-stable.bottles
   ];
 
 }

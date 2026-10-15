@@ -10,7 +10,7 @@ in
     [templates.waybar]
     input_path = "${dotfiles_dir}/templates/waybar_colors.css"
     output_path = "~/.config/waybar/colors.css"
-    post_hook = "pkill -SIGUSR2 waybar || true"
+    post_hook = "pkill waybar && waybar&; disown"
 
     [templates.cava]
     input_path = "${dotfiles_dir}/templates/cava.conf"

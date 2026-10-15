@@ -1,5 +1,3 @@
--- hyprland.lua
-
 --------------------
 ---- MONITORS ----
 --------------------
@@ -57,7 +55,7 @@ hl.config({
 			enabled = true,
 			range = 4,
 			render_power = 3,
-			color = 0xee1a1a1a,
+			color = "rgba(ee1a1a1a)",
 		},
 		blur = {
 			enabled = true,
@@ -139,7 +137,10 @@ hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("sh -c 'app=$(tofi-drun); [ -n \"$app\" ] && $app'"))
 
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd("rb tofi"))
+
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + I", hl.dsp.window.pin({ action = "pin" }))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + O", hl.dsp.layout("togglesplit"))

@@ -2,6 +2,7 @@
   programs.bash = {
     enable = true;
   };
+  home.sessionPath = [ "$HOME/.cargo/bin" ];
   programs.zsh = {
     enable = true;
     defaultKeymap = "emacs";
