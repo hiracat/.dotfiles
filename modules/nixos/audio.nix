@@ -1,4 +1,9 @@
-{ ... }: {
+{ pkgs, ... }: {
+  # prevents stutter by letting pipewire demand cpu time
+  security.rtkit.enable = true;
+  environment.systemPackages = with pkgs; [
+    alsa-utils
+  ];
   services = {
     pipewire = {
       enable = true;

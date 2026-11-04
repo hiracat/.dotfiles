@@ -2,12 +2,13 @@
   imports = [
     ./hardware-configuration.nix
 
+    ../../modules/nixos/caps2escape.nix
+    ../../modules/nixos/fonts.nix
+    ../../modules/nixos/console.nix
+    ../../modules/nixos/ntfy.nix
+    ../../modules/nixos/shellutils.nix
     ../../modules/nixos/base.nix
-    ../../modules/nixos/appearance.nix
-    ../../modules/nixos/audio.nix
     ../../modules/nixos/ime.nix
-    ../../modules/nixos/software.nix
-
     ../../modules/nixos/syncthing.nix
     ../../modules/nixos/hyprland.nix
   ];
@@ -25,6 +26,10 @@
     group = "users";
 
   };
+  services.tailscale.extraUpFlags = [
+    "--advertise-exit-node"
+    "--advertise-routes=192.168.1.0/24"
+  ];
 
   networking = {
     firewall.allowedUDPPorts = [ 24454 ];

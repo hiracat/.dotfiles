@@ -74,7 +74,7 @@ vim.lsp.config("clangd", {
 
 vim.lsp.enable({
 	"clangd",
-	"nil_ls",
+	"nixd",
 	"lua_ls",
 	"zls",
 	"glsl_analyzer",

@@ -2,17 +2,34 @@
   imports = [
     ./hardware-configuration.nix
 
-    ../../modules/nixos/base.nix
-    ../../modules/nixos/appearance.nix
+    ../../modules/nixos/3dprinting.nix
     ../../modules/nixos/audio.nix
-    ../../modules/nixos/ime.nix
-    ../../modules/nixos/periferals.nix
-    ../../modules/nixos/software.nix
-    ../../modules/nixos/resolve.nix
-
+    ../../modules/nixos/base.nix
+    ../../modules/nixos/caps2escape.nix
+    ../../modules/nixos/console.nix
+    ../../modules/nixos/development.nix
+    ../../modules/nixos/fonts.nix
+    ../../modules/nixos/gaming.nix
     ../../modules/nixos/hyprland.nix
+    ../../modules/nixos/ime.nix
+    ../../modules/nixos/ntfy.nix
+    ../../modules/nixos/print.nix
+    ../../modules/nixos/resolve.nix
+    ../../modules/nixos/shellutils.nix
     ../../modules/nixos/syncthing.nix
+    ../../modules/nixos/usb.nix
+    ../../modules/nixos/userapps.nix
+    ../../modules/nixos/virtualization.nix
   ];
+  # for my qmk keyboard
+  services = {
+    udev.enable = true;
+    udev.extraRules = ''
+      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", MODE="0660", GROUP="users", TAG+="uaccess", TAG+="udev-acl"
+    '';
+  };
+  hardware.keyboard.qmk.enable = true;
+  hardware.opentabletdriver.enable = true;
 
   base = {
     username = settings.username;

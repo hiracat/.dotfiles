@@ -1,4 +1,4 @@
-{ pkgs, settings, inputs, pkgs-stable, lib, config, ... }: {
+{ pkgs, settings, inputs, lib, config, ... }: {
   options.base = {
     locale = lib.mkOption {
       type = lib.types.str;
@@ -23,90 +23,34 @@
   };
 
   config = {
-
     boot = {
       kernelPackages = pkgs.linuxPackages_latest;
       loader.systemd-boot.enable = true;
       loader.efi.canTouchEfiVariables = true;
       kernelModules = [ "snd-aloop" ];
-      extraModprobeConfig = ''
-        options bluetooth disable_ertm=0
-      '';
-
     };
+    # thunderbolt support
     services.hardware.bolt.enable = true;
-    services.speechd.enable = true;
-
-    services.kmscon = {
-      enable = true;
-      useXkbConfig = true;
-      config = {
-        hwaccel = true;
-        font-name = "JetBrains Mono";
-        font-size = 14;
-      };
-    };
 
     networking = {
       hostName = config.base.hostname;
       networkmanager.enable = true;
+      networkmanager.plugins = with pkgs; [ networkmanager-openvpn ];
       firewall.enable = true;
-      # NOTE: tailscale0 is a trusted interface (see below), so anything reachable
-      # over the tailnet does NOT need to be listed here. These entries only exist
-      # to expose ports on the LAN/WAN interface. Port 80 (ntfy) was removed because
-      # ntfy runs unauthenticated and is only ever used over tailscale.
-      # TODO: 1070/8080/5050 are only actually needed on the server; move them to
-      # hosts/server/configuration.nix when splitting these modules up.
-      firewall.allowedTCPPorts = [ 1070 25565 8080 5050 ];
-      firewall.allowedUDPPorts = [ 25565 8080 5050 ];
 
-
-
-      networkmanager.ensureProfiles = {
-        environmentFiles = [ config.age.secrets.eduroam-password.path ];
-        profiles = {
-          eduroam = {
-            connection = {
-              id = "eduroam";
-              type = "wifi";
-            };
-            wifi = {
-              mode = "infrastructure";
-              ssid = "eduroam";
-            };
-            wifi-security = {
-              key-mgmt = "wpa-eap";
-            };
-            "802-1x" = {
-              eap = "tls";
-              anonymous-identity = "anonymous@rit.edu";
-              identity = "frl4915@rit.edu";
-              client-cert = "/etc/NetworkManager/certs/eduroam-cert.p12";
-              private-key = "/etc/NetworkManager/certs/eduroam-cert.p12";
-              ca-cert = "/etc/NetworkManager/certs/eduroam-ca.cer";
-              private-key-password-flags = 0;
-
-              private-key-password = "$EDUROAM_KEY_PASSWORD";
-            };
-            ipv4.method = "auto";
-            ipv6.method = "auto";
-          };
-        };
+      firewall = {
+        checkReversePath = "loose";
+        trustedInterfaces = [ "tailscale0" ];
       };
     };
-
     systemd.services.NetworkManager-wait-online.enable = false;
-
     services.tailscale = {
       enable = true;
       useRoutingFeatures = "both";
       extraUpFlags = [
-        "--advertise-exit-node"
-        "--advertise-routes=192.168.1.0/24"
         "--accept-routes"
       ];
     };
-    networking.firewall.trustedInterfaces = [ "tailscale0" ];
     systemd.services.tailscaled-resume = {
       description = "Restart tailscaled after resume";
       wantedBy = [ "sleep.target" ];
@@ -114,17 +58,6 @@
       serviceConfig.Type = "oneshot";
       script = "sleep 3 && systemctl restart tailscaled";
     };
-
-
-    networking.firewall.checkReversePath = "loose";
-    services.ntfy-sh.enable = true;
-    services.ntfy-sh.settings = {
-      base-url = "http://${config.networking.hostName}";
-      listen-http = ":80";
-      upstream-base-url = "https://ntfy.sh";
-    };
-
-
     services.fstrim.enable = true;
 
     zramSwap = {
@@ -133,35 +66,13 @@
       memoryPercent = 90;
     };
 
-
-    services.logind.settings.Login = {
-      HandleLidSwitch = "suspend";
-      HandleLidSwitchDocked = "ignore";
-      HandleLidSwitchExternalPower = "ignore";
-    };
-
-
-
     time.timeZone = config.base.timezone;
     i18n = {
-      # Select internationalisation properties.
-      defaultLocale = "en_US.UTF-8";
+      defaultLocale = config.base.locale;
       supportedLocales = [ "en_US.UTF-8/UTF-8" "ja_JP.UTF-8/UTF-8" "ko_KR.UTF-8/UTF-8" ];
-
       extraLocaleSettings = {
         LC_ALL = "en_US.UTF-8";
       };
-    };
-    services.interception-tools = {
-      enable = true;
-      plugins = [ pkgs-stable.interception-tools-plugins.caps2esc ];
-      udevmonConfig = ''
-        - JOB: "${pkgs-stable.interception-tools}/bin/intercept -g $DEVNODE | ${pkgs-stable.interception-tools-plugins.caps2esc}/bin/caps2esc | ${pkgs-stable.interception-tools}/bin/uinput -d $DEVNODE"
-          DEVICE:
-            EVENTS:
-              EV_KEY: [KEY_CAPSLOCK, KEY_ESC]
-      '';
-
     };
 
     services.openssh = {
@@ -170,37 +81,28 @@
       settings.PasswordAuthentication = false;
       settings.X11Forwarding = false;
 
-      settings.AllowUsers = [ "forest" ];
+      settings.AllowUsers = [ config.base.username ];
       hostKeys = [{
         path = "/etc/ssh/ssh_host_ed25519_key";
         rounds = 100;
         type = "ed25519";
       }];
-
+      # configers the server
       extraConfig = ''
         ClientAliveInterval 300
       '';
-    };
 
+    };
     age.secrets.ssh_config = {
       file = ../../secrets/ssh_config.age;
       owner = config.base.username;
       mode = "0600";
     };
-    age.secrets.eduroam-password = {
-      file = ../../secrets/eduroam_password.age;
-    };
+    # configures the client
     programs.ssh.extraConfig = "Include ${config.age.secrets.ssh_config.path}";
-    programs.nix-ld.enable = true;
 
-
-
-    services.devmon.enable = true;
-    services.gvfs.enable = true;
-    services.udisks2.enable = true;
-
-    security.rtkit.enable = true;
     security.polkit.enable = true;
+    # allow passwordless rebuilding which is stupid but i dont care
     security.sudo.extraRules = [{
       users = [ config.base.username ];
       commands = [{
@@ -210,6 +112,7 @@
     }];
     programs = {
       zsh.enable = true;
+      neovim.enable = true;
     };
     users.defaultUserShell = pkgs.zsh;
     users.users.${config.base.username} = {
@@ -224,59 +127,20 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO9X++QDuK2Uh5nV2X8P8ratkLV9U7CYLIUoj909tAHx forest@nixos-desktop"
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDRApYvZx6z1yesqcMfwNPz7XNQNIVzLyvhYioZhFKuE Generated By Termius"
       ];
-
     };
     environment = {
-      sessionVariables = {
-        TERMINAL = "kitty";
-        EDITOR = "nvim";
-      };
-
       shells = with pkgs; [ zsh ];
       pathsToLink = [ "/share/zsh" ];
       systemPackages = with pkgs; [
-        espeak-ng # basic voices (robotic but works)
-
-        perf
-        orca-slicer
-
-        remmina
-        neovim
-        gcc
-        gnumake
-        adwaita-icon-theme
-        adwaita-icon-theme-legacy
-        kdePackages.breeze-icons
-
-        rustup
-
-        nix-tree
-        base16-schemes
         git
-        wl-clipboard
-        ripgrep
-        atuin
-        fastfetch
-        starship
-        wget
-        unzip
-        fd
         rar
-        htop
         btop
-        termdown
-        fzf
-        stylua
-        shfmt
-        nixpkgs-fmt
-        nil
-        lua
-        clang-tools
-        vulkan-tools
-        glsl_analyzer
+        htop
+        wget
+        curl
+
       ] ++ [
         inputs.matugen.packages.${settings.system}.default
-        pkgs-stable.piper-tts
       ];
     };
     # This value determines the NixOS release from which the default
@@ -298,16 +162,18 @@
         flake = "/home/${config.base.username}/.dotfiles/flake.nix";
       };
     };
-    nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-    nix.settings.auto-optimise-store = true;
     nixpkgs.config.allowUnfree = true;
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    nix.channel.enable = false;
-    nix.registry.nixpkgs.flake = inputs.nixpkgs;
-    nix.registry.nixpkgs-stable.flake = inputs.nixpkgs-stable;
+    nix = {
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 30d";
+      };
+      settings.auto-optimise-store = true;
+      settings.experimental-features = [ "nix-command" "flakes" ];
+      channel.enable = false;
+      registry.nixpkgs.flake = inputs.nixpkgs;
+      registry.nixpkgs-stable.flake = inputs.nixpkgs-stable;
+    };
   };
 }

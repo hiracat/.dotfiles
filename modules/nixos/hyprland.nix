@@ -1,6 +1,4 @@
-{ pkgs, config, ... }:
-
-{
+{ pkgs, ... }: {
   programs.hyprland.enable = true;
   services.displayManager.ly = {
     enable = true;
@@ -11,9 +9,6 @@
   services.hypridle.enable = true;
   # security.pam.services.hyprlock.fprintAuth = false; # use hyprlock's own fprintd support instead
   # security.pam.services.ly.fprintAuth = false; # password at the login screen
-
-
-
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -50,7 +45,19 @@
       NIXOS_OZONE_WL = "1";
     };
     systemPackages = with pkgs; [
+      adwaita-icon-theme
+      adwaita-icon-theme-legacy
+      kdePackages.breeze-icons
       networkmanagerapplet
+      pwvucontrol
+      playerctl
+      xdg-user-dirs
+      libnotify
+      qimgv
+      brightnessctl
+      nemo-with-extensions
+      nemo-fileroller
+      xdg-user-dirs-gtk
       hyprsunset
       glib
       tofi

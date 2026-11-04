@@ -99,5 +99,5 @@ let
   };
 in
 {
-  environment.systemPackages = [ davinci-fixed ];
+  environment.systemPackages = [ pkgs.davinci-resolve ];
 }

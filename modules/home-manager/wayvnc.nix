@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   services.wayvnc = {
     enable = true;
     autoStart = true;
@@ -8,5 +7,4 @@
       port = 5901;
     };
   };
-
 }

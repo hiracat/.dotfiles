@@ -2,22 +2,36 @@
   imports = [
     ./hardware-configuration.nix
 
-    ../../modules/nixos/base.nix
-    ../../modules/nixos/appearance.nix
+    ../../modules/nixos/3dprinting.nix
     ../../modules/nixos/audio.nix
-    ../../modules/nixos/ime.nix
-    ../../modules/nixos/periferals.nix
-    ../../modules/nixos/software.nix
-    ../../modules/nixos/syncthing.nix
-
+    ../../modules/nixos/base.nix
+    ../../modules/nixos/bluetooth.nix
+    ../../modules/nixos/caps2escape.nix
+    ../../modules/nixos/console.nix
+    ../../modules/nixos/development.nix
+    ../../modules/nixos/eduroam.nix
+    ../../modules/nixos/fonts.nix
+    ../../modules/nixos/gaming.nix
     ../../modules/nixos/hyprland.nix
+    ../../modules/nixos/ime.nix
+    ../../modules/nixos/ntfy.nix
+    ../../modules/nixos/print.nix
+    ../../modules/nixos/shellutils.nix
+    ../../modules/nixos/syncthing.nix
+    ../../modules/nixos/usb.nix
+    ../../modules/nixos/userapps.nix
+    ../../modules/nixos/virtualization.nix
   ];
   base = {
     username = settings.username;
     hostname = "nixos-laptop";
   };
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchDocked = "ignore";
+    HandleLidSwitchExternalPower = "ignore";
+  };
   services.xserver.wacom.enable = true;
-  periferals.drawingTablet.enable = true;
 
   nix.settings = {
     cores = 2;
