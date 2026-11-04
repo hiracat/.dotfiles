@@ -36,7 +36,6 @@ vim.lsp.config("lua_ls", {
 })
 
 vim.lsp.config("rust_analyzer", {
-	cmd = { vim.fn.expand("~/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rust-analyzer") },
 	settings = {
 		["rust-analyzer"] = {
 			cargo = {

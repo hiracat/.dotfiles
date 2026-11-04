@@ -52,8 +52,7 @@
              "urgent": "",
              "focused": "",
              "default": ""
-         },
-         "on-click": "activate"
+         }
      },
 
      "idle_inhibitor": {

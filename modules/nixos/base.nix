@@ -35,6 +35,17 @@
 
     };
     services.hardware.bolt.enable = true;
+    services.speechd.enable = true;
+
+    services.kmscon = {
+      enable = true;
+      useXkbConfig = true;
+      config = {
+        hwaccel = true;
+        font-name = "JetBrains Mono";
+        font-size = 14;
+      };
+    };
 
     networking = {
       hostName = config.base.hostname;
@@ -204,7 +215,7 @@
     users.users.${config.base.username} = {
       isNormalUser = true;
       description = "forest";
-      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "audio" "vboxusers" "disk" "render" ];
+      extraGroups = [ "dialout" "networkmanager" "wheel" "video" "audio" "vboxusers" "render" ];
       initialPassword = "password"; # for vms
       shell = pkgs.zsh;
       openssh.authorizedKeys.keys = [
@@ -224,6 +235,8 @@
       shells = with pkgs; [ zsh ];
       pathsToLink = [ "/share/zsh" ];
       systemPackages = with pkgs; [
+        espeak-ng # basic voices (robotic but works)
+
         perf
         orca-slicer
 
@@ -263,6 +276,7 @@
         glsl_analyzer
       ] ++ [
         inputs.matugen.packages.${settings.system}.default
+        pkgs-stable.piper-tts
       ];
     };
     # This value determines the NixOS release from which the default

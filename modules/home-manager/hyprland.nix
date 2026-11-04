@@ -51,6 +51,7 @@
         recursive = true;
       };
       "hypr/hyprsunset.conf".source = ./hypr/hyprsunset.conf;
+      "hypr/hyprlock.conf".source = ./hypr/hyprlock.conf;
       "hypr/hypridle.conf".source = config.hypr.hypridleConfig;
     };
   };

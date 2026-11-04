@@ -28,7 +28,7 @@ in
   virtualisation.podman.dockerCompat = true;
 
   programs = {
-    droidcam.enable = true;
+    # droidcam.enable = true;
     partition-manager.enable = true;
     appimage.enable = true;
 
@@ -80,11 +80,10 @@ in
     jetbrains.idea
     bellsoft-jdk
     linux-wifi-hotspot
-    pritunl-client
+    openvpn
     watchexec
     pwvucontrol
     proton-vpn
-    audacity
     brave
     firefox
     slack
@@ -123,14 +122,12 @@ in
 
     prismlauncher
     krita
-    obsidian
 
     tree-sitter
     lua-language-server
     gopls
     astro-language-server
     shader-slang
-    typescript-language-server
     prettier
     nodejs
     gdb
@@ -145,9 +142,12 @@ in
     (pkgs.cava.override { withSDL2 = true; })
     nemo-with-extensions
     nemo-fileroller
+    pika-backup
+    obsidian
   ] ++ [
-    pkgs-stable.pika-backup
     pkgs-stable.calibre
+    pkgs-stable.typescript-language-server
+    pkgs-stable.audacity
   ];
 
 }

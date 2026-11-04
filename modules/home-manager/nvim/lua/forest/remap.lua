@@ -51,28 +51,32 @@ k("n", "<C-q>", ":cclose<CR>zz", opts)
 -- Plugin Remaps
 -- #############
 
--- Telescope
-local telescope = require("telescope.builtin")
+-- Snacks picker
+k("n", "<leader>fd", function()
+	require("snacks").picker.files()
+end, opts)
+k("n", "<leader>fs", function()
+	require("snacks").picker.grep()
+end, opts)
+k("n", "<leader>fo", function()
+	require("snacks").picker.buffers()
+end, opts)
+k("n", "<leader>fh", function()
+	require("snacks").picker.help()
+end, opts)
 
-k("n", "<leader>fd", telescope.find_files, opts)
-k("n", "<leader>fs", telescope.live_grep, opts)
-k("n", "<leader>fo", telescope.buffers, opts)
-k("n", "<leader>fh", telescope.help_tags, opts)
-
-require("telescope").setup({
-	defaults = {
-		mappings = {
-			i = {
-				["<C-j>"] = "move_selection_next",
-				["<C-k>"] = "move_selection_previous",
-			},
-			n = {
-				["<C-j>"] = "move_selection_next",
-				["<C-k>"] = "move_selection_previous",
-			},
-		},
-	},
-})
+k("n", "<leader>e", function()
+	require("snacks").explorer()
+end, opts)
+k("n", "<leader>rn", function()
+	require("snacks").rename.rename_file()
+end, opts)
+k({ "n", "v" }, "<leader>gB", function()
+	require("snacks").gitbrowse()
+end, opts)
+k({ "n", "v" }, "<leader>fk", function()
+	require("snacks").picker.keymaps({ modes = { "n", "v", "i", "x", "o" } })
+end, opts)
 
 -- Dap
 

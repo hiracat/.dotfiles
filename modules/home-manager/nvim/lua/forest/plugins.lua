@@ -28,7 +28,6 @@ local plugins = {
 
 	-- Appearance / UI
 	{ src = "https://github.com/xiyaowong/transparent.nvim" },
-	{ src = "https://github.com/lukas-reineke/indent-blankline.nvim" },
 	{ src = "https://github.com/eandrju/cellular-automaton.nvim" },
 	{ src = "https://github.com/NvChad/nvim-colorizer.lua" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
@@ -40,13 +39,10 @@ local plugins = {
 	{ src = "https://github.com/stevearc/conform.nvim" },
 	{ src = "https://github.com/ThePrimeagen/vim-be-good" },
 
-	-- Telescope
+	-- snacks
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
-	{ src = "https://github.com/nvim-telescope/telescope-dap.nvim" },
-
-	-- Images
-	{ src = "https://github.com/3rd/image.nvim" },
+	{ src = "https://github.com/folke/snacks.nvim" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
 
 	-- Treesitter
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },

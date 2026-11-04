@@ -2,15 +2,18 @@
 
 {
   programs.hyprland.enable = true;
-  services.greetd = {
+  services.displayManager.ly = {
     enable = true;
-    settings = {
-      default_session = {
-        command = "start-hyprland";
-        user = config.base.username;
-      };
-    };
+    # settings = { animation = "matrix"; };  # optional, on recent nixpkgs
   };
+  # services.fprintd.enable = true;
+  programs.hyprlock.enable = true; # also creates the "hyprlock" PAM service
+  services.hypridle.enable = true;
+  # security.pam.services.hyprlock.fprintAuth = false; # use hyprlock's own fprintd support instead
+  # security.pam.services.ly.fprintAuth = false; # password at the login screen
+
+
+
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -31,6 +34,9 @@
   xdg.terminal-exec.enable = true;
   programs.nm-applet.enable = true;
   services.gnome.gnome-keyring.enable = true;
+  security.pam.services.ly.enableGnomeKeyring = true;
+  programs.seahorse.enable = true;
+
 
   environment.etc."hypr-stubs".source = "${pkgs.hyprland}/share/hypr/stubs";
   xdg.portal = {
@@ -46,10 +52,8 @@
     systemPackages = with pkgs; [
       networkmanagerapplet
       hyprsunset
-      hypridle
       glib
       tofi
-      hyprland-qtutils
       grim
       tesseract
       slurp

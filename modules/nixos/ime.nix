@@ -1,17 +1,16 @@
-{ pkgs, ... }: {
-  i18n = {
-    inputMethod = {
-      enable = true;
-      type = "fcitx5";
-      fcitx5.waylandFrontend = true;
-      fcitx5.addons = with pkgs; [
-        fcitx5-gtk
-        catppuccin-fcitx5
-        fcitx5-mozc
-        fcitx5-hangul
-      ];
-    };
+{ pkgs, pkgs-stable, ... }: {
+  i18n.inputMethod = {
+    enable = true;
+    type = "fcitx5";
+    fcitx5.waylandFrontend = true;
+    fcitx5.addons = with pkgs-stable; [
+      fcitx5-gtk
+      catppuccin-fcitx5
+      fcitx5-hangul
+      fcitx5-mozc
+    ];
   };
+
 
   # XMODIFIERS is already set unconditionally by the i18n.inputMethod.fcitx5
   # module, and with waylandFrontend = true that module deliberately leaves
